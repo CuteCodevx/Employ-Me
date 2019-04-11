@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="180">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/stylesheets/results.css">
+    <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <title>Index</title>
+</head>
+<body class="w3-content">
+
+<% include header.html%>
+
+<div class="w3-container w3-padding-48">
+    <div class="w3-center" id="head">
+        <span class="w3-tag w3-xlarge">R</span>
+        <span class="w3-tag w3-xlarge">E</span>
+        <span class="w3-tag w3-xlarge">S</span>
+        <span class="w3-tag w3-xlarge">U</span>
+        <span class="w3-tag w3-xlarge">L</span>
+        <span class="w3-tag w3-xlarge">T</span>
+        <span class="w3-tag w3-xlarge">S</span>
+    </div>
+</div>
+
+<div class="w3-container">
+    <table class="w3-table w3-border" id="table">
+        <thead>
+            <tr class="w3-border-bottom">
+                <th>Company</th>
+                <th>Occupation</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!--<div class="w3-bar w3-center" id="page">-->
+        <!--<a href="#" class="w3-button w3-hover-black">«</a>-->
+        <!--<a href="#" class="w3-button w3-hover-black">1</a>-->
+        <!--<a href="#" class="w3-button w3-hover-black">2</a>-->
+        <!--<a href="#" class="w3-button w3-hover-black">3</a>-->
+        <!--<a href="#" class="w3-button w3-hover-orange">»</a>-->
+    <!--</div>-->
+</div>
+
+<% include footer.html%>
+<script>
+    $(function(){
+        var result = JSON.parse(localStorage.getItem("result"));
+        //console.log(result.length);
+        for(var i=0;i<result.length;i++){
+            var name = result[i].name;
+            var career = result[i].career;
+            var city = result[i].city;
+            $('tbody').append(` <tr class="w3-border-bottom tr">
+                <td>`+name+`</td>
+                <td><a>`+career+`</a></td>
+                <td>`+city+`</td>
+            </tr>`);
+
+        }
+        $('.tr').each(function () {
+            $(this).click(function () {
+                //console.log($(this).text());
+                var text = $(this).text();
+
+                var dataArr = text.split("\r\n");
+                dataArr = dataArr[0].split("\n");
+                var dataFinal=[];
+                for(var i=0;i<dataArr.length;i++){
+                    if(dataArr[i]){
+                        dataFinal.push(dataArr[i].trim());
+                    }
+                }
+                //console.log(dataFinal);
+                var name = dataFinal[0];
+                var career= dataFinal[1];
+                var data = {'name':name,'career':career};
+                $.ajax({
+                    url:'/results',
+                    type:'post',
+                    data:data,
+                    success:function (result) {
+                        //console.log(result);
+                        var result = JSON.stringify(result);
+                        localStorage.setItem('careerDetail',result);
+
+                        location.href='careerdetail';
+                    },
+                    error:function (err,result) {
+
+                    }
+                })
+            })
+        })
+
+
+    })
+
+</script>
+</body>
+</html>

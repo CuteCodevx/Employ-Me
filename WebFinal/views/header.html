@@ -1,0 +1,17 @@
+<div class="w3-bar w3-container w3-black" id="nav">
+    <a class="w3-bar-item w3-button" href="home">Home</a>
+    <% if(user){%>
+
+    <a href="users" class="w3-bar-item w3-button">My Account <span  id="account"><%=user.username%></span></a>
+
+    <a href="logout" class="w3-bar-item w3-button" id="logout">Log out</a>
+    <% }else{ %>
+    <a href="login" class="w3-bar-item w3-button" >Log in</a>
+    <a href="register" class="w3-bar-item w3-button">register</a>
+    <%}%>
+    <div class="w3-right">
+        <input type="text" class="w3-bar-item w3-input w3-white w3-mobile" placeholder="Search..">
+        <button class="w3-bar-item w3-button w3-mobile w3-black">Go</button>
+    </div>
+
+</div>

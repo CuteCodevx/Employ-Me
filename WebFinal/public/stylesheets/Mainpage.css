@@ -1,0 +1,201 @@
+
+
+#cityButton{
+    margin-top: 5%;
+}
+
+
+#HottestCity{
+    margin-top: 5%;
+}
+
+
+
+#londonPic{
+    height: 150px;
+    width:250px;
+}
+
+#manchesterPic{
+    height: 150px;
+    width:250px;
+}
+
+#edinburghPic{
+    height: 150px;
+    width:250px;
+}
+
+#careerButton{
+    margin-top: 5%;
+}
+
+#HottestCareer{
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+#CSPic{
+    height: 150px;
+    width:250px;
+}
+
+#FinancePic{
+    height: 150px;
+    width:250px;
+}
+
+#BioPic{
+    height: 150px;
+    width:250px;
+}
+
+#city{
+    font-size: medium;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+#line1{
+    font-size: large;
+    margin-top: 1%;
+}
+
+#line2{
+    font-size: large;
+    margin-top: 2%;
+}
+
+#line3{
+    font-size: large;
+    margin-top: 2%;
+}
+
+#line4{
+    font-size: large;
+    margin-top: 2%;
+}
+
+#cityHead{
+    margin-top: 2%;
+    margin-bottom: 3%;
+
+}
+
+#occupation{
+    font-size: medium;
+    margin-bottom: 10%;
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+#occupationHead{
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
+#software{
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+#softwareHeader{
+    padding-bottom: 2%;
+    padding-top: 1%;
+}
+
+#sline1{
+    font-size: large;
+    margin-bottom: 2%;
+}
+
+#sline2{
+    font-size: large;
+    margin-bottom: 2%;
+}
+
+#Finance{
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+#financeHeader{
+    padding-bottom: 2%;
+    padding-top: 1%;
+}
+
+#fline1{
+    font-size: large;
+    margin-bottom: 2%;
+}
+
+#fline2{
+    font-size: large;
+    margin-bottom: 2%;
+}
+
+#biology{
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+#biologyHeader{
+    padding-bottom: 2%;
+    padding-top: 1%;
+}
+
+#bline1{
+    font-size: large;
+    margin-bottom: 2%;
+}
+
+#arts{
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+#artsHeader{
+    padding-bottom: 2%;
+    padding-top: 1%;
+}
+
+#aline1{
+    font-size: large;
+    margin-bottom: 2%;
+}
+
+#literature{
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+#literatureHeader{
+    padding-bottom: 2%;
+    padding-top: 1%;
+}
+
+#lline1{
+    font-size: large;
+    margin-bottom: 2%;
+}
+
+#part1{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+#titleSearch{
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+#search{
+    margin-top: 5%;
+}
+
+#input{
+    width: 50%;
+    margin-left: 25%;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="180">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/stylesheets/careerdetail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <title>Show Occupation Detail</title>
+</head>
+<body class="w3-content">
+
+<% include header.html%>
+
+<div class="w3-container w3-margin-top" id="title">
+    <div class="w3-padding-32 w3-xlarge w3-black">
+        <i class="fa fa-home"></i>
+        Career Details
+    </div>
+</div>
+
+<div class="w3-container" id="panel"></div>
+
+<div class="w3-container" id="button">
+    <button class="w3-btn w3-round-large w3-black ">See the Comments</button>
+    <button class="w3-btn w3-round-large w3-black " id="apply">Apply</button>
+    <button class="w3-btn w3-round-large w3-black w3-right">Evaluate</button>
+</div>
+<%include footer.html%>
+<script>
+    $(function(){
+        var careerdetail=JSON.parse(localStorage.getItem('careerDetail'));
+        //console.log(careerdetail);
+        $('#panel').append(`<div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                <label><strong>Name of Company:</strong></label>
+                <p>`+careerdetail.name+`</p>
+            </div>
+
+            <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                <label><strong>Occupation:</strong></label>
+                <p>`+careerdetail.career+`</p>
+            </div>
+
+            <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                <label><strong>Rate of Pay (Pounds/Year):</strong></label>
+                <p>`+careerdetail.pay+`</p>
+            </div>
+
+            <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                <label><strong>Description: </strong></label>
+                <p>`+careerdetail.careerType.toString()+`</p>
+            </div>
+
+            <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                <label><strong>Requirement:</strong></label>
+                <p>`+careerdetail.requirement+`</p>
+            </div>
+
+            <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                <label><strong>City:</strong></label>
+                <p>`+careerdetail.city+`</p>
+            </div>
+
+            <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                <label><strong>Address:</strong></label>
+                <p>`+careerdetail.address+`</p>
+            </div>
+
+            <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                <label><strong>Email:</strong></label>
+                <p>`+careerdetail.email+`</p>
+            </div>`);
+
+
+        $('#apply').click(function(){
+            var username = $('#account').text();
+            var career = careerdetail.career;
+            var companyName = careerdetail.username;
+            var date = new Date();
+            var data = {'employeeAccount':username,'employerAccount':companyName,'date':date,'career':career};
+            if(!username){
+                alert('please login your account first!');
+            }else{
+                $.ajax({
+                    url:'/careerdetail',
+                    type:'post',
+                    data:data,
+                    success:function (result) {
+                        //console.log(result);
+                        alert('apply successfully!');
+                    },
+                    error:function (err,result) {
+                        // console.log(err.statusText);
+                        alert("you cannot apply a same job!");
+                    }
+                })
+            }
+
+        })
+    })
+</script>
+</body>
+</html>

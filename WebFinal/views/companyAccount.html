@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="180">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="stylesheets/companyAccount.css">
+    <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/showCompanyDetails.js"></script>
+    <title>Company Account</title>
+</head>
+<body class="w3-content">
+
+<div class="w3-bar w3-container w3-black tabbox" id="nav">
+    <a class="w3-bar-item w3-button active">My Account <span id="account"><%=user.username%></span></a>
+    <a class="w3-bar-item w3-button" id="publication">My Publication</a>
+    <a class="w3-bar-item w3-button" id="evaluation">My Evaluation</a>
+    <a href="logout" class="w3-bar-item w3-button">Log Out</a>
+</div>
+<section class="active">
+    <div class="w3-container w3-center" id="part1">
+        <h4>Search Job Request</h4>
+        <form>
+            <input class="w3-input w3-border w3-round-large w3-hover-sand" type="text" id="input">
+        </form>
+
+        <button class="w3-button w3-center w3-black w3-round-large" id="search">Search</button>
+    </div>
+
+    <div class="w3-container w3-center" id="part2">
+        <h4>Choose Job Request</h4>
+        <form id="form">
+            <div class="w3-container w3-third">
+                <select class="w3-select w3-border" name="option" id="first" onChange="change()">
+                    <option value="">Software</option>
+                    <option value="">Finance</option>
+                    <option value="">Biology</option>
+                    <option value="">Arts</option>
+                    <option value="">Literature</option>
+                </select>
+            </div>
+
+            <div class="w3-container w3-third">
+                <select class="w3-select w3-border" id="second">
+                    <option value=""></option>
+                    <option value="">Software</option>
+                    <option value="">Finance</option>
+                    <option value="">Biology</option>
+                    <option value="">Arts</option>
+                    <option value="">Literature</option>
+                </select>
+            </div>
+
+            <div class="w3-container w3-third">
+                <select class="w3-select w3-border" id="city">
+                    <option value=""></option>
+                    <option value="">London</option>
+                    <option value="">Manchester</option>
+                    <option value="">Edinburgh</option>
+                    <option value="">Glasgow</option>
+                    <option value="">Leeds</option>
+                </select>
+            </div>
+
+        </form>
+        <button class="w3-button w3-center w3-black w3-round-large" id="go">Go</button>
+
+
+    </div>
+</section>
+
+
+<section>
+    <div class="w3-container" id="received">
+        <h3><strong>Received applications</strong></h3>
+    </div>
+
+    <div class="w3-container w3-center">
+        <a href="public.html"><button class="w3-button w3-black w3-round-xlarge">Public New Occupation</button></a>
+    </div>
+
+    <div class="w3-container" id="previous">
+        <h3><strong>Previous Publication</strong></h3>
+    </div>
+
+</section>
+
+<section>
+    <div class="w3-container w3-card w3-center" id="score">
+        <span><strong>Average Score: </strong></span>
+        <br> <br>
+        <span class="w3-tag w3-xlarge">4.5</span>
+    </div>
+
+    <div class="w3-container w3-center w3-card" id="comment">
+        <h3>Displaying Comments</h3>
+
+        <div class="w3-panel w3-border w3-border-black">
+            <p>This is a testing comments</p>
+        </div>
+        <div class="w3-panel w3-border w3-border-black">
+            <p>This is a testing comments</p>
+        </div>
+        <div class="w3-panel w3-border w3-border-black">
+            <p>This is a testing comments</p>
+        </div>
+
+    </div>
+</section>
+
+<%include footer.html%>
+
+<script>
+    function change()
+    {
+        var x = document.getElementById("first");
+        var y = document.getElementById("second");
+        y.options.length = 0;
+        if(x.selectedIndex == 0)
+        {
+            y.options.add(new Option("Java Development", "0"));
+            y.options.add(new Option("PHP Development", "1", false, true));
+            y.options.add(new Option("Web Development", "2"));
+            y.options.add(new Option("Python Development", "3"));
+            y.options.add(new Option("Database Development", "4"));
+            y.options.add(new Option("AI Development", "5"));
+            y.options.add(new Option("None", "6"));
+        }
+
+        if(x.selectedIndex == 1)
+        {
+            y.options.add(new Option("Bank", "0"));
+            y.options.add(new Option("Marketing", "1", false, true));
+            y.options.add(new Option("Securities", "2"));
+            y.options.add(new Option("Stock", "3"));
+            y.options.add(new Option("Insurance", "4"));
+            y.options.add(new Option("The credit", "5"));
+            y.options.add(new Option("None", "6"));
+        }
+
+        if(x.selectedIndex == 2)
+        {
+            y.options.add(new Option("Biology engineer", "0"));
+            y.options.add(new Option("Biology assistant", "1", false, true));
+            y.options.add(new Option("Biology education", "2"));
+            y.options.add(new Option("None", "3"));
+        }
+
+        if(x.selectedIndex == 3)
+        {
+            y.options.add(new Option("The fine arts", "0"));
+            y.options.add(new Option("Music arts", "1", false, true));
+            y.options.add(new Option("Arts education", "2"));
+            y.options.add(new Option("None", "3"));
+        }
+
+        if(x.selectedIndex == 4)
+        {
+            y.options.add(new Option("English literature", "0"));
+            y.options.add(new Option("Foreign literature", "1", false, true));
+            y.options.add(new Option("Literature education", "2"));
+            y.options.add(new Option("None", "3"));
+        }
+
+    }
+
+
+
+</script>
+</body>
+</html>

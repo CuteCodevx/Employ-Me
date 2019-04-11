@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="180">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/stylesheets/Mainpage.css">
+    <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/home.js"></script>
+    <style type="text/css">
+        a:link { text-decoration: none;}
+
+        a:active { text-decoration:none}
+
+        a:hover { text-decoration:underline;color: red}
+
+    </style>
+    <title>Main page</title>
+</head>
+<body class="w3-content">
+
+<% include header.html%>
+
+<div class="w3-content w3-display-container">
+    <img class="mySlides" src="/images/manchester.jpg" style="width:100%">
+    <img class="mySlides" src="/images/edinburgh.jpg" style="width:100%">
+    <img class="mySlides" src="/images/liverpool.jpg" style="width:100%">
+
+    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+
+<div class="w3-container w3-center" id="cityButton">
+    <p class="w3-btn w3-round-large w3-black"><strong>Hottest Cities</strong></p>
+    <a href="#city">more ></a>
+</div>
+<div class="w3-container" id="HottestCity">
+    <div class="w3-third w3-padding">
+        <div class="w3-container w3-black w3-center">
+            <h2>London</h2>
+        </div>
+        <div class="container">
+            <div class="w3-image w3-padding w3-third">
+                <a href="index.html">
+                    <img src="/images/london.jpg" alt="London" id="londonPic"/>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-third w3-padding">
+        <div class="w3-container w3-black w3-center">
+            <h2>Manchester</h2>
+        </div>
+        <div class="container">
+            <div class="w3-image w3-padding w3-third">
+                <a href="index.html">
+                    <img src="/images/manchester.jpg" alt="Manchester" id="manchesterPic"/>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-third w3-padding">
+        <div class="w3-container w3-black w3-center">
+            <h2>Edinburgh</h2>
+        </div>
+        <div class="container">
+            <div class="w3-image w3-padding w3-third">
+                <a href="index.html">
+                    <img src="/images/edinburgh.jpg" alt="Edinburgh" id="edinburghPic"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w3-container w3-center" id="careerButton">
+    <p class="w3-btn w3-round-large w3-black" href=""><strong>Hottest Careers</strong></p>
+    <a href="#occupation">more ></a>
+</div>
+
+<div class="w3-container" id="HottestCareer">
+    <div class="w3-third w3-padding">
+        <div class="w3-container w3-black w3-center">
+            <h2>Software</h2>
+        </div>
+        <div class="container">
+            <div class="w3-image w3-padding w3-third">
+                <a href="index.html">
+                    <img src="/images/cs.jpg" alt="Software" id="CSPic"/>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-third w3-padding">
+        <div class="w3-container w3-black w3-center">
+            <h2>Finance</h2>
+        </div>
+        <div class="container">
+            <div class="w3-image w3-padding w3-third">
+                <a href="index.html">
+                    <img src="/images/finance.jpg" alt="Finance" id="FinancePic"/>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-third w3-padding">
+        <div class="w3-container w3-black w3-center">
+            <h2>Biology</h2>
+        </div>
+        <div class="container">
+            <div class="w3-image w3-padding w3-third">
+                <a href="index.html">
+                    <img src="/images/biology.jpg" alt="Biology" id="BioPic"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <div class="w3-container w3-card" id="city">
+        <div class="w3-center" id="cityHead">
+            <span class="w3-tag w3-xlarge">C</span>
+            <span class="w3-tag w3-xlarge">I</span>
+            <span class="w3-tag w3-xlarge">T</span>
+            <span class="w3-tag w3-xlarge">Y</span>
+        </div>
+
+        <div class="w3-row w3-container" id="line1">
+            <div class="w3-row">
+                <div class="w3-col m3 w3-center">
+                    <a>LONDON</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>MANCHESTER</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>EDINBURGH</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>LIVERPOOL</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-row w3-container" id="line2">
+            <div class="w3-row">
+                <div class="w3-col m3 w3-center">
+                    <a>BRIGHTON</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>GLASGOW</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>CARDIFF</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>BIRMINGHAM</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-row w3-container" id="line3">
+            <div class="w3-row">
+                <div class="w3-col m3 w3-center">
+                    <a>NOTTINGHAM</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>LOUGHBOROUGH</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>LEICESTER</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>BRISTOL</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-row w3-container" id="line4">
+            <div class="w3-row">
+                <div class="w3-col m3 w3-center">
+                    <a>EXETER</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>LEEDS</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>NEWCASTLE</a>
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <a>BELFAST</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="w3-container w3-card" id="occupation">
+        <div class="w3-center" id="occupationHead">
+            <span class="w3-tag w3-xlarge">O</span>
+            <span class="w3-tag w3-xlarge">C</span>
+            <span class="w3-tag w3-xlarge">C</span>
+            <span class="w3-tag w3-xlarge">U</span>
+            <span class="w3-tag w3-xlarge">P</span>
+            <span class="w3-tag w3-xlarge">A</span>
+            <span class="w3-tag w3-xlarge">T</span>
+            <span class="w3-tag w3-xlarge">I</span>
+            <span class="w3-tag w3-xlarge">O</span>
+            <span class="w3-tag w3-xlarge">N</span>
+        </div>
+
+
+        <div class="w3-container w3-center" id="software">
+            <div class="w3-container" id="softwareHeader">
+                <a><strong>SOFTWARE</strong></a>
+            </div>
+            <div class="w3-row w3-container" id="sline1">
+                <div class="w3-row">
+                    <div class="w3-col m4 w3-center">
+                        <a>Java Development</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Python Development</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>PHP Development</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-row w3-container" id="sline2">
+                <div class="w3-row">
+                    <div class="w3-col m4 w3-center">
+                        <a>Database Development</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Web Development</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>AI Development</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-container w3-center" id="Finance">
+            <div class="w3-container" id="financeHeader">
+                <a><strong>FINANCE</strong></a>
+            </div>
+            <div class="w3-row w3-container" id="fline1">
+                <div class="w3-row">
+                    <div class="w3-col m4 w3-center">
+                        <a>Marketing</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Bank</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Securities</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-row w3-container" id="fline2">
+                <div class="w3-row">
+                    <div class="w3-col m4 w3-center">
+                        <a>Stock</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Insurance</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>The credit</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-container w3-center" id="biology">
+            <div class="w3-container" id="biologyHeader">
+                <a><strong>BIOLOGY</strong></a>
+            </div>
+            <div class="w3-row w3-container" id="bline1">
+                <div class="w3-row">
+                    <div class="w3-col m4 w3-center">
+                        <a>Biology engineer</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Biology assistant</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Biology education</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-container w3-center" id="arts">
+            <div class="w3-container" id="artsHeader">
+                <a><strong>ARTS</strong></a>
+            </div>
+            <div class="w3-row w3-container" id="aline1">
+                <div class="w3-row">
+                    <div class="w3-col m4 w3-center">
+                        <a>The fine arts</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Music arts</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Arts education</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-container w3-center" id="literature">
+            <div class="w3-container" id="literatureHeader">
+                <a><strong>LITERATURE</strong></a>
+            </div>
+            <div class="w3-row w3-container" id="lline1">
+                <div class="w3-row">
+                    <div class="w3-col m4 w3-center">
+                        <a>English literature</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Foreign literature</a>
+                    </div>
+                    <div class="w3-col m4 w3-center">
+                        <a>Literature education</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</div>
+<%include footer.html%>
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex-1].style.display = "block";
+    }
+</script>
+
+</body>
+</html>

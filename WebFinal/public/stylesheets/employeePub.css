@@ -1,0 +1,34 @@
+a{
+    font-size: large;
+}
+
+#head{
+    padding-top: 5%;
+}
+
+public{
+    padding-top: 10%;
+}
+
+#button{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+p{
+    font-size: large;
+}
+
+#first{
+    padding-bottom: 3%;
+    margin-top: 2%;
+    width: 30%;
+}
+
+#second{
+    width:30%;
+}
+
+#footer{
+    margin-top: 10%;
+}

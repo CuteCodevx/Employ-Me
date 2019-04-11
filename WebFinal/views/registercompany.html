@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="180">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/stylesheets/registercompany.css">
+    <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/registerCompany.js"></script>
+    <title>Register Company</title>
+</head>
+<body class="w3-content">
+
+<div class="w3-container w3-center" id="registerTitle">
+    <p>Do you want to find a job? </p>
+    <a class="w3-text-black" href="register" id="changeRegisterType"><strong>Start Register as Employee</strong></a>
+</div>
+
+<div class="w3-container">
+    <%-msg%>
+    <div class="w3-card" id="registerCard">
+        <div class="w3-container w3-black">
+            <h2>Register</h2>
+        </div>
+        <div>
+            <form class="w3-container" method="post" onsubmit="return false">
+                <p>
+                    <label>Username</label>
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" id="username">
+                </p>
+                <p>
+                    <label>Password</label>
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="password" id="psw1" name="password">
+                    <span class="w3-small">Passwords must be at least 6 characters.</span>
+                </p>
+                <p>
+                    <label>Confirm Password</label>
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="password" id="psw2" name="password">
+                </p>
+                <div class="w3-small">
+                    <span class="w3-tag">*</span>
+                    Confirm Password should be consistent with Password
+                </div>
+                <p>
+                    <label>Company Name</label>
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                </p>
+                <p>
+                    <label>City</label>
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                </p>
+                <p>
+                    <label>Address</label>
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                </p>
+                <p>
+                    <label>Post Code</label>
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                </p>
+                <p>
+                    <label>Email Address</label>
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                </p>
+                <p><button type="submit" id="register">Create your Company account</button></p>
+                <br>
+                <p>Already have an account? <button type="button" id="login">Sign in</button></p>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</div>
+<%include footer.html%>
+</body>
+</html>
