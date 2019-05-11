@@ -18,16 +18,16 @@
 </div>
 
 <div class="w3-container">
-    <%-msg%>
+    <div id="msg"><%-msg%></div>
     <div class="w3-card" id="registerCard">
         <div class="w3-container w3-black">
             <h2>Register as an employee</h2>
         </div>
         <div>
-            <form class="w3-container" method="post" onsubmit="return false">
+            <form class="w3-container" onsubmit="return false" id="register">
                 <p>
                     <label>Username</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" id="username">
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" id="username" name="username">
                 </p>
                 <p>
                     <label>Password</label>
@@ -36,7 +36,7 @@
                 </p>
                 <p>
                     <label>Confirm Password</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="password" id="psw2" name="password">
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="password" id="psw2">
                 </p>
                 <div class="w3-small">
                     <span class="w3-tag">*</span>
@@ -44,33 +44,32 @@
                 </div>
                 <p>
                     <label>First Name</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" name="firstName">
                 </p>
                 <p>
                     <label>Last Name</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" name="lastName">
                 </p>
                 <p>
                     <label>Email Address</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="email" name="email">
                 </p>
                 <p>
                     <label>Phone Number</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" name="tel">
                 </p>
                 <p>
                     <label>Degree level</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" name="degreeLevel">
                 </p>
                 <p>
                     <label>Major</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text">
+                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" name="major">
                 </p>
-                <p><button type="submit" id="register">Create your Website account</button></p>
+                <p><button type="submit">Create your Website account</button></p>
                 <br>
-                <p>Already have an account? <button type="button" id="login">Sign in</button></p>
-
             </form>
+            <p>Already have an account? <button type="button" id="login">Sign in</button></p>
         </div>
 
     </div>

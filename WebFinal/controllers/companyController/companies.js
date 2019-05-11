@@ -1,4 +1,3 @@
-
 exports.companies = function (req, res) {
     var username = req.session.user.username;
     var companies = global.dbHandel.getModel('publication');

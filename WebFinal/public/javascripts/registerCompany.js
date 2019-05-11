@@ -4,9 +4,9 @@ $(function () {
     });
 
     $('#login').click(function () {
-        location.href = 'loginCompany';
+        location.href = 'login';
     });
-    $('#register').click(function () {
+    $('#registerCompany').submit(function () {
         var username = $('#username').val();
         var psw1 = $('#psw1').val();
         var psw2 = $('#psw2').val();
@@ -16,21 +16,17 @@ $(function () {
 
             //$('body').prepend('<div style="color:green;">Confirm Password should be consistent with Password</div>');
         }else{
-            //req.body.name, req.body.psw
-            var data = {'username':username,'password':psw1};
             $.ajax({
                 url:'/registercompany',
                 type:'post',
-                data:data,
+                data:$('#registerCompany').serialize(),
                 success:function (data,status) {
                     if (status=='success'){
                         location.href = 'loginCompany';
                     }
                 },
                 error:function (data,err) {
-                    console.log(data);
-                    console.log('ajax fail');
-                    //location.href='registercompany';
+                    location.href='register';
                 }
             })
         }

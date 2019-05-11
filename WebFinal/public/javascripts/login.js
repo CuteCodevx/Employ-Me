@@ -17,13 +17,19 @@ $(function () {
                 type:'post',
                 data:data,
                 success:function (result) {
-                    console.log(JSON.stringify(result));
-                    location.href = 'home';
+                    //String
+                    // var res = JSON.stringify(result);
+                    //console.log(typeof res);
+
+                    //is company
+                    if(result.isCompany!=null){
+                        location.href = 'companyAccount';
+                    }else{
+                        location.href = 'home';
+                    }
                 },
                 error:function (data,err) {
-                    alert('fail.....please try again');
-                    //console.log('aaaaaaaajax fail');
-                    //location.href='login';
+                    location.href='login';
                 }
             })
         // }

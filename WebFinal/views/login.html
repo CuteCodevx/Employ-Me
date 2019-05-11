@@ -16,13 +16,13 @@
     <a class="w3-btn w3-round-large w3-black"><strong>Login to Our Website</strong></a>
 </div>
 <div class="w3-container">
-    <%-msg%>
+    <div id="msg"><%-msg%></div>
     <div class="w3-card" id="loginCard">
         <div class="w3-container w3-black">
             <h2>Login</h2>
         </div>
         <div>
-            <form class="w3-container" method="post" onsubmit="return false">
+            <form class="w3-container" onsubmit="return false">
                 <p>
                     <label>Username</label>
                     <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" id="username" name="username">
@@ -36,12 +36,6 @@
                 <p><button type="button" id="register">Create your Website account</button></p>
             </form>
         </div>
-
-        <!--<div class="w3-container">-->
-            <!--<label>-->
-                <!--<input type="checkbox"> Remember Me-->
-            <!--</label>-->
-        <!--</div>-->
     </div>
 </div>
 <%include footer.html%>

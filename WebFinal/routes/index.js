@@ -17,9 +17,6 @@ router.post('/registercompany',loginAndRegisterController.registerCompanyPost);
 router.get('/login',loginAndRegisterController.login);
 router.post('/login',loginAndRegisterController.loginPost);
 
-router.get('/loginCompany',loginAndRegisterController.loginCompany);
-router.post('/loginCompany',loginAndRegisterController.loginCompanyPost);
-
 router.get('/home',loginAndRegisterController.home);
 router.post('/home',loginAndRegisterController.getResults);
 

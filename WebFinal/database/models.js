@@ -26,7 +26,8 @@ module.exports={
         postcode:{type:String,required:true},
         address:{type:String,required:true},
         email:{type:String,required:true},
-        aveScore:{type:Number}
+        aveScore:{type:Number},
+        isCompany:{type:Number}
     },
     publication:{
         username:{type:String,required:true},

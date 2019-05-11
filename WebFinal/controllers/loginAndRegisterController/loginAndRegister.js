@@ -3,7 +3,6 @@ exports.register = function (req, res) {
 }
 exports.registerPost = function(req, res) {
     var username = req.body.username;
-    var psw = req.body.password;
     var employee = global.dbHandel.getModel('employee');
 
     employee.findOne({username:username}, function (err,result) {
@@ -17,7 +16,14 @@ exports.registerPost = function(req, res) {
         }else {
             employee.create({
                 username:username,
-                password:psw
+                password:req.body.password,
+                firstName:req.body.firstName,
+                lastName:req.body.lastName,
+                email:req.body.email,
+                phoneNumber:req.body.tel,
+                degreeLevel:req.body.degreeLevel,
+                major:req.body.major,
+                aveScore:0.0
             },function (err, doc) {
                 if (err){
                     req.session.error= 'server is wrong!';
@@ -36,12 +42,9 @@ exports.registerCompany = function(req, res){
 }
 exports.registerCompanyPost=function(req, res){
     var username = req.body.username;
-    var psw = req.body.password;
-    //console.log("^^^^^^^^^"+username+psw);
     var employer = global.dbHandel.getModel('employer');
 
     employer.findOne({username:username}, function (err,result) {
-        //console.log("!!!!!!!!!");
         if (err){
             req.session.error= 'something wrong!';
             res.sendStatus(500);
@@ -52,13 +55,20 @@ exports.registerCompanyPost=function(req, res){
         }else {
             employer.create({
                 username:username,
-                password:psw
+                password:req.body.password,
+                name:req.body.companyName,
+                city:req.body.city,
+                address:req.body.address,
+                postcode:req.body.postcode,
+                email:req.body.email,
+                aveScore:0.0,
+                isCompany:1
             },function (err, doc) {
                 if (err){
                     req.session.error= 'server is wrong!';
                     res.sendStatus(500);
-                    //console.log(err);
                 } else {
+                    console.log(doc)
                     req.session.error = 'create successfully';
                     res.sendStatus(200);
                 }
@@ -75,53 +85,49 @@ exports.loginPost = function (req, res){
     var employee = global.dbHandel.getModel('employee');
     //var company = global.dbHandel.getModel('company');
     employee.findOne({username:username},function (err,result) {
-        if (err){
-            req.session.error= 'something wrong!';
-            res.sendStatus(500);
-            //console.log(err);
-        } else if (!result){
-            req.session.error = 'We cannot find an account with that username';
-            res.sendStatus(404);
+        if(result!=null){
+            if (err){
+                req.session.error= 'something wrong!';
+                res.sendStatus(500);
+                //console.log(err);
+            } else if (!result){
+                req.session.error = 'We cannot find an account with that username';
+                res.sendStatus(404);
 
-        } else if(psw!=result.password){
-            req.session.error = 'password is incorrect';
-            res.sendStatus(404);
+            } else if(psw!=result.password){
+                req.session.error = 'password is incorrect';
+                res.sendStatus(404);
+            }else{
+                req.session.user = result;
+                res.send(result);
+            }
         }else{
-            req.session.user = result;
-            res.send(result);
+            var employer = global.dbHandel.getModel('employer');
+            employer.findOne({username:username},function (err,result) {
+                if (err){
+                    req.session.error= 'something wrong!';
+                    res.sendStatus(500);
+                    //console.log(err);
+                } else if (!result){
+                    req.session.error = 'We cannot find an account with that username';
+                    res.sendStatus(404);
+
+                } else if(psw!=result.password){
+                    req.session.error = 'password is incorrect';
+                    res.sendStatus(404);
+                }else{
+                    req.session.user = result;
+                    res.send(result);
+                }
+
+            });
         }
+
 
     });
 
 }
-exports.loginCompany = function (req, res) {
-    res.render('loginCompany', { title: 'Login into Company'});
-}
-exports.loginCompanyPost = function (req, res){
-    var username = req.body.username;
-    var psw = req.body.password;
-    var employer = global.dbHandel.getModel('employer');
-    //var company = global.dbHandel.getModel('company');
-    employer.findOne({username:username},function (err,result) {
-        if (err){
-            req.session.error= 'something wrong!';
-            res.sendStatus(500);
-            //console.log(err);
-        } else if (!result){
-            req.session.error = 'We cannot find an account with that username';
-            res.sendStatus(404);
 
-        } else if(psw!=result.password){
-            req.session.error = 'password is incorrect';
-            res.sendStatus(404);
-        }else{
-            req.session.user = result;
-            res.send(result);
-        }
-
-    });
-
-}
 exports.home = function (req,res) {
     //console.log(req);
     res.render('home',{title : 'welcome'+req.session.user});
@@ -161,14 +167,13 @@ exports.companyAccount = function (req, res) {
     //should compare the user is belonged company member or individual
     if (!req.session.user){
         req.session.error = 'please log in to your company account';
-        res.redirect('/loginCompany');
+        res.redirect('/login');
     }
     res.render('companyAccount',{title : 'welcome'+req.session.user});
 }
 
 
 exports.results = function (req, res) {
-
     res.render('results', { title: 'results'});
 }
 

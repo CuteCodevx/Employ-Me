@@ -52,7 +52,7 @@ app.use(function (req, res, next) {
   res.locals.msg = "";
   if (error){
     //console.log("11111111111111111"+error);
-    res.locals.msg = '<div class="w3-panel w3-border w3-border-red w3-center"><h3 class="w3-text-red">Warning!</h3><p>'+error+'</p></div>';
+    res.locals.msg = error;
     //console.log(res.locals.msg);
   }
   next();

@@ -5,7 +5,7 @@ $(function () {
     $('#login').click(function () {
         location.href = 'login';
     });
-    $('#register').click(function () {
+    $('#register').submit(function () {
         var username = $('#username').val();
         var psw1 = $('#psw1').val();
         var psw2 = $('#psw2').val();
@@ -15,14 +15,13 @@ $(function () {
             $('#psw2').addClass("w3-border-red");
             //$('body').prepend('<div style="color:green;">Confirm Password should be consistent with Password</div>');
         }else{
-            //req.body.name, req.body.psw
-            var data = {'username':username,'password':psw1};
             $.ajax({
                 url:'/register',
                 type:'post',
-                data:data,
+                data:$('#register').serialize(),
                 success:function (data,status) {
                     if (status=='success'){
+                        alert($('#msg'));
                         location.href = 'login';
                     }
                 },
