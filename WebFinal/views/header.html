@@ -2,8 +2,8 @@
     <a class="w3-bar-item w3-button" href="home">Home</a>
     <% if(user){%>
 
-    <a href="users" class="w3-bar-item w3-button">My Account <span  id="account"><%=user.username%></span></a>
-
+    <a href="users?username=<%=user.username%>" class="w3-bar-item w3-button">My Account <span  id="account"><%=user.username%></span></a>
+    <a href="evaluation" class="w3-bar-item w3-button">My Evaluation</a>
     <a href="logout" class="w3-bar-item w3-button" id="logout">Log out</a>
     <% }else{ %>
     <a href="login" class="w3-bar-item w3-button" >Log in</a>

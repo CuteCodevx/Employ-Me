@@ -33,7 +33,7 @@ module.exports={
         username:{type:String,required:true},
         name:{type:String,required:true},
         career:{type:String,required:true},
-        careerType:{type:String,required:true},
+        careerType:{type:Array,required:true},
         city:{type:String,required:true},
         description:{type:String,required:true},
         requirement:{type:String,required:true},
@@ -46,7 +46,8 @@ module.exports={
         job:{type:String,required:true},
         city:{type:String,required:true},
         introduction:{type:String,required:true},
-        type:{type:String,required:true}
+        type:{type:Array,required:true},
+        date:{type:String,required:true}
     },
     receivedInvite:{
         employee:{type:String,required:true},

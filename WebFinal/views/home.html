@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="/stylesheets/Mainpage.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="/javascripts/home.js"></script>
     <style type="text/css">
         a:link { text-decoration: none;}
 
@@ -363,6 +362,28 @@
         }
         x[slideIndex-1].style.display = "block";
     }
+
+    $(function () {
+        $('section a').click(function () {
+            var text = $(this).text();
+            var data = {'value':text};
+            $.ajax({
+                url:'/home',
+                type:'post',
+                data:data,
+                success:function (result) {
+                    var data = JSON.stringify(result)
+                    localStorage.setItem("result",data);
+                    //console.log(localStorage);
+                    location.href = 'results';
+                },
+                error:function (err,result) {
+                    alert("wrong");
+                }
+            })
+        })
+    })
+
 </script>
 
 </body>

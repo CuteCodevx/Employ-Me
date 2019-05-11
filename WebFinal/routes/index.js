@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var loginAndRegisterController = require('../controllers/loginAndRegisterController/loginAndRegister');
+var loginAndRegisterController = require('../controllers/loginAndRegister');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,10 +25,11 @@ router.get('/logout', loginAndRegisterController.logout);
 router.get('/companyAccount',loginAndRegisterController.companyAccount);
 
 router.get('/results',loginAndRegisterController.results);
-router.post('/results',loginAndRegisterController.getCareerDetail);
 
 router.get('/careerdetail',loginAndRegisterController.careerDetail);
 router.post('/careerdetail',loginAndRegisterController.careerapply);
+
+router.post('/comment',loginAndRegisterController.comment);
 
 
 

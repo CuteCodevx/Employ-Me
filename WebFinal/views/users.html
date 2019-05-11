@@ -15,13 +15,15 @@
 <%include header.html%>
 <div class="w3-container" id="invitations">
     <h3 id="title1"><strong>Received Invitation</strong></h3>
+    <%if(received.length > 0){
+        for(var i=0;i<received.length;i++){%>
     <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
         <div class="w3-row">
             <div class="w3-col m4">
-                <p>Date</p>
+                <p><%=received[i].date%></p>
             </div>
             <div class="w3-col m4">
-                <p>Company Name</p>
+                <p><%=received[i].job%> From <%=received[i].employer%></p>
             </div>
             <div class="w3-col m4">
                 <p class="w3-right"><a href="customerExhibition.html">Check</a></p>
@@ -29,88 +31,162 @@
         </div>
 
     </div>
-
-    <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
-        <div class="w3-row">
-            <div class="w3-col m4">
-                <p>Date</p>
-            </div>
-            <div class="w3-col m4">
-                <p>Company Name</p>
-            </div>
-            <div class="w3-col m4">
-                <p class="w3-right"><a href="customerExhibition.html">Check</a></p>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
-        <div class="w3-row">
-            <div class="w3-col m4">
-                <p>Date</p>
-            </div>
-            <div class="w3-col m4">
-                <p>Company Name</p>
-            </div>
-            <div class="w3-col m4">
-                <p class="w3-right"><a href="customerExhibition.html">Check</a></p>
-            </div>
-        </div>
-
-    </div>
+    <%}}else{%>
+    <p>You haven't received any job invitation</p>
+    <%}%>
 </div>
 
 
 <div class="w3-container w3-center" id="new">
-    <a href="public.html"><button class="w3-button w3-black w3-round-xlarge">Public New Request</button></a>
+    <a><button class="w3-button w3-black w3-round-xlarge" id="public">Public New Request</button></a>
 </div>
+<!--public new request-->
+<section id="publicRequest" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+        <header class="w3-container w3-black w3-center w3-padding-32">
+        <span onclick="document.getElementById('publicRequest').style.display='none'"
+              class="w3-button w3-black w3-xlarge w3-display-topright">X</span>
+            <h2 class="w3-wide">Public New Request</h2>
+        </header>
+        <form class="w3-container w3-card-4" id="requestForm" onsubmit="return false">
+            <p>
+                <label>Name</label>
+                <input class="w3-input" type="text" name="realName" id="realName" required></p>
+            <p>
+                <label>Job request</label>
+                <input class="w3-input" type="text" name="job" id="job" required></p>
+
+            <p>
+                <label>City</label>
+                <input class="w3-input" type="text" name="city" id="city" required></p>
+            <p>
+                <label>Introduction</label>
+                <textarea class="w3-input" type="text" name="intro" id="intro" require></textarea></p>
+
+            <p><label>Job Type</label>
+                <select class="w3-select w3-border" name="option" id="first" onChange="change()">
+                    <option value="">Software</option>
+                    <option value="">Finance</option>
+                    <option value="">Biology</option>
+                    <option value="">Arts</option>
+                    <option value="">Literature</option>
+                </select>
+
+                <select class="w3-select w3-border" id="second" style="margin-top: 10px">
+
+                </select></p>
+            <button type="submit" class="w3-button w3-block w3-black w3-padding-16 w3-section w3-right">SUBMIT <i class="fa fa-check"></i></button>
+
+        </form>
+    </div>
+</section>
 
 <div class="w3-container" id="previous">
     <h3 id="title2"><strong>Previous Publication</strong></h3>
-
+    <%if(request.length>0){
+        for(var i=0;i<request.length;i++){ %>
     <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
         <div class="w3-row">
             <div class="w3-col m4">
-                <p>Date</p>
+                <p><%=request[i].date%></p>
             </div>
             <div class="w3-col m4">
-                <p>Requirement</p>
+                <p>I want to find <%=request[i].job%></p>
             </div>
             <div class="w3-col m4">
-                <p class="w3-right"><a href="public.html">Edit</a>/<a href="">Delete</a> </p>
+                <p class="w3-right"><a href="">Delete</a> </p>
             </div>
         </div>
     </div>
-
-    <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
-        <div class="w3-row">
-            <div class="w3-col m4">
-                <p>Date</p>
-            </div>
-            <div class="w3-col m4">
-                <p>Requirement</p>
-            </div>
-            <div class="w3-col m4">
-                <p class="w3-right"><a href="public.html">Edit</a>/<a href="">Delete</a> </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
-        <div class="w3-row">
-            <div class="w3-col m4">
-                <p>Date</p>
-            </div>
-            <div class="w3-col m4">
-                <p>Requirement</p>
-            </div>
-            <div class="w3-col m4">
-                <p class="w3-right"><a href="public.html">Edit</a>/<a href="">Delete</a> </p>
-            </div>
-        </div>
-    </div>
+    <%}}else{%>
+    <p>You haven't put any job request.</p>
+    <%}%>
 </div>
 <%include footer.html%>
+<script>
+    function change()
+    {
+        var x = document.getElementById("first");
+        var y = document.getElementById("second");
+        y.options.length = 0; // clear all content
+        if(x.selectedIndex == 0)
+        {
+            y.options.add(new Option("Java Development", "0"));
+            y.options.add(new Option("PHP Development", "1", false, true));  //
+            y.options.add(new Option("Web Development", "2"));
+            y.options.add(new Option("Python Development", "3"));
+            y.options.add(new Option("Database Development", "4"));
+            y.options.add(new Option("AI Development", "5"));
+            y.options.add(new Option("None", "6"));
+        }
+
+        if(x.selectedIndex == 1)
+        {
+            y.options.add(new Option("Bank", "0"));
+            y.options.add(new Option("Marketing", "1", false, true));  //
+            y.options.add(new Option("Securities", "2"));
+            y.options.add(new Option("Stock", "3"));
+            y.options.add(new Option("Insurance", "4"));
+            y.options.add(new Option("The credit", "5"));
+            y.options.add(new Option("None", "6"));
+        }
+
+        if(x.selectedIndex == 2)
+        {
+            y.options.add(new Option("Biology engineer", "0"));
+            y.options.add(new Option("Biology assistant", "1", false, true));  //
+            y.options.add(new Option("Biology education", "2"));
+            y.options.add(new Option("None", "3"));
+        }
+
+        if(x.selectedIndex == 3)
+        {
+            y.options.add(new Option("The fine arts", "0"));
+            y.options.add(new Option("Music arts", "1", false, true));  //
+            y.options.add(new Option("Arts education", "2"));
+            y.options.add(new Option("None", "3"));
+        }
+
+        if(x.selectedIndex == 4)
+        {
+            y.options.add(new Option("English literature", "0"));
+            y.options.add(new Option("Foreign literature", "1", false, true));  //
+            y.options.add(new Option("Literature education", "2"));
+            y.options.add(new Option("None", "3"));
+        }
+
+    }
+    $(function () {
+        $('#public').click(function () {
+            //open public request page
+            $('#publicRequest').css("display","block");
+
+            $('#requestForm').submit(function () {
+                //get the information
+                var account = $('#account').text();
+                var name = $('#realName').val();
+                var job = $('#job').val();
+                var city=$('#city').val();
+                var intro = $('#intro').val();
+                var date= new Date();
+                var type=[$('#first').find("option:selected").text(),$('#second').find("option:selected").text()];
+                var data = {account:account,name:name,job:job,city:city,date:date.toLocaleString(),intro:intro,type:type};
+                $.ajax({
+                    url:'/users',
+                    type:'post',
+                    data:data,
+                    success:function (result) {
+                        alert("submit successfully!");
+                        location.href="/users?username="+account+"";
+                    },
+                    error:function (err) {
+                        alert(err);
+                    }
+                })
+            })
+        })
+
+    })
+</script>
 </body>
 </html>
