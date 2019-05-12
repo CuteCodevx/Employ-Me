@@ -5,12 +5,18 @@ exports.users = function (req, res) {
     }else{
         var username = req.query.username;
         var request = global.dbHandel.getModel('jobRequest');
+        //get the application record
         request.find({account:username},function (err,result) {
             if (err) throw err;
             var received = global.dbHandel.getModel('receivedInvite');
             received.find({employee:username},function (err,result1) {
                 if (err) throw err;
-                res.render('users',{request:result,received:result1});
+                var receivedApplication = global.dbHandel.getModel('receivedApplication');
+                receivedApplication.find({employeeAccount:username},function (err,result2) {
+                    if (err) throw err;
+                    res.render('users',{request:result,received:result1,record:result2});
+                })
+
             })
         })
     }
@@ -35,4 +41,36 @@ exports.publicRequest=function (req,res) {
             res.sendStatus(200);
         }
     })
+}
+
+exports.userdetails=function (req,res) {
+    //username
+    var name = req.query.username;
+    var usersTable = global.dbHandel.getModel('employee');
+    var comment = global.dbHandel.getModel('comment')
+    //calculate the average score
+
+    comment.find({username:name},function (err, result) {
+        if(err) throw err;
+        //calculate
+        var aveScore=0;
+        for(var i=0;i<result.length;i++){
+            aveScore+=result[i].score;
+        }
+        aveScore = (aveScore/result.length).toFixed(2);
+
+        usersTable.updateOne({username:name}, { $set: { aveScore: aveScore}},function (err,res) {
+        if(err) throw err;
+        });
+
+        usersTable.findOne({username:name},function (err,result1) {
+            if(err) throw err;
+            res.render('userdetail',{detail:result1,comment:result});
+
+        })
+
+    })
+
+
+
 }

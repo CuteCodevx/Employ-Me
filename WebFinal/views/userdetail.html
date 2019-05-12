@@ -10,57 +10,72 @@
     <title>Employee Details</title>
 </head>
 <body class="w3-content">
-
-<div class="w3-container" id="title">
-    <div class="w3-padding w3-xlarge w3-black w3-center">
+<%include header.html%>
+<div class="w3-container w3-center" id="title">
+    <div class="w3-padding w3-xlarge w3-center">
         <i class="fa fa-home"></i>
         Employee Details
     </div>
 </div>
 <div class="w3-container" id="panel">
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>Applied Occupation:</strong></label>
-        <p>Software Engineer</p>
-    </div>
-
-    <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>First Name:</strong></label>
-        <p>Shanhong</p>
+        <p><%=detail.firstName%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Last Name: </strong></label>
-        <p>Yin</p>
+        <p><%=detail.lastName%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Degree Level:</strong></label>
-        <p>PostGraduate</p>
+        <p><%=detail.degreeLevel%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Major:</strong></label>
-        <p>Computer Science</p>
+        <p><%=detail.major%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Email:</strong></label>
-        <p>abc@abc.com</p>
+        <p><%=detail.email%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Phone Number:</strong></label>
-        <p>1234567</p>
+        <p><%=detail.phoneNumber%></p>
     </div>
 </div>
 
-<div class="w3-container" id="button">
-    <a class="w3-btn w3-round-large w3-black w3-left" href="evaExhibition.html">See the Comments</a>
-    <a class="w3-btn w3-round-large w3-black w3-right" href="evaluate.html">Evaluate</a>
-
-</div>
-
+<!--evaluation-->
+<section class="w3-container w3-card w3-padding-48" style="margin-top:64px">
+    <!--show average scores-->
+    <div class="w3-container  w3-center">
+        <h3 style="margin-top: 48px">AVERAGE SCORE</h3>
+        <br><br>
+        <span class="w3-tag w3-xlarge" id="aveScore"><%=detail.aveScore%></span>
+    </div>
+    <!--show comments-->
+    <div class="w3-container ">
+        <h3 class="w3-center" style="margin:48px">COMMENTS</h3>
+        <%if(comment.length>0){
+        for(var i=0;i<comment.length;i++){%>
+        <div class="w3-card-4 w3-white w3-margin-top">
+            <div class="w3-container">
+                <h5><b><%=comment[i].evaluators%></b><span class="w3-opacity w3-right w3-small"><i class="w3-text-black">Reviewed</i> <%=comment[i].date%></span></h5>
+            </div>
+            <div class="w3-container">
+                <p class="w3-text-red"><%=comment[i].score%></p>
+                <p><%=comment[i].comments%></p>
+            </div>
+        </div>
+        <%}}else{%>
+        <p class="w3-center">No any company comment to you</p>
+        <%}%>
+    </div>
+</section>
 <%include footer.html%>
-
 </body>
 </html>

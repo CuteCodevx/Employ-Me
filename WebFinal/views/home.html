@@ -21,148 +21,51 @@
 
 <% include header.html%>
 
-<div class="w3-content w3-display-container">
-    <img class="mySlides" src="/images/manchester.jpg" style="width:100%">
-    <img class="mySlides" src="/images/edinburgh.jpg" style="width:100%">
-    <img class="mySlides" src="/images/liverpool.jpg" style="width:100%">
 
-    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+<div class="w3-container w3-center w3-padding-48">
+    <h4 class=""><strong>Search By Different Cities</strong></h4>
 </div>
 
-<div class="w3-container w3-center" id="cityButton">
-    <p class="w3-btn w3-round-large w3-black"><strong>Hottest Cities</strong></p>
-    <a href="#city">more ></a>
-</div>
-<div class="w3-container" id="HottestCity">
-    <div class="w3-third w3-padding">
-        <div class="w3-container w3-black w3-center">
-            <h2>London</h2>
-        </div>
-        <div class="container">
-            <div class="w3-image w3-padding w3-third">
-                <a href="index.html">
-                    <img src="/images/london.jpg" alt="London" id="londonPic"/>
-                </a>
+<section class="w3-container w3-card" id="city">
+    <div class="w3-center" id="cityHead">
+        <span class="w3-tag w3-xlarge">C</span>
+        <span class="w3-tag w3-xlarge">I</span>
+        <span class="w3-tag w3-xlarge">T</span>
+        <span class="w3-tag w3-xlarge">Y</span>
+    </div>
+    <div class="w3-row w3-container" id="line1">
+        <div class="w3-row">
+            <div class="w3-col m3 w3-center">
+                <a>LONDON</a>
+            </div>
+            <div class="w3-col m3 w3-center">
+                <a>MANCHESTER</a>
+            </div>
+            <div class="w3-col m3 w3-center">
+                <a>EDINBURGH</a>
+            </div>
+            <div class="w3-col m3 w3-center">
+                <a>LIVERPOOL</a>
             </div>
         </div>
     </div>
 
-    <div class="w3-third w3-padding">
-        <div class="w3-container w3-black w3-center">
-            <h2>Manchester</h2>
-        </div>
-        <div class="container">
-            <div class="w3-image w3-padding w3-third">
-                <a href="index.html">
-                    <img src="/images/manchester.jpg" alt="Manchester" id="manchesterPic"/>
-                </a>
+    <div class="w3-row w3-container" id="line2">
+        <div class="w3-row">
+            <div class="w3-col m3 w3-center">
+                <a>BRIGHTON</a>
+            </div>
+            <div class="w3-col m3 w3-center">
+                <a>GLASGOW</a>
+            </div>
+            <div class="w3-col m3 w3-center">
+                <a>CARDIFF</a>
+            </div>
+            <div class="w3-col m3 w3-center">
+                <a>BIRMINGHAM</a>
             </div>
         </div>
     </div>
-
-    <div class="w3-third w3-padding">
-        <div class="w3-container w3-black w3-center">
-            <h2>Edinburgh</h2>
-        </div>
-        <div class="container">
-            <div class="w3-image w3-padding w3-third">
-                <a href="index.html">
-                    <img src="/images/edinburgh.jpg" alt="Edinburgh" id="edinburghPic"/>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="w3-container w3-center" id="careerButton">
-    <p class="w3-btn w3-round-large w3-black" href=""><strong>Hottest Careers</strong></p>
-    <a href="#occupation">more ></a>
-</div>
-
-<div class="w3-container" id="HottestCareer">
-    <div class="w3-third w3-padding">
-        <div class="w3-container w3-black w3-center">
-            <h2>Software</h2>
-        </div>
-        <div class="container">
-            <div class="w3-image w3-padding w3-third">
-                <a href="index.html">
-                    <img src="/images/cs.jpg" alt="Software" id="CSPic"/>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="w3-third w3-padding">
-        <div class="w3-container w3-black w3-center">
-            <h2>Finance</h2>
-        </div>
-        <div class="container">
-            <div class="w3-image w3-padding w3-third">
-                <a href="index.html">
-                    <img src="/images/finance.jpg" alt="Finance" id="FinancePic"/>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="w3-third w3-padding">
-        <div class="w3-container w3-black w3-center">
-            <h2>Biology</h2>
-        </div>
-        <div class="container">
-            <div class="w3-image w3-padding w3-third">
-                <a href="index.html">
-                    <img src="/images/biology.jpg" alt="Biology" id="BioPic"/>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<section>
-    <div class="w3-container w3-card" id="city">
-        <div class="w3-center" id="cityHead">
-            <span class="w3-tag w3-xlarge">C</span>
-            <span class="w3-tag w3-xlarge">I</span>
-            <span class="w3-tag w3-xlarge">T</span>
-            <span class="w3-tag w3-xlarge">Y</span>
-        </div>
-
-        <div class="w3-row w3-container" id="line1">
-            <div class="w3-row">
-                <div class="w3-col m3 w3-center">
-                    <a>LONDON</a>
-                </div>
-                <div class="w3-col m3 w3-center">
-                    <a>MANCHESTER</a>
-                </div>
-                <div class="w3-col m3 w3-center">
-                    <a>EDINBURGH</a>
-                </div>
-                <div class="w3-col m3 w3-center">
-                    <a>LIVERPOOL</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="w3-row w3-container" id="line2">
-            <div class="w3-row">
-                <div class="w3-col m3 w3-center">
-                    <a>BRIGHTON</a>
-                </div>
-                <div class="w3-col m3 w3-center">
-                    <a>GLASGOW</a>
-                </div>
-                <div class="w3-col m3 w3-center">
-                    <a>CARDIFF</a>
-                </div>
-                <div class="w3-col m3 w3-center">
-                    <a>BIRMINGHAM</a>
-                </div>
-            </div>
-        </div>
 
         <div class="w3-row w3-container" id="line3">
             <div class="w3-row">
@@ -197,10 +100,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
+<div class="w3-container w3-center w3-padding-48">
+    <h4 class=""><strong>Search By Different Type of Jobs</strong></h4>
+</div>
 
-    <div class="w3-container w3-card" id="occupation">
+    <section class="w3-container w3-card" id="occupation">
         <div class="w3-center" id="occupationHead">
             <span class="w3-tag w3-xlarge">O</span>
             <span class="w3-tag w3-xlarge">C</span>
@@ -339,30 +245,11 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-</div>
+
 <%include footer.html%>
 <script>
-    var slideIndex = 1;
-    showDivs(slideIndex);
-
-    function plusDivs(n) {
-        showDivs(slideIndex += n);
-    }
-
-    function showDivs(n) {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        if (n > x.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = x.length}
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        x[slideIndex-1].style.display = "block";
-    }
-
     $(function () {
         $('section a').click(function () {
             var text = $(this).text();

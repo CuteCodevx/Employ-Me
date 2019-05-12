@@ -20,8 +20,13 @@
         Career Details
     </div>
 </div>
-
+<!--career detail-->
 <div class="w3-container" id="panel">
+    <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+        <label><strong>Username of Company:</strong></label>
+        <p id="companyUserName"> <%=detail.username%></p>
+    </div>
+
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Name of Company:</strong></label>
         <p id="companyName"><%=detail.name%></p>
@@ -97,7 +102,8 @@
     <!--show comments-->
     <div class="w3-container ">
         <h3 class="w3-center" style="margin:48px">REVIEWS</h3>
-        <%for(var i=0;i<comment.length;i++){%>
+        <%if(comment.length>0){
+        for(var i=0;i<comment.length;i++){%>
         <div class="w3-card-4 w3-white">
             <div class="w3-container">
                 <h5><b><%=comment[i].evaluators%></b><span class="w3-opacity w3-right w3-small"><i class="w3-text-black">Reviewed</i> <%=comment[i].date%></span></h5>
@@ -107,6 +113,8 @@
                 <p><%=comment[i].comments%></p>
             </div>
         </div>
+        <%}}else{%>
+        <p class="w3-center">The company haven't any comment.</p>
         <%}%>
         <button class="w3-btn w3-round-large w3-margin w3-black w3-right" id="evaluate">Evaluate</button>
     </div>
@@ -132,7 +140,7 @@
                     success:function (result) {
                         //console.log(result);
                         alert('apply successfully!');
-                        location.href='careerdetail?name='+name+'&career='+career+'';
+                        location.href='careerdetail?name='+companyName+'&career='+career+'';
                     },
                     error:function (err,result) {
                         // console.log(err.statusText);
@@ -145,7 +153,7 @@
 
         $('#evaluate').click(function () {
 
-            var username = $('#account').text();
+            var username = $('#companyUserName').text();
             var name=$('#companyName').text();
             var career = $('#career').text();
             var date = new Date();

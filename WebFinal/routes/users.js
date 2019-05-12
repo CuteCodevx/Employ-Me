@@ -6,4 +6,6 @@ var usersController = require('../controllers/users');
 router.get('/', usersController.users);
 router.post('/',usersController.publicRequest);
 
+router.get('/userdetail',usersController.userdetails);
+
 module.exports = router;

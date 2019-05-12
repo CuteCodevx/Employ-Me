@@ -183,31 +183,35 @@ exports.careerDetail=function(req,res){
     var career = req.query.career;
 
     var comment = global.dbHandel.getModel('comment');
-    comment.find({name:name},function (err,result) {
+    comment.find({$or:[{name:name},{username:name}]},function (err,result) {
         if(err){
             req.session.error= 'something wrong!';
             res.sendStatus(500);
         }else{
             //calculate the average score, and update the database.
-            var aveScore=0;
-            for(var i=0;i<result.length;i++){
-                aveScore+=result[i].score;
+            var aveScore = 0;
+            //if this company has comment
+            if(result.length>0){
+                for(var i=0;i<result.length;i++){
+                    aveScore+=result[i].score;
+                    aveScore = (aveScore/result.length).toFixed(2);
+                }
             }
-            aveScore = (aveScore/result.length).toFixed(2);
+
             //find the detail of this company
             var publication = global.dbHandel.getModel('publication');
             var company = global.dbHandel.getModel('employer');
-            publication.findOne({name:{$regex:name,$options:"$i"},career:{$regex:career,$options:"$i"}},function (err,result1) {
+            publication.findOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}],career:{$regex:career,$options:"$i"}},function (err,result1) {
                 if(err){
                     console.log('wrong.')
                 }else{
                     var data = result1._doc;
                     //update the new score
-                    company.updateOne({name:{$regex:name,$options:"$i"}}, { $set: { aveScore: aveScore}},function (err,res) {
+                    company.updateOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}]}, { $set: { aveScore: aveScore}},function (err,res) {
                         if (err) throw err;
                     })
                     //plus the data from other database
-                    company.findOne({name:{$regex:name,$options:"$i"}},function (err,result2) {
+                    company.findOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}]},function (err,result2) {
                         if(err){
                             console.log("wrong");
                         }else{
@@ -264,6 +268,7 @@ exports.careerapply = function (req,res) {
     })
 
 }
+//write comment for company. evaluator is job hunter
 exports.comment=function (req,res) {
     var comment = global.dbHandel.getModel('comment');
     comment.create({

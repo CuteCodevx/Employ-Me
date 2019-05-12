@@ -13,6 +13,7 @@
 <body class="w3-content">
 
 <%include header.html%>
+<!--received Invitation-->
 <div class="w3-container" id="invitations">
     <h3 id="title1"><strong>Received Invitation</strong></h3>
     <%if(received.length > 0){
@@ -23,24 +24,23 @@
                 <p><%=received[i].date%></p>
             </div>
             <div class="w3-col m4">
-                <p><%=received[i].job%> From <%=received[i].employer%></p>
+                <p><span class="InviteJob"><%=received[i].job%></span> From <span class="InviteEmployer"><%=received[i].employer%></span></p>
             </div>
             <div class="w3-col m4">
-                <p class="w3-right"><a href="customerExhibition.html">Check</a></p>
+                <p class="w3-right"><a class="checkInvitationDetail" href="">Check</a></p>
             </div>
         </div>
-
     </div>
     <%}}else{%>
-    <p>You haven't received any job invitation</p>
+    <p class="w3-center">You haven't received any job invitation</p>
     <%}%>
 </div>
 
-
+<!--public new request-->
 <div class="w3-container w3-center" id="new">
     <a><button class="w3-button w3-black w3-round-xlarge" id="public">Public New Request</button></a>
 </div>
-<!--public new request-->
+<!--public new request model-->
 <section id="publicRequest" class="w3-modal">
     <div class="w3-modal-content w3-animate-top w3-card-4">
         <header class="w3-container w3-black w3-center w3-padding-32">
@@ -80,9 +80,9 @@
         </form>
     </div>
 </section>
-
+<!--Previous Publication-->
 <div class="w3-container" id="previous">
-    <h3 id="title2"><strong>Previous Publication</strong></h3>
+    <h3 class="w3-padding-32" id="title2"><strong>Previous Publication</strong></h3>
     <%if(request.length>0){
         for(var i=0;i<request.length;i++){ %>
     <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
@@ -94,18 +94,78 @@
                 <p>I want to find <%=request[i].job%></p>
             </div>
             <div class="w3-col m4">
-                <p class="w3-right"><a href="">Delete</a> </p>
+                <p class="w3-right"><a style="cursor: pointer" class="checkPublic">Check</a> / <a style="cursor: pointer" class="delete">Delete</a> </p>
+            </div>
+        </div>
+    </div>
+    <!--Previous Publication Model-->
+    <section class="w3-modal publicDetail">
+        <div class="w3-modal-content w3-animate-top w3-card-4">
+            <header class="w3-container w3-black w3-center w3-padding-32">
+        <span class="w3-button w3-black w3-xlarge w3-display-topright close">X</span>
+                <h2 class="w3-wide">Request Detail</h2>
+            </header>
+
+            <div class="w3-container" id="panel">
+                <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                    <label><strong>Username:</strong></label>
+                    <p><%=request[i].account%></p>
+                </div>
+                <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                    <label><strong>Name:</strong></label>
+                    <p><%=request[i].name%></p>
+                </div>
+
+                <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                    <label><strong>Job request:</strong></label>
+                    <p><%=request[i].job%></p>
+                </div>
+
+                <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                    <label><strong>City:</strong></label>
+                    <p><%=request[i].city%></p>
+                </div>
+
+                <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+                    <label><strong>Introduction: </strong></label>
+                    <p><%=request[i].introduction%></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <%}}else{%>
+    <p class="w3-center">You haven't put any job request.</p>
+    <%}%>
+</div>
+
+<!--My application-->
+<div class="w3-container" style="margin-top: 2%">
+    <h3 class="w3-padding-32"><strong>My Application Records</strong></h3>
+    <%if(record.length>0){
+    for(var i=0;i<record.length;i++){ %>
+    <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
+        <div class="w3-row">
+            <div class="w3-col m4">
+                <p><%=record[i].date%></p>
+            </div>
+            <div class="w3-col m4">
+                <p>I applied <span class="recordJob"><%=record[i].career%></span> in <span class="recordCompany"><%=record[i].employerAccount%></span></p>
+            </div>
+            <div class="w3-col m4">
+                <p class="w3-right"><a class="checkRecord" href="">Check</a> </p>
             </div>
         </div>
     </div>
     <%}}else{%>
-    <p>You haven't put any job request.</p>
+    <p class="center">You haven't apply any job.</p>
     <%}%>
 </div>
+
 <%include footer.html%>
 <script>
-    function change()
-    {
+    function change() {
         var x = document.getElementById("first");
         var y = document.getElementById("second");
         y.options.length = 0; // clear all content
@@ -185,7 +245,38 @@
                 })
             })
         })
+        
+        // $('.checkInvitationDetail').each(function (index,ele) {
+        //     $(this).click(function () {
+        //         var job = $('.InviteJob')[index].innerHTML;
+        //         var employer = $('.InviteEmployer')[index].innerHTML;
+        //         $(this).attr('href','careerdetail?name='+employer+'&career='+job+'');
+        //         // location.href='careerdetail?name='+employer+'&career='+job+'';
+        //     })
+        // })
+        $('.checkRecord').each(function (index,ele) {
+            $(this).click(function () {
+                var job = $('.recordJob')[index].innerHTML;
+                var employer = $('.recordCompany')[index].innerHTML;
+                $(this).attr('href','careerdetail?name='+employer+'&career='+job+'');
+                // location.href='careerdetail?name='+employer+'&career='+job+'';
+            })
+        })
 
+
+        //display public request detail
+        $('.checkPublic').each(function (index,ele) {
+            $(this).click(function () {
+                $('.publicDetail')[index].style.display='block';
+            })
+
+        })
+
+        $('.close').each(function (index,ele) {
+            $(this).click(function () {
+                $('.publicDetail')[index].style.display='none';
+            })
+        })
     })
 </script>
 </body>
