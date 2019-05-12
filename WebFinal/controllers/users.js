@@ -1,5 +1,5 @@
 exports.users = function (req, res) {
-    if (!req.session.user){
+    if (!req.session.user||req.session.isCompany==1){
         req.session.error = 'please log in to your personal account first!';
         res.redirect('/login');
     }else{
@@ -54,11 +54,13 @@ exports.userdetails=function (req,res) {
         if(err) throw err;
         //calculate
         var aveScore=0;
-        for(var i=0;i<result.length;i++){
-            aveScore+=result[i].score;
+        //if user has comment
+        if(result.length>0){
+            for(var i=0;i<result.length;i++){
+                aveScore+=result[i].score;
+            }
+            aveScore = (aveScore/result.length).toFixed(2);
         }
-        aveScore = (aveScore/result.length).toFixed(2);
-
         usersTable.updateOne({username:name}, { $set: { aveScore: aveScore}},function (err,res) {
         if(err) throw err;
         });

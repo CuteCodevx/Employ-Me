@@ -98,7 +98,9 @@ exports.loginPost = function (req, res){
                 req.session.error = 'password is incorrect';
                 res.sendStatus(404);
             }else{
-                req.session.user = result;
+                req.session.user = result.username;
+                //0
+                req.session.isCompany = 0;
                 res.send(result);
             }
         }else{
@@ -116,7 +118,10 @@ exports.loginPost = function (req, res){
                     req.session.error = 'password is incorrect';
                     res.sendStatus(404);
                 }else{
-                    req.session.user = result;
+                    //console.log(result);
+                    req.session.user = result.username;
+                    //1
+                    req.session.isCompany = result.isCompany;
                     res.send(result);
                 }
 
@@ -159,13 +164,14 @@ exports.getResults=function(req,res){
 
 exports.logout = function (req,res) {
     req.session.user = null;
+    req.session.isCompany=null;
     req.session.error = null;
     res.redirect('/');
 }
 
 exports.companyAccount = function (req, res) {
     //should compare the user is belonged company member or individual
-    if (!req.session.user){
+    if (!req.session.user || (req.session.isCompany!= 1)){
         req.session.error = 'please log in to your company account';
         res.redirect('/login');
     }

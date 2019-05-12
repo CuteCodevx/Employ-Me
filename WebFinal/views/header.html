@@ -1,11 +1,10 @@
 <div class="w3-bar w3-container w3-black" id="nav">
     <a class="w3-bar-item w3-button" href="/home">Home</a>
-    <% if(user){%>
-
-    <a href="/users/userdetail?username=<%=user.username%>" class="w3-bar-item w3-button">My Account <span  id="account"><%=user.username%></span></a>
-    <a href="/users?username=<%=user.username%>" class="w3-bar-item w3-button">My Job Hunting</a>
+    <% if(user && isCompany != 1){%>
+    <a href="/users/userdetail?username=<%=user%>" class="w3-bar-item w3-button">My Account <span  id="account"><%=user%></span></a>
+    <a href="/users?username=<%=user%>" class="w3-bar-item w3-button">My Job Hunting</a>
     <a href="/logout" class="w3-bar-item w3-button" id="logout">Log out</a>
-    <% }else{ %>
+    <%}else{%>
     <a href="/login" class="w3-bar-item w3-button" >Log in</a>
     <a href="/register" class="w3-bar-item w3-button">register</a>
     <%}%>

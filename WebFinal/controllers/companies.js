@@ -1,10 +1,9 @@
 exports.companies = function (req, res) {
-    var username = req.session.user.username;
+    var username = req.session.user;
     var companies = global.dbHandel.getModel('publication');
     var receivedApply = global.dbHandel.getModel('receivedApplication');
     companies.find({username:username}, function (err, results) {
         if (err) throw err;
-        console.log("ssssss"+results);
         //res.locals.data= results;
         var data = results;
 

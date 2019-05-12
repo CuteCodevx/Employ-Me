@@ -47,13 +47,12 @@ app.use(session({
 
 app.use(function (req, res, next) {
   res.locals.user = req.session.user;
+  res.locals.isCompany=req.session.isCompany;
   var error = req.session.error;
   delete req.session.error;
   res.locals.msg = "";
   if (error){
-    //console.log("11111111111111111"+error);
     res.locals.msg = error;
-    //console.log(res.locals.msg);
   }
   next();
 });
