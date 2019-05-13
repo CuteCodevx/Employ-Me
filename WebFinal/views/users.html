@@ -38,7 +38,7 @@
 
 <!--public new request-->
 <div class="w3-container w3-center" id="new">
-    <a><button class="w3-button w3-black w3-round-xlarge" id="public">Public New Request</button></a>
+    <a><button class="w3-button w3-black w3-round-xlarge" id="public">Post New Request</button></a>
 </div>
 <!--public new request model-->
 <section id="publicRequest" class="w3-modal">
@@ -246,14 +246,13 @@
             })
         })
         
-        // $('.checkInvitationDetail').each(function (index,ele) {
-        //     $(this).click(function () {
-        //         var job = $('.InviteJob')[index].innerHTML;
-        //         var employer = $('.InviteEmployer')[index].innerHTML;
-        //         $(this).attr('href','careerdetail?name='+employer+'&career='+job+'');
-        //         // location.href='careerdetail?name='+employer+'&career='+job+'';
-        //     })
-        // })
+        $('.checkInvitationDetail').each(function (index,ele) {
+            $(this).click(function () {
+                var employer = $('.InviteEmployer')[index].innerHTML;
+                $(this).attr('href','/company/companydetail?username='+employer+'');
+
+            })
+        })
         $('.checkRecord').each(function (index,ele) {
             $(this).click(function () {
                 var job = $('.recordJob')[index].innerHTML;

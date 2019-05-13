@@ -7,113 +7,144 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="stylesheets/companyAccount.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="/javascripts/showCompanyDetails.js"></script>
     <title>Company Account</title>
 </head>
 <body class="w3-content">
 
-<div class="w3-bar w3-container w3-black tabbox" id="nav">
-    <a class="w3-bar-item w3-button active">My Account <span id="account"><%=user%></span></a>
-    <a class="w3-bar-item w3-button" id="publication">My Publication</a>
-    <a class="w3-bar-item w3-button" id="evaluation">My Evaluation</a>
-    <a href="logout" class="w3-bar-item w3-button">Log Out</a>
-</div>
-<section class="active">
-    <div class="w3-container w3-center" id="part1">
-        <h4>Search Job Request</h4>
-        <form>
-            <input class="w3-input w3-border w3-round-large w3-hover-sand" type="text" id="input">
-        </form>
-
-        <button class="w3-button w3-center w3-black w3-round-large" id="search">Search</button>
-    </div>
-
-    <div class="w3-container w3-center" id="part2">
-        <h4>Choose Job Request</h4>
-        <form id="form">
-            <div class="w3-container w3-third">
-                <select class="w3-select w3-border" name="option" id="first" onChange="change()">
-                    <option value="">Software</option>
-                    <option value="">Finance</option>
-                    <option value="">Biology</option>
-                    <option value="">Arts</option>
-                    <option value="">Literature</option>
-                </select>
-            </div>
-
-            <div class="w3-container w3-third">
-                <select class="w3-select w3-border" id="second">
-                    <option value=""></option>
-                    <option value="">Software</option>
-                    <option value="">Finance</option>
-                    <option value="">Biology</option>
-                    <option value="">Arts</option>
-                    <option value="">Literature</option>
-                </select>
-            </div>
-
-            <div class="w3-container w3-third">
-                <select class="w3-select w3-border" id="city">
-                    <option value=""></option>
-                    <option value="">London</option>
-                    <option value="">Manchester</option>
-                    <option value="">Edinburgh</option>
-                    <option value="">Glasgow</option>
-                    <option value="">Leeds</option>
-                </select>
-            </div>
-
-        </form>
-        <button class="w3-button w3-center w3-black w3-round-large" id="go">Go</button>
-
-
-    </div>
-</section>
-
-
-<section>
+<%include header.html%>
+<!--Received applications-->
     <div class="w3-container" id="received">
-        <h3><strong>Received applications</strong></h3>
+        <h3 class="w3-padding-32" id="title1"><strong>Received Application</strong></h3>
+        <%if(received.length > 0){
+        for(var i=0;i<received.length;i++){%>
+        <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
+            <div class="w3-row">
+                <div class="w3-col m4">
+                    <p><%=received[i].date%></p>
+                </div>
+                <div class="w3-col m4">
+                    <p><span class="InviteJob"><%=received[i].career%></span> From <span class="applicant"><%=received[i].employeeAccount%></span></p>
+                </div>
+                <div class="w3-col m4">
+                    <p class="w3-right"><a class="checkEmployee" href="">Check Applicant</a></p>
+                </div>
+            </div>
+        </div>
+        <%}}else{%>
+        <p class="w3-center">You haven't received any application</p>
+        <%}%>
     </div>
 
-    <div class="w3-container w3-center">
-        <a href="public.html"><button class="w3-button w3-black w3-round-xlarge">Public New Occupation</button></a>
-    </div>
+<!--public new occupation-->
+<div class="w3-container w3-center w3-margin" id="new">
+    <a><button class="w3-button w3-black w3-round-xlarge" id="public">Post New Occupation</button></a>
+</div>
 
-    <div class="w3-container" id="previous">
-        <h3><strong>Previous Publication</strong></h3>
-    </div>
+<!--Public new publication model-->
+<section id="publicJob" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+        <header class="w3-container w3-black w3-center w3-padding-32">
+        <span onclick="document.getElementById('publicJob').style.display='none'"
+              class="w3-button w3-black w3-xlarge w3-display-topright">X</span>
+            <h2 class="w3-wide">Public New Job</h2>
+        </header>
+        <form class="w3-container w3-card-4" id="postForm" onsubmit="return false">
+            <p>
+                <label>Name of Company  </label> <span class="w3-large" id="companyName"><%=nameCompany%></span>
+            <p>
+                <label>Occupation</label>
+                <input class="w3-input" type="text" name="career" id="career"></p>
+            <p>
+            <p>
+                <label>City</label>
+                <input class="w3-input" type="text" name="city" id="city"></p>
+            <p>
 
+            <p>
+                <label>Rate of Pay (Pounds/Year)</label>
+                <input class="w3-input" type="text" name="pay" id="pay"></p>
+            <p>
+
+                <label>Occupation description</label>
+                <textarea class="w3-input" type="text" name="description" id="desc"></textarea></p>
+
+            <p>
+                <label>Occupation requirement</label>
+                <textarea class="w3-input" type="text" name="requirement" id="requ"></textarea></p>
+
+            <p><label>Job Type</label>
+                <select class="w3-section w3-select w3-border" name="option" id="first" onChange="change()">
+                    <option value="">Software</option>
+                    <option value="">Finance</option>
+                    <option value="">Biology</option>
+                    <option value="">Arts</option>
+                    <option value="">Literature</option>
+                </select>
+
+                <select class=" w3-select w3-border" id="second">
+
+                </select>
+            </p>
+
+            <button type="submit" class="w3-button w3-block w3-black w3-padding-16 w3-section w3-right">SUBMIT <i class="fa fa-check"></i></button>
+
+        </form>
+    </div>
 </section>
 
-<section>
-    <div class="w3-container w3-card w3-center" id="score">
-        <span><strong>Average Score: </strong></span>
-        <br> <br>
-        <span class="w3-tag w3-xlarge">4.5</span>
+<!--Previous publication-->
+<div class="w3-container" id="previous">
+    <h3 class="w3-padding-32"><strong>Previous Publication</strong></h3>
+    <%if(public.length>0){
+    for(var i=0;i<public.length;i++){ %>
+    <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
+        <div class="w3-row">
+            <div class="w3-col m4">
+                <p><%=public[i].date%></p>
+            </div>
+            <div class="w3-col m4">
+                <p>I publicized a job <span class="career w3-large"><%=public[i].career%></span></p>
+            </div>
+            <div class="w3-col m4">
+                <p class="w3-right"><a style="cursor: pointer" class="checkPublic">Check</a> / <a style="cursor: pointer" class="delete">Delete</a> </p>
+            </div>
+        </div>
     </div>
+    <%}}else{%>
+    <p class="w3-center">You haven't public any job information.</p>
+    <%}%>
+</div>
 
-    <div class="w3-container w3-center w3-card" id="comment">
-        <h3>Displaying Comments</h3>
 
-        <div class="w3-panel w3-border w3-border-black">
-            <p>This is a testing comments</p>
-        </div>
-        <div class="w3-panel w3-border w3-border-black">
-            <p>This is a testing comments</p>
-        </div>
-        <div class="w3-panel w3-border w3-border-black">
-            <p>This is a testing comments</p>
-        </div>
+<!--My invitation-->
 
+<div class="w3-container" style="margin-top: 2%">
+    <h3 class="w3-padding-32"><strong>My Invitation Records</strong></h3>
+    <%if(invite.length>0){
+    for(var i=0;i<invite.length;i++){ %>
+    <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">
+        <div class="w3-row">
+            <div class="w3-col m4">
+                <p><%=invite[i].date%></p>
+            </div>
+            <div class="w3-col m4">
+                <p>I invited <span class="recordJob"><%=invite[i].employee%></span> to interview <span class="recordCompany"><%=invite[i].job%></span></p>
+            </div>
+            <div class="w3-col m4">
+                <p class="w3-right"><a class="checkInvite" href="">Check</a> </p>
+            </div>
+        </div>
     </div>
-</section>
+    <%}}else{%>
+    <p class="center">You haven't invite any people.</p>
+    <%}%>
+</div>
+
 
 <%include footer.html%>
 
 <script>
-    function change()
-    {
+    function change() {
         var x = document.getElementById("first");
         var y = document.getElementById("second");
         y.options.length = 0;
@@ -158,15 +189,61 @@
         if(x.selectedIndex == 4)
         {
             y.options.add(new Option("English literature", "0"));
-            y.options.add(new Option("Foreign literature", "1", false, true));
+            y.options.add(new Option("Foreign literature", "1", false, true));  // 默认选中省会城市
             y.options.add(new Option("Literature education", "2"));
             y.options.add(new Option("None", "3"));
         }
-
     }
+    $(function () {
+        $('#public').click(function () {
+            $('#publicJob').css("display","block");
+        })
+        
+        //check publication
+        $('.checkPublic').each(function (index,ele) {
+            $(this).click(function () {
+                var name = $('#companyAccount').text();
+                var career= $('.career')[index].innerHTML;
+                location.href='/careerdetail?name='+name+'&career='+career+'';
+            })
+        })
 
+        //check employee information
+        $('.checkEmployee').each(function (i,ele) {
+            $(this).click(function () {
+                var name = $('.applicant')[i].innerHTML;
+                $(this).attr('href','/users/userdetail?username='+name+'');
+            })
+        })
 
+        //post new job
+        $('#postForm').submit(function () {
+            var account = $('#companyAccount').text();
+            var name = $('#companyName').text();
+            var career = $('#career').val();
+            var city=$('#city').val();
+            var pay = $('#pay').val();
+            var desc=$('#desc').val();
+            var requ = $('#requ').val();
+            var date= new Date();
+            var type=[$('#first').find("option:selected").text(),$('#second').find("option:selected").text()];
+            var data = {account:account,name:name,career:career,city:city,date:date.toLocaleString(),pay:pay,detail:desc,requ:requ,type:type};
 
+            $.ajax({
+                url:'/company/companyAccount',
+                type:'post',
+                data:data,
+                success:function (res) {
+                    alert('post success');
+                    location.href="/company/companyAccount?username="+account+"";
+                },
+                error:function (err) {
+                    console.log(err);
+                }
+
+            })
+        })
+    })
 </script>
 </body>
 </html>

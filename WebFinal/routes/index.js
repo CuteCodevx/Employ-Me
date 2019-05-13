@@ -22,7 +22,7 @@ router.post('/home',loginAndRegisterController.getResults);
 
 router.get('/logout', loginAndRegisterController.logout);
 
-router.get('/companyAccount',loginAndRegisterController.companyAccount);
+router.get('/company',loginAndRegisterController.companyHome);
 
 router.get('/results',loginAndRegisterController.results);
 

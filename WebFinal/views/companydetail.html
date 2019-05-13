@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="180">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <title>Company Account</title>
+</head>
+<body class="w3-content">
+
+<%include header.html%>
+    <div class="w3-container w3-center w3-margin-top w3-padding-48">
+        <div class="w3-padding w3-xlarge">
+            <i class="fa fa-home"></i>
+            Company Details
+        </div>
+    </div>
+
+    <div class="w3-container" id="panel">
+        <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+            <label><strong>Username of Company:</strong></label>
+            <p><%=detail.username%></p>
+        </div>
+        <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+            <label><strong>Name of Company:</strong></label>
+            <p><%=detail.name%></p>
+        </div>
+
+        <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+            <label><strong>City:</strong></label>
+            <p><%=detail.city%></p>
+        </div>
+
+        <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+            <label><strong>Address:</strong></label>
+            <p><%=detail.address%>, <%=detail.postcode%></p>
+        </div>
+
+        <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+            <label><strong>Email:</strong></label>
+            <p><%=detail.email%></p>
+        </div>
+    </div>
+    <!--evaluation-->
+    <div class="w3-container w3-card w3-padding-48" style="margin-top:64px">
+        <div class="w3-container  w3-center">
+            <h3 style="margin-top: 48px">AVERAGE SCORE</h3>
+        <br><br>
+        <span class="w3-tag w3-xlarge" id="aveScore"><%=detail.aveScore%></span>
+        </div>
+        <!--show comments-->
+        <div class="w3-container ">
+            <h3 class="w3-center" style="margin:48px">COMMENTS</h3>
+            <%if(comment.length>0){
+            for(var i=0;i<comment.length;i++){%>
+            <div class="w3-card-4 w3-white w3-margin-top">
+                <div class="w3-container">
+                    <h5><b><%=comment[i].evaluators%></b><span class="w3-opacity w3-right w3-small"><i class="w3-text-black">Reviewed</i> <%=comment[i].date%></span></h5>
+                </div>
+                <div class="w3-container">
+                    <p class="w3-text-red"><%=comment[i].score%></p>
+                    <p><%=comment[i].comments%></p>
+                </div>
+            </div>
+            <%}}else{%>
+            <p class="w3-center">No any company comment to you</p>
+            <%}%>
+        </div>
+    </div>
+<%include footer.html%>
+
+<script>
+
+</script>
+</body>
+</html>

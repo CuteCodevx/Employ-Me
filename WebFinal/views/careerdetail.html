@@ -44,7 +44,7 @@
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Description: </strong></label>
-        <p><%=detail.careerType.toString()%></p>
+        <p><%=detail.description%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
@@ -68,10 +68,11 @@
     </div>
 
 </div>
-
+<%if(isCompany != 1){%>
 <div class="w3-container" id="button">
     <button class="w3-btn w3-round-large w3-black " id="apply">Apply</button>
 </div>
+<%}%>
 <!--comment model-->
 <section id="reviewModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-top w3-card-4">
@@ -91,6 +92,7 @@
         </form>
     </div>
 </section>
+<%if(isCompany != 1){%>
 <!--show information about-->
 <section class="w3-container w3-card" style="margin-top:64px">
     <!--show average scores-->
@@ -119,7 +121,7 @@
         <button class="w3-btn w3-round-large w3-margin w3-black w3-right" id="evaluate">Evaluate</button>
     </div>
 </section>
-
+<%}%>
 <%include footer.html%>
 <script>
     $(function(){
@@ -152,12 +154,12 @@
         })
 
         $('#evaluate').click(function () {
-
+            var account= $('#account').text();
             var username = $('#companyUserName').text();
             var name=$('#companyName').text();
             var career = $('#career').text();
             var date = new Date();
-            if(!username){
+            if(!account){
                 alert('please login your account first!');
             }else{
                 $('#reviewModal').css("display","block");

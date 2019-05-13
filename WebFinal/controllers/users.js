@@ -47,7 +47,7 @@ exports.userdetails=function (req,res) {
     //username
     var name = req.query.username;
     var usersTable = global.dbHandel.getModel('employee');
-    var comment = global.dbHandel.getModel('comment')
+    var comment = global.dbHandel.getModel('comment');
     //calculate the average score
 
     comment.find({username:name},function (err, result) {

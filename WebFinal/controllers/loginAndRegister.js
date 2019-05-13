@@ -169,13 +169,13 @@ exports.logout = function (req,res) {
     res.redirect('/');
 }
 
-exports.companyAccount = function (req, res) {
+    exports.companyHome = function (req, res) {
     //should compare the user is belonged company member or individual
     if (!req.session.user || (req.session.isCompany!= 1)){
         req.session.error = 'please log in to your company account';
         res.redirect('/login');
     }
-    res.render('companyAccount',{title : 'welcome'+req.session.user});
+    res.render('companyHome',{title : 'welcome'+req.session.user});
 }
 
 

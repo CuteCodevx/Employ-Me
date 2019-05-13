@@ -23,7 +23,7 @@ $(function () {
 
                     //is company
                     if(result.isCompany!=null){
-                        location.href = 'companyAccount';
+                        location.href = 'company';
                     }else{
                         location.href = 'home';
                     }

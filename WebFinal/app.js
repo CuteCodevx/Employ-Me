@@ -64,7 +64,7 @@ var companiesRouter = require('./routes/companies');
 //apply the routes to our application
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/companyAccount',companiesRouter);
+app.use('/company',companiesRouter);
 // app.use('/register', indexRouter);
 // app.use('/home',indexRouter);
 
