@@ -105,7 +105,7 @@
         for(var i=0;i<comment.length;i++){%>
         <div class="w3-card-4 w3-white w3-section">
             <div class="w3-container">
-                <h5><a href="/company/companydetail?username=<%=comment[i].evaluators%>"><b><%=comment[i].evaluators%></b><a><span class="w3-opacity w3-right w3-small"><i class="w3-text-black">Reviewed</i> <%=comment[i].date%></span></h5>
+                <h5><a href="/company/companydetail?username=<%=comment[i].evaluators%>"><b><%=comment[i].evaluators%></b></a><span class="w3-opacity w3-right w3-small"><i class="w3-text-black">Reviewed</i> <%=comment[i].date%></span></h5>
             </div>
             <div class="w3-container">
                 <p class="w3-text-red"><%=comment[i].score%></p>
@@ -113,7 +113,7 @@
             </div>
         </div>
         <%}}else{%>
-        <p class="w3-center">The company haven't any comment.</p>
+        <p class="w3-center">There are currently no reviews.</p>
         <%}%>
         <button class="w3-btn w3-round-large w3-margin w3-black w3-right" id="evaluate">Evaluate</button>
     </div>
@@ -129,7 +129,7 @@
         $('#invite').click(function () {
 
             if(!companyaccount){
-                alert('please login your account first!');
+                alert('Please login to your account first!');
             }else{
 
                 var date = new Date();
@@ -146,7 +146,7 @@
                     },
                     error:function (err,result) {
                         // console.log(err.statusText);
-                        alert("you already invited this person!");
+                        alert("You have already invited this person!");
                     }
                 })
 
@@ -158,7 +158,7 @@
             var date = new Date();
 
             if(!companyaccount){
-                alert('please login your account first!');
+                alert('Please Login to your account first!');
             }else{
                 $('#reviewModal').css('display','block');
 

@@ -1,12 +1,12 @@
 exports.users = function (req, res) {
-    if (!req.session.user||req.session.isCompany==1){
+    if (!req.session.user||req.session.isCompany===1){
         req.session.error = 'please log in to your personal account first!';
         res.redirect('/login');
     }else{
         var username = req.query.username;
-        var request = global.dbHandel.getModel('jobRequest');
-        var received = global.dbHandel.getModel('receivedInvite');
-        var receivedApplication = global.dbHandel.getModel('receivedApplication');
+        var request = global.dbHandle.getModel('jobRequest');
+        var received = global.dbHandle.getModel('receivedInvite');
+        var receivedApplication = global.dbHandle.getModel('receivedApplication');
         //get the application record
         request.find({account:username},function (err,result) {
             if (err) throw err;
@@ -22,9 +22,10 @@ exports.users = function (req, res) {
             }).sort({'date':-1})
         }).sort({'date':-1})
     }
-}
+};
+
 exports.publicRequest=function (req,res) {
-    var request = global.dbHandel.getModel('jobRequest');
+    var request = global.dbHandle.getModel('jobRequest');
     request.create({
         account:req.body.account,
         name:req.body.name,
@@ -43,16 +44,16 @@ exports.publicRequest=function (req,res) {
             res.sendStatus(200);
         }
     })
-}
+};
 
 exports.userdetails=function (req,res) {
     //username
     var name = req.query.username;
-    var namearr=name.split(' ');
+    var namearr = name.split(' ');
     var firstname = namearr[0];
     var lastname = namearr[1];
-    var usersTable = global.dbHandel.getModel('employee');
-    var comment = global.dbHandel.getModel('comment');
+    var usersTable = global.dbHandle.getModel('employee');
+    var comment = global.dbHandle.getModel('comment');
     //calculate the average score
 
     comment.find({$or:[{username:{$regex:name,$options:"$i"}},{'name':{$regex:name,$options:"$i"}}]},function (err, result) {
@@ -76,5 +77,4 @@ exports.userdetails=function (req,res) {
         })
 
     }).sort({'date':-1})
-
-}
+};

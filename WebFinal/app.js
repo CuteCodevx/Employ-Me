@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var multer = require('multer');
 var mongoose = require('mongoose');
-global.dbHandel = require('./database/mongo');
+global.dbHandle = require('./database/mongo');
 global.db = mongoose.connect("mongodb+srv://admin:team4123456@cluster0-mozuc.mongodb.net/mongodbWeb?retryWrites=true");
 //global.db = mongoose.connect("mongodb://localhost:27017/mongodbWeb");
 

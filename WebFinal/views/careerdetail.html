@@ -116,7 +116,7 @@
             </div>
         </div>
         <%}}else{%>
-        <p class="w3-center">The company haven't any comment.</p>
+        <p class="w3-center">There are currently no reviews.</p>
         <%}%>
         <button class="w3-btn w3-round-large w3-margin w3-black w3-right" id="evaluate">Evaluate</button>
     </div>
@@ -146,7 +146,7 @@
                     },
                     error:function (err,result) {
                         // console.log(err.statusText);
-                        alert("you cannot apply a same job!");
+                        alert("You cannot apply for the same job more than once!");
                     }
                 })
             }
@@ -160,7 +160,7 @@
             var career = $('#career').text();
             var date = new Date();
             if(!account){
-                alert('please login your account first!');
+                alert('\'Please login to your account first!\'');
             }else{
                 $('#reviewModal').css("display","block");
                 $('#comment').submit(function () {

@@ -1,32 +1,32 @@
 exports.compantAccount = function (req, res) {
     var username = req.query.username;
-    var publication = global.dbHandel.getModel('publication');
-    var receivedApply = global.dbHandel.getModel('receivedApplication');
-    var invititation = global.dbHandel.getModel('receivedInvite');
-    var company = global.dbHandel.getModel('employer');
+    var publication = global.dbHandle.getModel('publication');
+    var receivedApply = global.dbHandle.getModel('receivedApplication');
+    var invitation = global.dbHandle.getModel('receivedInvite');
+    var company = global.dbHandle.getModel('employer');
 
     company.findOne({username:username},function (err,result3) {
         if(err) throw err;
         publication.find({username:username},function (err,result) {
             if(err) throw err;
-            //get compantName
+            //get company Name
             var companyName = result3.name;
             receivedApply.find({employerAccount:companyName},function (err,result1) {
                 if(err) throw err;
-                invititation.find({$or:[{employer:companyName},{employer:username}]},function (err,result2) {
+                invitation.find({$or:[{employer:companyName},{employer:username}]},function (err,result2) {
                     if(err) throw err;
                     res.render('companyAccount',{public:result,received:result1,invite:result2,nameCompany:result3.name});
                 })
             }).sort({'date':-1})
         }).sort({'date':-1})
     })
+};
 
-}
 //get detail of company
 exports.companydetail=function (req,res) {
     var name = req.query.username;
-    var company = global.dbHandel.getModel('employer');
-    var comment = global.dbHandel.getModel('comment');
+    var company = global.dbHandle.getModel('employer');
+    var comment = global.dbHandle.getModel('comment');
     comment.find({$or:[{username:name},{name:name}]},function (err, result1) {
         if(err) throw err;
         //calculate
@@ -46,10 +46,10 @@ exports.companydetail=function (req,res) {
             })
         })
     }).sort({'date':-1})
-}
+};
 
 exports.publicJob=function (req,res) {
-    var publication = global.dbHandel.getModel('publication');
+    var publication = global.dbHandle.getModel('publication');
     publication.create({
         username:req.body.account,
         name:req.body.name,
@@ -59,7 +59,7 @@ exports.publicJob=function (req,res) {
         city:req.body.city,
         description:req.body.detail,
         requirement:req.body.requ,
-        date:req.body.date,
+        date:req.body.date
     },function (err,result) {
         if(err){
             req.session.error= 'server is wrong!';
@@ -69,4 +69,4 @@ exports.publicJob=function (req,res) {
             res.sendStatus(200);
         }
     })
-}
+};
