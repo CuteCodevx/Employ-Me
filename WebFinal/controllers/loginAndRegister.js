@@ -3,7 +3,7 @@ exports.register = function (req, res) {
 }
 exports.registerPost = function(req, res) {
     var username = req.body.username;
-    var employee = global.dbHandel.getModel('employee');
+    var employee = global.dbHandle.getModel('employee');
 
     employee.findOne({username:username}, function (err,result) {
         if (err){
@@ -42,7 +42,7 @@ exports.registerCompany = function(req, res){
 }
 exports.registerCompanyPost=function(req, res){
     var username = req.body.username;
-    var employer = global.dbHandel.getModel('employer');
+    var employer = global.dbHandle.getModel('employer');
 
     employer.findOne({username:username}, function (err,result) {
         if (err){
@@ -82,8 +82,8 @@ exports.login = function (req, res) {
 exports.loginPost = function (req, res){
     var username = req.body.username;
     var psw = req.body.password;
-    var employee = global.dbHandel.getModel('employee');
-    //var company = global.dbHandel.getModel('company');
+    var employee = global.dbHandle.getModel('employee');
+    //var company = global.dbHandle.getModel('company');
     employee.findOne({username:username},function (err,result) {
         if(result!=null){
             if (err){
@@ -104,7 +104,7 @@ exports.loginPost = function (req, res){
                 res.send(result);
             }
         }else{
-            var employer = global.dbHandel.getModel('employer');
+            var employer = global.dbHandle.getModel('employer');
             employer.findOne({username:username},function (err,result) {
                 if (err){
                     req.session.error= 'something wrong!';
@@ -160,8 +160,8 @@ exports.results = function (req, res) {
     var value = req.query.keyword;
     var keyword = req.query.keywordJob;
     var address = req.query.address;
-    var publication = global.dbHandel.getModel('publication');
-    var jobrequest = global.dbHandel.getModel('jobRequest');
+    var publication = global.dbHandle.getModel('publication');
+    var jobrequest = global.dbHandle.getModel('jobRequest');
     //find jobs
     if(value){
         publication.find({$or:[{city:{$regex:value,$options:"$i"}},{careerType:{$regex:value,$options:"$i"}}]},function(err,result) {
@@ -195,7 +195,7 @@ exports.careerDetail=function(req,res){
     var name = req.query.name;
     var career = req.query.career;
 
-    var comment = global.dbHandel.getModel('comment');
+    var comment = global.dbHandle.getModel('comment');
     comment.find({$or:[{name:name},{username:name}]},function (err,result) {
         if(err){
             req.session.error= 'something wrong!';
@@ -212,8 +212,8 @@ exports.careerDetail=function(req,res){
             }
 
             //find the detail of this company
-            var publication = global.dbHandel.getModel('publication');
-            var company = global.dbHandel.getModel('employer');
+            var publication = global.dbHandle.getModel('publication');
+            var company = global.dbHandle.getModel('employer');
             publication.findOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}],career:{$regex:career,$options:"$i"}},function (err,result1) {
                 if(err){
                     console.log('wrong.')
@@ -252,7 +252,7 @@ exports.careerapply = function (req,res) {
     var date = req.body.date;
     var companyUsername = req.body.employerAccount;
     //create application into received application form
-    var receivedApply = global.dbHandel.getModel('receivedApplication');
+    var receivedApply = global.dbHandle.getModel('receivedApplication');
     receivedApply.findOne({employeeAccount:username,career:career,employerAccount:companyUsername}, function (err,result) {
         if (err){
             req.session.error= 'something wrong!';
@@ -283,7 +283,7 @@ exports.careerapply = function (req,res) {
 }
 //write comment for company. evaluator is job hunter
 exports.comment=function (req,res) {
-    var comment = global.dbHandel.getModel('comment');
+    var comment = global.dbHandle.getModel('comment');
     comment.create({
         username:req.body.username,
         name:req.body.name,
@@ -309,9 +309,9 @@ exports.candidateDetail=function (req,res) {
     var name = req.query.name;
     var career = req.query.career;
 
-    var comment = global.dbHandel.getModel('comment');
-    var employee = global.dbHandel.getModel('employee');
-    var jobrequest = global.dbHandel.getModel('jobRequest');
+    var comment = global.dbHandle.getModel('comment');
+    var employee = global.dbHandle.getModel('employee');
+    var jobrequest = global.dbHandle.getModel('jobRequest');
 
     jobrequest.findOne({$and:[{$or:[{name:name},{account:name}]},{job:{$regex:career,$options:"$i"}}]},function (err,result) {
         if(err) throw err;
@@ -353,7 +353,7 @@ exports.candidateInvite=function (req,res) {
     var date = req.body.date;
     var companyUsername = req.body.employer;
     //create application into received application form
-    var receivedInvite = global.dbHandel.getModel('receivedInvite');
+    var receivedInvite = global.dbHandle.getModel('receivedInvite');
     receivedInvite.findOne({employee:username,job:career,employer:companyUsername}, function (err,result) {
         if (err){
             req.session.error= 'something wrong!';
