@@ -5,7 +5,7 @@
     <meta http-equiv="refresh" content="180">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="stylesheets/companyAccount.css">
+    <link rel="stylesheet" href="/stylesheets/companyAccount.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
     <title>Company Account</title>
 </head>
@@ -275,7 +275,7 @@
                 data:formData,
                 success:function (res) {
                     alert('post success');
-
+                    //back the current page
                     location.href="/company/companyAccount?username="+account+"";
                 },
                 error:function (err) {
@@ -286,17 +286,25 @@
         })
 
         //delete application
-        $('.delete').each(function () {
+        $('.delete').each(function (index,ele) {
             $(this).click(function () {
-                var name = $('#companyAccount').text();
+                console.log('click');
+                var username = $('#companyAccount').text();
+                var name = $('#companyName').text();
                 var career= $('.career')[index].innerHTML;
                 career=career.trim();
+                username=username.trim();
                 name=name.trim();
+                var data={username:username,name:name,career:career};
                 $.ajax({
-                    url:'deletePublication?name='+name+'&career='+career+'',
-                    post:'get',
-                    success:function () {
+                    url:'/company/deletePublication',
+                    type:'post',
+                    data:data,
+                    success:function (data) {
+
                         alert('delete success');
+                        //back the current page
+                        location.href="/company/companyAccount?username="+username+"";
                     },
                     error:function (err) {
                         console.log(err)

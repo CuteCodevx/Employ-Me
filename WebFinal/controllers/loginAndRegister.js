@@ -164,7 +164,7 @@ exports.results = function (req, res) {
     var jobrequest = global.dbHandle.getModel('jobRequest');
     //find jobs
     if(value){
-        publication.find({$or:[{city:{$regex:value,$options:"$i"}},{careerType:{$regex:value,$options:"$i"}}]},function(err,result) {
+        publication.find({$and:[{$or:[{city:{$regex:value,$options:"$i"}},{careerType:{$regex:value,$options:"$i"}}]},{isDeleted:{$ne:1}}]},function(err,result) {
             if (err) {
                 console.log("something wrong..");
             } else {

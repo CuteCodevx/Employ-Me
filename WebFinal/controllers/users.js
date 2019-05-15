@@ -14,7 +14,7 @@ exports.users = function (req, res) {
             received.find({employee:{$regex:username,$options:"$i"}},function (err,result1) {
                 if (err) throw err;
 
-                receivedApplication.find({employeeAccount:username},function (err,result2) {
+                receivedApplication.find({$and:[{employeeAccount:username},{isDeleted:{$ne:1}}]},function (err,result2) {
                     if (err) throw err;
                     res.render('users',{request:result,received:result1,record:result2});
                 }).sort({'date':-1})

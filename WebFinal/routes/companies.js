@@ -5,6 +5,6 @@ var companyController = require('../controllers/companies');
 router.get('/companyAccount',companyController.companyAccount);
 router.post('/companyAccount',companyController.publicJob);
 router.get('/companydetail',companyController.companydetail);
-router.get('/deletePublication',companyController.deleteJob);
+router.post('/deletePublication',companyController.deleteJob);
 
 module.exports = router;
