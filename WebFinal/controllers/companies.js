@@ -5,6 +5,7 @@ exports.compantAccount = function (req, res) {
     var invititation = global.dbHandel.getModel('receivedInvite');
     var company = global.dbHandel.getModel('employer');
 
+
     company.findOne({username:username},function (err,result3) {
         if(err) throw err;
         publication.find({username:username},function (err,result) {
@@ -15,8 +16,11 @@ exports.compantAccount = function (req, res) {
                 if(err) throw err;
                 invititation.find({$or:[{employer:companyName},{employer:username}]},function (err,result2) {
                     if(err) throw err;
+
                     res.render('companyAccount',{public:result,received:result1,invite:result2,nameCompany:result3.name});
-                })
+
+
+                }).sort({'date':-1})
             }).sort({'date':-1})
         }).sort({'date':-1})
     })

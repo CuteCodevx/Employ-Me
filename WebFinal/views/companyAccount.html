@@ -128,7 +128,7 @@
                 <p><%=invite[i].date%></p>
             </div>
             <div class="w3-col m4">
-                <p>I invited <span class="recordJob"><%=invite[i].employee%></span> to interview <span class="recordCompany"><%=invite[i].job%></span></p>
+                <p>I invited <span class="recordCandidate"><%=invite[i].employee%></span> to interview <span class="recordJob"><%=invite[i].job%></span></p>
             </div>
             <div class="w3-col m4">
                 <p class="w3-right"><a class="checkInvite" href="">Check</a> </p>
@@ -139,6 +139,8 @@
     <p class="center">You haven't invite any people.</p>
     <%}%>
 </div>
+
+
 
 
 <%include footer.html%>
@@ -204,6 +206,8 @@
             $(this).click(function () {
                 var name = $('#companyAccount').text();
                 var career= $('.career')[index].innerHTML;
+                career=career.trim();
+                name=name.trim();
                 location.href='/careerdetail?name='+name+'&career='+career+'';
             })
         })
@@ -212,7 +216,17 @@
         $('.checkEmployee').each(function (i,ele) {
             $(this).click(function () {
                 var name = $('.applicant')[i].innerHTML;
+                name=name.trim();
                 $(this).attr('href','/users/userdetail?username='+name+'');
+            })
+        })
+        $('.checkInvite').each(function (i,ele) {
+            $(this).click(function () {
+                var career = $('.recordJob')[i].innerHTML;
+                var name = $('.recordCandidate')[i].innerHTML;
+                career=career.trim();
+                name=name.trim();
+                $(this).attr('href',"/candidatedetail?name="+name+"&career="+career+"");
             })
         })
 

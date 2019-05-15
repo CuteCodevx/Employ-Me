@@ -238,10 +238,10 @@ exports.careerDetail=function(req,res){
                         }
                     })
                 }
-            })
+            }).sort({'date':-1})
 
         }
-    });
+    }).sort({'date':-1});
 
 }
 
@@ -278,7 +278,7 @@ exports.careerapply = function (req,res) {
                 }
             });
         }
-    })
+    }).sort({'date':-1});
 
 }
 //write comment for company. evaluator is job hunter
@@ -313,33 +313,38 @@ exports.candidateDetail=function (req,res) {
     var employee = global.dbHandel.getModel('employee');
     var jobrequest = global.dbHandel.getModel('jobRequest');
 
-    jobrequest.findOne({name:{$regex:name,$options:"$i"},job:{$regex:career,$options:"$i"}},function (err,result) {
+    jobrequest.findOne({$and:[{$or:[{name:name},{account:name}]},{job:{$regex:career,$options:"$i"}}]},function (err,result) {
         if(err) throw err;
-        var data = result;
-        //find the comment about this candidate
-        comment.find({username:{$regex:data.account,$options:"$i"}},function (err,result2) {
-            if(err) throw err;
-            //calculate the average score, and update average score
-            var aveScore = 0;
-            //if this company has comment
-            if(result2.length>0){
-                for(var i=0;i<result2.length;i++){
-                    aveScore+=result2[i].score;
+        if(result){
+            var data = result;
+            //find the comment about this candidate
+            comment.find({username:{$regex:data.account,$options:"$i"}},function (err,result2) {
+                if(err) throw err;
+                //calculate the average score, and update average score
+                var aveScore = 0;
+                //if this company has comment
+                if(result2.length>0){
+                    for(var i=0;i<result2.length;i++){
+                        aveScore+=result2[i].score;
+                    }
+                    aveScore = (aveScore/result2.length).toFixed(2);
                 }
-                aveScore = (aveScore/result2.length).toFixed(2);
-            }
-            employee.updateOne({username:data.account},{$set: { aveScore: aveScore}},function (err, res) {
-                if(err) throw err;
-            })
+                employee.updateOne({username:data.account},{$set: { aveScore: aveScore}},function (err, res) {
+                    if(err) throw err;
+                })
 
-            //find candidate personal detail
-            employee.findOne({username:data.account},function (err,result1) {
-                if(err) throw err;
-                res.render('candidatedetail',{detail:result1,job:data.job,city:data.city,intro:data.introduction,comment:result2});
-            })
-        })
+                //find candidate personal detail
+                employee.findOne({username:data.account},function (err,result1) {
+                    if(err) throw err;
+                    res.render('candidatedetail',{detail:result1,job:data.job,city:data.city,intro:data.introduction,comment:result2});
+                })
+            }).sort({'date':-1})
+        }else{
+            res.render('error');
+        }
 
-    })
+
+    }).sort({'date':-1});
 }
 
 exports.candidateInvite=function (req,res) {
@@ -374,5 +379,5 @@ exports.candidateInvite=function (req,res) {
                 }
             });
         }
-    })
+    }).sort({'date':-1})
 }
