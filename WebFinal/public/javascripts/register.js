@@ -20,7 +20,7 @@ $(function () {
                 type:'post',
                 data:$('#register').serialize(),
                 success:function (data,status) {
-                    if (status=='success'){
+                    if (status==='success'){
                         alert($('#msg'));
                         location.href = 'login';
                     }

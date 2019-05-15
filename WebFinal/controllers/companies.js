@@ -1,4 +1,4 @@
-exports.compantAccount = function (req, res) {
+exports.companyAccount = function (req, res) {
     var username = req.query.username;
     var publication = global.dbHandle.getModel('publication');
     var receivedApply = global.dbHandle.getModel('receivedApplication');

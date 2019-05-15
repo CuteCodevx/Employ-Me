@@ -174,7 +174,7 @@ exports.results = function (req, res) {
     }else{
         //find cv
         if(address){
-            jobrequest.find({$and:[{city:{$regex:address,$options:"$i"}},{type:{$regex:keyword,$options:"$i"}}]},function (err,result2) {
+            jobrequest.find({$and:[{city:{$regex:address,$options:"$i"}},{$or:[{type:{$regex:keyword,$options:"$i"}},{job:{$regex:keyword,$options:"$i"}}]}]},function (err,result2) {
                 if(err) throw err;
                 res.render('results',{resultOfSearch:result2})
             }).sort({'date':-1})
