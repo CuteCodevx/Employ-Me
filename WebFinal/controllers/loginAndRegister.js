@@ -346,7 +346,7 @@ exports.candidateDetail=function (req,res) {
 
     }).sort({'date':-1});
 }
-
+//invite people
 exports.candidateInvite=function (req,res) {
     var username = req.body.employee;
     var career = req.body.job;

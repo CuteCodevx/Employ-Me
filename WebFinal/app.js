@@ -6,10 +6,11 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var multer = require('multer');
+var UUID = require('uuid');
 var mongoose = require('mongoose');
-global.dbHandle = require('./database/mongo');
-global.db = mongoose.connect("mongodb+srv://admin:team4123456@cluster0-mozuc.mongodb.net/mongodbWeb?retryWrites=true");
-//global.db = mongoose.connect("mongodb://localhost:27017/mongodbWeb");
+global.dbHandel = require('./database/mongo');
+//global.db = mongoose.connect("mongodb+srv://admin:team4123456@cluster0-mozuc.mongodb.net/mongodbWeb?retryWrites=true");
+global.db = mongoose.connect("mongodb://localhost:27017/mongodbWeb");
 
 
 //Declares this as an Express App
@@ -32,7 +33,27 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({extended:true}));
-//app.use(multer());
+
+
+//setup the rule of storage
+var storage = multer.diskStorage({
+  //destination：upload path
+  destination: path.resolve(__dirname, '../upload'),
+
+  filename: function(req, file, cb) {
+    var extName = file.originalname.slice(file.originalname.lastIndexOf('.'))
+    var fileName = UUID.v1()
+    cb(null, fileName + extName)
+  }
+})
+var imageLimit = {
+  fieldSize: '2MB'
+}
+
+imageUploader = multer({
+  storage: storage,
+  limits: imageLimit
+}).single('file');
 
 app.use(session({
   secret:'secret',

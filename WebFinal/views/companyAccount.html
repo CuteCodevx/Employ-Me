@@ -44,29 +44,33 @@
               class="w3-button w3-black w3-xlarge w3-display-topright">X</span>
             <h2 class="w3-wide">Public New Job</h2>
         </header>
-        <form class="w3-container w3-card-4" id="postForm" onsubmit="return false">
+        <form enctype="multipart/form-data" class="w3-container w3-card-4" id="postForm" onsubmit="return false">
             <p>
                 <label>Name of Company  </label> <span class="w3-large" id="companyName"><%=nameCompany%></span>
+            </p>
             <p>
                 <label>Occupation</label>
-                <input class="w3-input" type="text" name="career" id="career"></p>
-            <p>
+                <input class="w3-input" type="text" name="career" required id="career">
+            </p>
             <p>
                 <label>City</label>
-                <input class="w3-input" type="text" name="city" id="city"></p>
-            <p>
+                <input class="w3-input" type="text" name="city" required id="city">
+            </p>
+
 
             <p>
                 <label>Rate of Pay (Pounds/Year)</label>
-                <input class="w3-input" type="text" name="pay" id="pay"></p>
+                <input class="w3-input" type="text" name="pay" required id="pay">
+            </p>
             <p>
-
                 <label>Occupation description</label>
-                <textarea class="w3-input" type="text" name="description" id="desc"></textarea></p>
+                <textarea class="w3-input" type="text" name="description" required id="desc"></textarea>
+            </p>
 
             <p>
                 <label>Occupation requirement</label>
-                <textarea class="w3-input" type="text" name="requirement" id="requ"></textarea></p>
+                <textarea class="w3-input" type="text" name="requirement" required id="requ"></textarea>
+            </p>
 
             <p><label>Job Type</label>
                 <select class="w3-section w3-select w3-border" name="option" id="first" onChange="change()">
@@ -80,6 +84,13 @@
                 <select class=" w3-select w3-border" id="second">
 
                 </select>
+            </p>
+
+            <p>
+                <label>File input:</label>
+                <input type="file" name="file" id="file">
+                <p id="result"></p>
+                <img id="img" src="">
             </p>
 
             <button type="submit" class="w3-button w3-block w3-black w3-padding-16 w3-section w3-right">SUBMIT <i class="fa fa-check"></i></button>
@@ -241,19 +252,56 @@
             var requ = $('#requ').val();
             var date= new Date();
             var type=[$('#first').find("option:selected").text(),$('#second').find("option:selected").text()];
-            var data = {account:account,name:name,career:career,city:city,date:date.toLocaleString(),pay:pay,detail:desc,requ:requ,type:type};
+            //upload file
+            var file=$('#file')[0];
+
+            var formData = new FormData();
+            formData.append('file',file.files[0]);
+            formData.append('name',name);
+            formData.append('career',career);
+            formData.append('city',city);
+            formData.append('pay',pay);
+            formData.append('description',desc);
+            formData.append('requ',requ);
+            formData.append('date',date.toLocaleString());
+            formData.append('type',type);
+            formData.append('account',account);
 
             $.ajax({
                 url:'/company/companyAccount',
                 type:'post',
-                data:data,
+                contentType: false,
+                processData: false,
+                data:formData,
                 success:function (res) {
                     alert('post success');
+
                     location.href="/company/companyAccount?username="+account+"";
                 },
                 error:function (err) {
                     console.log(err);
                 }
+
+            })
+        })
+
+        //delete application
+        $('.delete').each(function () {
+            $(this).click(function () {
+                var name = $('#companyAccount').text();
+                var career= $('.career')[index].innerHTML;
+                career=career.trim();
+                name=name.trim();
+                $.ajax({
+                    url:'deletePublication?name='+name+'&career='+career+'',
+                    post:'get',
+                    success:function () {
+                        alert('delete success');
+                    },
+                    error:function (err) {
+                        console.log(err)
+                    }
+                })
 
             })
         })

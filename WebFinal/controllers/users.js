@@ -17,7 +17,7 @@ exports.users = function (req, res) {
                 receivedApplication.find({employeeAccount:username},function (err,result2) {
                     if (err) throw err;
                     res.render('users',{request:result,received:result1,record:result2});
-                })
+                }).sort({'date':-1})
 
             }).sort({'date':-1})
         }).sort({'date':-1})

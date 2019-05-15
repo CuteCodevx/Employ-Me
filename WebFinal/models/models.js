@@ -37,6 +37,8 @@ module.exports={
         city:{type:String,required:true},
         description:{type:String,required:true},
         requirement:{type:String,required:true},
+        path:{type:String},
+        isDeleted:{type:Number,default:0},
         date:{type:String},
         pay:{type:String,required:true}
     },
@@ -47,18 +49,21 @@ module.exports={
         city:{type:String,required:true},
         introduction:{type:String,required:true},
         type:{type:Array,required:true},
-        date:{type:String,required:true}
+        date:{type:String,required:true},
+        isDeleted:{type:Number,default:0},
     },
     receivedInvite:{
         employee:{type:String,required:true},
         employer:{type:String,required:true},
         job:{type:String,required:true},
-        date:{type:String,required:true}
+        date:{type:String,required:true},
+        isDeleted:{type:Number,default:0}
     },
     receivedApplication:{
         employeeAccount:{type:String,required:true},
         employerAccount:{type:String,required:true},
         career:{type:String,required:true},
-        date:{type:String,required:true}
+        date:{type:String,required:true},
+        isDeleted:{type:Number,default:0}
     }
 }
