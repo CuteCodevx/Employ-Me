@@ -1,10 +1,9 @@
 exports.register = function (req, res) {
     res.render('register',{title:'register'});
-};
-
+}
 exports.registerPost = function(req, res) {
     var username = req.body.username;
-    var employee = global.dbHandle.getModel('employee');
+    var employee = global.dbHandel.getModel('employee');
 
     employee.findOne({username:username}, function (err,result) {
         if (err){
@@ -37,13 +36,13 @@ exports.registerPost = function(req, res) {
             });
         }
     })
-};
+}
 exports.registerCompany = function(req, res){
     res.render('registercompany');
-};
+}
 exports.registerCompanyPost=function(req, res){
     var username = req.body.username;
-    var employer = global.dbHandle.getModel('employer');
+    var employer = global.dbHandel.getModel('employer');
 
     employer.findOne({username:username}, function (err,result) {
         if (err){
@@ -69,24 +68,22 @@ exports.registerCompanyPost=function(req, res){
                     req.session.error= 'server is wrong!';
                     res.sendStatus(500);
                 } else {
-                    console.log(doc);
+                    console.log(doc)
                     req.session.error = 'create successfully';
                     res.sendStatus(200);
                 }
             });
         }
     })
-};
-
+}
 exports.login = function (req, res) {
     res.render('login', { title: 'Login'});
-};
-
+}
 exports.loginPost = function (req, res){
     var username = req.body.username;
     var psw = req.body.password;
-    var employee = global.dbHandle.getModel('employee');
-    //var company = global.dbHandle.getModel('company');
+    var employee = global.dbHandel.getModel('employee');
+    //var company = global.dbHandel.getModel('company');
     employee.findOne({username:username},function (err,result) {
         if(result!=null){
             if (err){
@@ -97,7 +94,7 @@ exports.loginPost = function (req, res){
                 req.session.error = 'We cannot find an account with that username';
                 res.sendStatus(404);
 
-            } else if(psw!==result.password){
+            } else if(psw!=result.password){
                 req.session.error = 'password is incorrect';
                 res.sendStatus(404);
             }else{
@@ -107,7 +104,7 @@ exports.loginPost = function (req, res){
                 res.send(result);
             }
         }else{
-            var employer = global.dbHandle.getModel('employer');
+            var employer = global.dbHandel.getModel('employer');
             employer.findOne({username:username},function (err,result) {
                 if (err){
                     req.session.error= 'something wrong!';
@@ -117,7 +114,7 @@ exports.loginPost = function (req, res){
                     req.session.error = 'We cannot find an account with that username';
                     res.sendStatus(404);
 
-                } else if(psw!==result.password){
+                } else if(psw!=result.password){
                     req.session.error = 'password is incorrect';
                     res.sendStatus(404);
                 }else{
@@ -134,36 +131,37 @@ exports.loginPost = function (req, res){
 
     });
 
-};
+}
 
 exports.home = function (req,res) {
     //console.log(req);
     res.render('home',{title : 'welcome'+req.session.user});
-};
+}
 
 exports.logout = function (req,res) {
     req.session.user = null;
     req.session.isCompany=null;
     req.session.error = null;
     res.redirect('/');
-};
+}
 
 exports.companyHome = function (req, res) {
     //should compare the user is belonged company member or individual
-    if (!req.session.user || (req.session.isCompany!== 1)){
+    if (!req.session.user || (req.session.isCompany!= 1)){
         req.session.error = 'please log in to your company account';
         res.redirect('/login');
     }
     res.render('companyHome',{title : 'welcome'+req.session.user});
-};
+}
+
 
 exports.results = function (req, res) {
 
     var value = req.query.keyword;
     var keyword = req.query.keywordJob;
     var address = req.query.address;
-    var publication = global.dbHandle.getModel('publication');
-    var jobrequest = global.dbHandle.getModel('jobRequest');
+    var publication = global.dbHandel.getModel('publication');
+    var jobrequest = global.dbHandel.getModel('jobRequest');
     //find jobs
     if(value){
         publication.find({$or:[{city:{$regex:value,$options:"$i"}},{careerType:{$regex:value,$options:"$i"}}]},function(err,result) {
@@ -190,14 +188,14 @@ exports.results = function (req, res) {
 
     }
 
-};
+}
 
 exports.careerDetail=function(req,res){
     //company name
     var name = req.query.name;
     var career = req.query.career;
 
-    var comment = global.dbHandle.getModel('comment');
+    var comment = global.dbHandel.getModel('comment');
     comment.find({$or:[{name:name},{username:name}]},function (err,result) {
         if(err){
             req.session.error= 'something wrong!';
@@ -214,8 +212,8 @@ exports.careerDetail=function(req,res){
             }
 
             //find the detail of this company
-            var publication = global.dbHandle.getModel('publication');
-            var company = global.dbHandle.getModel('employer');
+            var publication = global.dbHandel.getModel('publication');
+            var company = global.dbHandel.getModel('employer');
             publication.findOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}],career:{$regex:career,$options:"$i"}},function (err,result1) {
                 if(err){
                     console.log('wrong.')
@@ -224,7 +222,7 @@ exports.careerDetail=function(req,res){
                     //update the new score
                     company.updateOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}]}, { $set: { aveScore: aveScore}},function (err,res) {
                         if (err) throw err;
-                    });
+                    })
                     //plus the data from other database
                     company.findOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}]},function (err,result2) {
                         if(err){
@@ -240,11 +238,12 @@ exports.careerDetail=function(req,res){
                         }
                     })
                 }
-            })
+            }).sort({'date':-1})
 
         }
-    });
-};
+    }).sort({'date':-1});
+
+}
 
 
 exports.careerapply = function (req,res) {
@@ -253,7 +252,7 @@ exports.careerapply = function (req,res) {
     var date = req.body.date;
     var companyUsername = req.body.employerAccount;
     //create application into received application form
-    var receivedApply = global.dbHandle.getModel('receivedApplication');
+    var receivedApply = global.dbHandel.getModel('receivedApplication');
     receivedApply.findOne({employeeAccount:username,career:career,employerAccount:companyUsername}, function (err,result) {
         if (err){
             req.session.error= 'something wrong!';
@@ -279,13 +278,12 @@ exports.careerapply = function (req,res) {
                 }
             });
         }
-    })
+    }).sort({'date':-1});
 
-};
-
+}
 //write comment for company. evaluator is job hunter
 exports.comment=function (req,res) {
-    var comment = global.dbHandle.getModel('comment');
+    var comment = global.dbHandel.getModel('comment');
     comment.create({
         username:req.body.username,
         name:req.body.name,
@@ -303,7 +301,7 @@ exports.comment=function (req,res) {
             res.sendStatus(200);
         }
     })
-};
+}
 
 //get candidate detail from employee table and job request table
 exports.candidateDetail=function (req,res) {
@@ -311,38 +309,43 @@ exports.candidateDetail=function (req,res) {
     var name = req.query.name;
     var career = req.query.career;
 
-    var comment = global.dbHandle.getModel('comment');
-    var employee = global.dbHandle.getModel('employee');
-    var jobrequest = global.dbHandle.getModel('jobRequest');
+    var comment = global.dbHandel.getModel('comment');
+    var employee = global.dbHandel.getModel('employee');
+    var jobrequest = global.dbHandel.getModel('jobRequest');
 
-    jobrequest.findOne({name:{$regex:name,$options:"$i"},job:{$regex:career,$options:"$i"}},function (err,result) {
+    jobrequest.findOne({$and:[{$or:[{name:name},{account:name}]},{job:{$regex:career,$options:"$i"}}]},function (err,result) {
         if(err) throw err;
-        var data = result;
-        //find the comment about this candidate
-        comment.find({username:{$regex:data.account,$options:"$i"}},function (err,result2) {
-            if(err) throw err;
-            //calculate the average score, and update average score
-            var aveScore = 0;
-            //if this company has comment
-            if(result2.length>0){
-                for(var i=0;i<result2.length;i++){
-                    aveScore+=result2[i].score;
+        if(result){
+            var data = result;
+            //find the comment about this candidate
+            comment.find({username:{$regex:data.account,$options:"$i"}},function (err,result2) {
+                if(err) throw err;
+                //calculate the average score, and update average score
+                var aveScore = 0;
+                //if this company has comment
+                if(result2.length>0){
+                    for(var i=0;i<result2.length;i++){
+                        aveScore+=result2[i].score;
+                    }
+                    aveScore = (aveScore/result2.length).toFixed(2);
                 }
-                aveScore = (aveScore/result2.length).toFixed(2);
-            }
-            employee.updateOne({username:data.account},{$set: { aveScore: aveScore}},function (err, res) {
-                if(err) throw err;
-            });
+                employee.updateOne({username:data.account},{$set: { aveScore: aveScore}},function (err, res) {
+                    if(err) throw err;
+                })
 
-            //find candidate personal detail
-            employee.findOne({username:data.account},function (err,result1) {
-                if(err) throw err;
-                res.render('candidatedetail',{detail:result1,job:data.job,city:data.city,intro:data.introduction,comment:result2});
-            })
-        })
+                //find candidate personal detail
+                employee.findOne({username:data.account},function (err,result1) {
+                    if(err) throw err;
+                    res.render('candidatedetail',{detail:result1,job:data.job,city:data.city,intro:data.introduction,comment:result2});
+                })
+            }).sort({'date':-1})
+        }else{
+            res.render('error');
+        }
 
-    })
-};
+
+    }).sort({'date':-1});
+}
 
 exports.candidateInvite=function (req,res) {
     var username = req.body.employee;
@@ -350,7 +353,7 @@ exports.candidateInvite=function (req,res) {
     var date = req.body.date;
     var companyUsername = req.body.employer;
     //create application into received application form
-    var receivedInvite = global.dbHandle.getModel('receivedInvite');
+    var receivedInvite = global.dbHandel.getModel('receivedInvite');
     receivedInvite.findOne({employee:username,job:career,employer:companyUsername}, function (err,result) {
         if (err){
             req.session.error= 'something wrong!';
@@ -376,5 +379,5 @@ exports.candidateInvite=function (req,res) {
                 }
             });
         }
-    })
-};
+    }).sort({'date':-1})
+}
