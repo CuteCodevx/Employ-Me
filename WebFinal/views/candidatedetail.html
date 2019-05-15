@@ -8,71 +8,68 @@
     <link rel="stylesheet" href="/stylesheets/careerdetail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
-    <title>Show Occupation Detail</title>
+    <title>Candidate</title>
 </head>
 <body class="w3-content">
-
 <% include header.html%>
 
 <div class="w3-container w3-margin-top" id="title">
     <div class="w3-padding-32 w3-xlarge w3-black">
         <i class="fa fa-home"></i>
-        Career Details
+        Candidate Details
     </div>
 </div>
-<!--career detail-->
+<!--candidate detail-->
 <div class="w3-container" id="panel">
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>Username of Company:</strong></label>
-        <p id="companyUserName"> <%=detail.username%></p>
+        <label><strong>Username</strong></label>
+        <p id="employeeUsername"> <%=detail.username%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>Name of Company:</strong></label>
-        <p id="companyName"><%=detail.name%></p>
+        <label><strong>Name</strong></label>
+        <p id="employeeName"><%=detail.firstName%> <%=detail.lastName%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>Occupation:</strong></label>
-        <p id="career"><%=detail.career%></p>
+        <label><strong>Target Job</strong></label>
+        <p id="career"><%=job%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>Rate of Pay (Pounds/Year):</strong></label>
-        <p><%=detail.pay%></p>
+        <label><strong>Target City</strong></label>
+        <p><%=city%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>Description: </strong></label>
-        <p><%=detail.description%></p>
+        <label><strong>Introduction: </strong></label>
+        <p><%=intro%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>Requirement:</strong></label>
-        <p><%=detail.requirement%></p>
+        <label><strong>Degree Level:</strong></label>
+        <p><%=detail.degreeLevel%></p>
+    </div>
+    <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+        <label><strong>Major:</strong></label>
+        <p><%=detail.major%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>City:</strong></label>
-        <p><%=detail.city%></p>
+        <label><strong>Tel:</strong></label>
+        <p><%=detail.phoneNumber%></p>
     </div>
-
-    <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>Address:</strong></label>
-        <p><%=detail.address%></p>
-    </div>
-
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Email:</strong></label>
         <p><%=detail.email%></p>
     </div>
 
 </div>
-<%if(isCompany != 1){%>
+
 <div class="w3-container" id="button">
-    <button class="w3-btn w3-round-large w3-black " id="apply">Apply</button>
+    <button class="w3-btn w3-round-large w3-black " id="invite">Invite</button>
 </div>
-<%}%>
+
 <!--comment model-->
 <section id="reviewModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-top w3-card-4">
@@ -84,31 +81,31 @@
         <form class="w3-container" id="comment" onsubmit="return false">
             <p><label>Share your feeling</label></p>
             <input class="w3-input w3-border" type="text" required name="content" id="content">
-            <p><label>How much point will you give us</label> <b class="w3-small">(The point is no more than 5)</b></p>
+            <p><label>How much point will you give this candidate</label> <b class="w3-small">(The point is no more than 5)</b></p>
             <input class="w3-input w3-border" type="number" required name="score" id="score">
-            <p><label>Please input your real name</label></p>
+            <p><label>Please input the company name</label></p>
             <input class="w3-input w3-border" type="text" required name="realName" id="realName">
             <button type="submit" class="w3-button w3-block w3-black w3-padding-16 w3-section w3-right">SUBMIT <i class="fa fa-check"></i></button>
         </form>
     </div>
 </section>
-<%if(isCompany != 1){%>
-<!--show information about-->
+
+<!--show information about candidate-->
 <section class="w3-container w3-card" style="margin-top:64px">
     <!--show average scores-->
     <div class="w3-container  w3-center">
         <h3 style="margin-top: 48px">AVERAGE SCORE</h3>
         <br><br>
-        <span class="w3-tag w3-xlarge" id="aveScore"><%=detail.score%></span>
+        <span class="w3-tag w3-xlarge" id="aveScore"><%=detail.aveScore%></span>
     </div>
     <!--show comments-->
     <div class="w3-container ">
         <h3 class="w3-center" style="margin:48px">REVIEWS</h3>
         <%if(comment.length>0){
         for(var i=0;i<comment.length;i++){%>
-        <div class="w3-card-4 w3-white">
+        <div class="w3-card-4 w3-white w3-section">
             <div class="w3-container">
-                <h5><a href="/users/userdetail?username=<%=comment[i].evaluators%>"><b><%=comment[i].evaluators%></b></a><span class="w3-opacity w3-right w3-small"><i class="w3-text-black">Reviewed</i> <%=comment[i].date%></span></h5>
+                <h5><a href="/company/companydetail?username=<%=comment[i].evaluators%>"><b><%=comment[i].evaluators%></b><a><span class="w3-opacity w3-right w3-small"><i class="w3-text-black">Reviewed</i> <%=comment[i].date%></span></h5>
             </div>
             <div class="w3-container">
                 <p class="w3-text-red"><%=comment[i].score%></p>
@@ -121,60 +118,63 @@
         <button class="w3-btn w3-round-large w3-margin w3-black w3-right" id="evaluate">Evaluate</button>
     </div>
 </section>
-<%}%>
 <%include footer.html%>
 <script>
-    $(function(){
-        //apply a job
-        $('#apply').click(function(){
-            var username = $('#account').text();
-            var career = $('#career').text();
-            var companyName = $('#companyName').text();
-            var date = new Date();
-            var data = {'employeeAccount':username,'employerAccount':companyName,'date':date.toLocaleString(),'career':career};
-            if(!username){
+    $(function () {
+        var companyaccount= $('#companyAccount').text();
+        var career = $('#career').text();
+        var username=$('#employeeUsername').text();
+        var name=$('#employeeName').text();
+
+        $('#invite').click(function () {
+
+            if(!companyaccount){
                 alert('please login your account first!');
             }else{
+
+                var date = new Date();
+                var data = {'employee':username,'employer':companyaccount,'date':date.toLocaleString(),'job':career};
+
                 $.ajax({
-                    url:'/careerdetail',
+                    url:'/candidatedetail',
                     type:'post',
                     data:data,
                     success:function (result) {
                         //console.log(result);
-                        alert('apply successfully!');
-                        location.href='careerdetail?name='+companyName+'&career='+career+'';
+                        alert('invite successfully!');
+                        location.href='candidatedetail?name='+name+'&career='+career+'';
                     },
                     error:function (err,result) {
                         // console.log(err.statusText);
-                        alert("you cannot apply a same job!");
+                        alert("you already invited this person!");
                     }
                 })
+
+
             }
-
         })
-
         $('#evaluate').click(function () {
-            var account= $('#account').text();
-            var username = $('#companyUserName').text();
-            var name=$('#companyName').text();
-            var career = $('#career').text();
+
             var date = new Date();
-            if(!account){
+
+            if(!companyaccount){
                 alert('please login your account first!');
             }else{
-                $('#reviewModal').css("display","block");
+                $('#reviewModal').css('display','block');
+
                 $('#comment').submit(function () {
-                    var realName=$('#realName').val();
+                    //get review
+                    var evaluator=$('#realName').val();
                     var score = $('#score').val();
                     var content=$('#content').val();
-                    var data={username:username,name:name,realName:realName,score:score,content:content,date:date.toLocaleString()};
+                    var data={username:username,name:name,realName:evaluator,score:score,content:content,date:date.toLocaleString()};
                     $.ajax({
                         url:'comment',
                         type:'post',
                         data:data,
                         success:function (result) {
                             alert('review successfully!');
-                            location.href='careerdetail?name='+name+'&career='+career+'';
+                            location.href='candidatedetail?name='+name+'&career='+career+'';
                         },
                         error:function (err) {
                             alert(err);
@@ -184,6 +184,7 @@
             }
 
         })
+
     })
 </script>
 </body>

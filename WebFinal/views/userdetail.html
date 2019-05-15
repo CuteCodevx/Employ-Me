@@ -64,7 +64,7 @@
         for(var i=0;i<comment.length;i++){%>
         <div class="w3-card-4 w3-white w3-margin-top">
             <div class="w3-container">
-                <h5><b><%=comment[i].evaluators%></b><span class="w3-opacity w3-right w3-small"><i class="w3-text-black">Reviewed</i> <%=comment[i].date%></span></h5>
+                <h5><a href="/company/companydetail?username=<%=comment[i].evaluators%>"><b><%=comment[i].evaluators%></b></a><span class="w3-opacity w3-right w3-small"><i class="w3-text-black">Reviewed</i> <%=comment[i].date%></span></h5>
             </div>
             <div class="w3-container">
                 <p class="w3-text-red"><%=comment[i].score%></p>

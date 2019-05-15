@@ -1,17 +1,18 @@
 <header class="w3-bar w3-container w3-black" id="nav">
 
     <% if(user && isCompany != 1){%>
-    <a class="w3-bar-item w3-button" href="/home">Home</a>
+    <a class="w3-bar-item w3-button" href="/home">Find Jobs</a>
     <a href="/users/userdetail?username=<%=user%>" class="w3-bar-item w3-button">My Account <span  id="account"><%=user%></span></a>
     <a href="/users?username=<%=user%>" class="w3-bar-item w3-button">My Job Hunting</a>
     <a href="/logout" class="w3-bar-item w3-button" id="logout">Log out</a>
     <%}else if(user && isCompany == 1){%>
-    <a class="w3-bar-item w3-button" href="/company">Home</a>
+    <a class="w3-bar-item w3-button" href="/company">Find CVs</a>
     <a class="w3-bar-item w3-button" href="/company/companydetail?username=<%=user%>">My Account <span id="companyAccount"><%=user%></span></a>
     <a class="w3-bar-item w3-button" href="/company/companyAccount?username=<%=user%>" >My Publication</a>
     <a href="/logout" class="w3-bar-item w3-button">Log Out</a>
     <%}else{%>
-    <a href="/home" class="w3-bar-item w3-button" >Home</a>
+    <a href="/home" class="w3-bar-item w3-button" >Find Jobs</a>
+    <a class="w3-bar-item w3-button" href="/company">Find CVs</a>
     <a href="/login" class="w3-bar-item w3-button" >Log in</a>
     <a href="/register" class="w3-bar-item w3-button">register</a>
     <%}%>

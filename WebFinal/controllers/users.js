@@ -5,20 +5,22 @@ exports.users = function (req, res) {
     }else{
         var username = req.query.username;
         var request = global.dbHandel.getModel('jobRequest');
+        var received = global.dbHandel.getModel('receivedInvite');
+        var receivedApplication = global.dbHandel.getModel('receivedApplication');
         //get the application record
         request.find({account:username},function (err,result) {
             if (err) throw err;
-            var received = global.dbHandel.getModel('receivedInvite');
-            received.find({employee:username},function (err,result1) {
+
+            received.find({employee:{$regex:username,$options:"$i"}},function (err,result1) {
                 if (err) throw err;
-                var receivedApplication = global.dbHandel.getModel('receivedApplication');
+
                 receivedApplication.find({employeeAccount:username},function (err,result2) {
                     if (err) throw err;
                     res.render('users',{request:result,received:result1,record:result2});
                 })
 
-            })
-        })
+            }).sort({'date':-1})
+        }).sort({'date':-1})
     }
 }
 exports.publicRequest=function (req,res) {
@@ -46,11 +48,14 @@ exports.publicRequest=function (req,res) {
 exports.userdetails=function (req,res) {
     //username
     var name = req.query.username;
+    var namearr=name.split(' ');
+    var firstname = namearr[0];
+    var lastname = namearr[1];
     var usersTable = global.dbHandel.getModel('employee');
     var comment = global.dbHandel.getModel('comment');
     //calculate the average score
 
-    comment.find({username:name},function (err, result) {
+    comment.find({$or:[{username:{$regex:name,$options:"$i"}},{'name':{$regex:name,$options:"$i"}}]},function (err, result) {
         if(err) throw err;
         //calculate
         var aveScore=0;
@@ -61,18 +66,15 @@ exports.userdetails=function (req,res) {
             }
             aveScore = (aveScore/result.length).toFixed(2);
         }
-        usersTable.updateOne({username:name}, { $set: { aveScore: aveScore}},function (err,res) {
+        usersTable.updateOne({$or:[{username:{$regex:name,$options:"$i"}},{$and:[{'firstName':firstname},{'lastName':lastname}]}]}, { $set: { aveScore: aveScore}},function (err,res) {
         if(err) throw err;
         });
 
-        usersTable.findOne({username:name},function (err,result1) {
+        usersTable.findOne({$or:[{username:{$regex:name,$options:"$i"}},{$and:[{'firstName':firstname},{'lastName':lastname}]}]},function (err,result1) {
             if(err) throw err;
             res.render('userdetail',{detail:result1,comment:result});
-
         })
 
-    })
-
-
+    }).sort({'date':-1})
 
 }

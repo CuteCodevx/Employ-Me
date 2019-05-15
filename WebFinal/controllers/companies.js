@@ -17,8 +17,8 @@ exports.compantAccount = function (req, res) {
                     if(err) throw err;
                     res.render('companyAccount',{public:result,received:result1,invite:result2,nameCompany:result3.name});
                 })
-            })
-        })
+            }).sort({'date':-1})
+        }).sort({'date':-1})
     })
 
 }
@@ -27,7 +27,7 @@ exports.companydetail=function (req,res) {
     var name = req.query.username;
     var company = global.dbHandel.getModel('employer');
     var comment = global.dbHandel.getModel('comment');
-    comment.find({username:name},function (err, result1) {
+    comment.find({$or:[{username:name},{name:name}]},function (err, result1) {
         if(err) throw err;
         //calculate
         var aveScore=0;
@@ -38,14 +38,14 @@ exports.companydetail=function (req,res) {
             }
             aveScore = (aveScore/result1.length).toFixed(2);
         }
-        company.updateOne({username:name}, { $set: { aveScore: aveScore}},function (err,status) {
+        company.updateOne({$or:[{username:name},{name:name}]}, { $set: { aveScore: aveScore}},function (err,status) {
             if (err) throw err;
-            company.findOne({username:name},function (err,result) {
+            company.findOne({$or:[{username:name},{name:name}]},function (err,result) {
                 if(err) throw err;
                 res.render('companydetail',{detail:result, comment:result1});
             })
         })
-    })
+    }).sort({'date':-1})
 }
 
 exports.publicJob=function (req,res) {

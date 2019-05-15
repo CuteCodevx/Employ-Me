@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="/stylesheets/results.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
-    <title>Index</title>
+    <title>Result</title>
 </head>
 <body class="w3-content">
 
@@ -26,17 +26,55 @@
 </div>
 
 <div class="w3-container">
+    <%if(isCompany !=1){%>
     <table class="w3-table w3-border w3-hoverable" id="table">
         <thead>
             <tr class="w3-border-bottom">
-                <th>Company</th>
+                <th id="judge">Company</th>
                 <th>Occupation</th>
                 <th>City</th>
+                <th>Time</th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+        <%if(resultOfSearch.length>0){
+        for(var i=0;i<resultOfSearch.length;i++){%>
+        <tr class="w3-border-bottom tr">
+            <td><%=resultOfSearch[i].name%></td>
+            <td><a><%=resultOfSearch[i].career%></a></td>
+            <td><%=resultOfSearch[i].city%></td>
+            <td><%=resultOfSearch[i].date%></td>
+        </tr>
+        <%}}else{%>
+        no results!
+        <%}%>
+        </tbody>
     </table>
-
+    <%}else{%>
+    <table class="w3-table w3-border w3-hoverable" id="table2">
+        <thead>
+        <tr class="w3-border-bottom ">
+            <th>Candidate</th>
+            <th>Job Request</th>
+            <th>City</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%if(resultOfSearch.length>0){
+        for(var i=0;i<resultOfSearch.length;i++){%>
+        <tr class="w3-border-bottom tr">
+            <td><%=resultOfSearch[i].name%></td>
+            <td><a><%=resultOfSearch[i].job%></a></td>
+            <td><%=resultOfSearch[i].city%></td>
+            <td><%=resultOfSearch[i].date%></td>
+        </tr>
+        <%}}else{%>
+        no results!
+        <%}%>
+        </tbody>
+    </table>
+    <%}%>
     <!--<div class="w3-bar w3-center" id="page">-->
         <!--<a href="#" class="w3-button w3-hover-black">«</a>-->
         <!--<a href="#" class="w3-button w3-hover-black">1</a>-->
@@ -49,18 +87,7 @@
 <% include footer.html%>
 <script>
     $(function(){
-        var result = JSON.parse(localStorage.getItem("result"));
-        //console.log(result.length);
-        for(var i=0;i<result.length;i++){
-            var name = result[i].name;
-            var career = result[i].career;
-            var city = result[i].city;
-            $('tbody').append(` <tr class="w3-border-bottom tr">
-                <td>`+name+`</td>
-                <td><a>`+career+`</a></td>
-                <td>`+city+`</td>
-            </tr>`);
-        }
+
         $('.tr').each(function () {
             $(this).click(function () {
                 //console.log($(this).text());
@@ -77,10 +104,15 @@
                 //console.log(dataFinal);
                 var name = dataFinal[0];
                 var career= dataFinal[1];
-                location.href='careerdetail?name='+name+'&career='+career+'';
+
+                if($('#judge').text()){
+                    location.href='careerdetail?name='+name+'&career='+career+'';
+                }else{
+                    location.href='candidatedetail?name='+name+'&career='+career+'';
+                }
+
             })
         })
-
 
     })
 

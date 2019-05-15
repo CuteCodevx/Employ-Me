@@ -1,12 +1,3 @@
-.tabbox a.active {
-    background: darkgray;
-}
-section{
-    display: none;
-}
-section.active{
-    display: block;
-}
 #input{
     width: 50%;
     margin-left: 25%;

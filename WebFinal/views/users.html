@@ -36,10 +36,6 @@
     <%}%>
 </div>
 
-<!--public new request-->
-<div class="w3-container w3-center" id="new">
-    <a><button class="w3-button w3-black w3-round-xlarge" id="public">Post New Request</button></a>
-</div>
 <!--public new request model-->
 <section id="publicRequest" class="w3-modal">
     <div class="w3-modal-content w3-animate-top w3-card-4">
@@ -83,6 +79,10 @@
 <!--Previous Publication-->
 <div class="w3-container" id="previous">
     <h3 class="w3-padding-32" id="title2"><strong>Previous Publication</strong></h3>
+    <!--public new request-->
+    <div class="w3-container w3-center w3-margin w3-padding-32" id="new">
+        <a><button class="w3-button w3-black w3-round-xlarge" id="public">Post New Request</button></a>
+    </div>
     <%if(request.length>0){
         for(var i=0;i<request.length;i++){ %>
     <div class="w3-panel w3-container w3-border w3-border-gray w3-round-xlarge">

@@ -5,121 +5,48 @@
     <meta http-equiv="refresh" content="180">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="stylesheets/companyAccount.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+
     <title>Company Account</title>
 </head>
 <body class="w3-content">
 
 <%include header.html%>
 <!--home-->
-<section class="active">
-    <div class="w3-container w3-center" id="part1">
-        <h4>Search Job Request</h4>
-        <form>
-            <input class="w3-input w3-border w3-round-large w3-hover-sand" type="text" id="input">
-        </form>
-
-        <button class="w3-button w3-center w3-black w3-round-large" id="search">Search</button>
-    </div>
-
-    <div class="w3-container w3-center" id="part2">
-        <h4>Choose Job Request</h4>
-        <form id="form">
-            <div class="w3-container w3-third">
-                <select class="w3-select w3-border" name="option" id="first" onChange="change()">
-                    <option value="">Software</option>
-                    <option value="">Finance</option>
-                    <option value="">Biology</option>
-                    <option value="">Arts</option>
-                    <option value="">Literature</option>
-                </select>
+<section class="w3-container w3-padding-64">
+    <h2 class="w3-center">Search Job Request</h2>
+    <div class="w3-row">
+        <form class="w3-padding-32" id="findCv" onsubmit="return false">
+            <div class="w3-col w3-section">
+                <h3 class="">what</h3>
+                <span class="w3-margin-bottom">  Job title, skills, or company</span>
+                <input class="w3-input w3-border w3-round-large w3-hover-sand w3-section" style="width: 80%" type="text" id="keyword" required name="keyword">
             </div>
 
-            <div class="w3-container w3-third">
-                <select class="w3-select w3-border" id="second">
-                    <option value=""></option>
-                    <option value="">Software</option>
-                    <option value="">Finance</option>
-                    <option value="">Biology</option>
-                    <option value="">Arts</option>
-                    <option value="">Literature</option>
-                </select>
+            <div class="w3-col w3-section">
+                <h3>where</h3>
+                <span class="w3-margin-bottom">City or postcode</span>
+                <input class="w3-input w3-border w3-round-large w3-hover-sand w3-section" style="width: 80%" type="text" id="address" name="address">
             </div>
 
-            <div class="w3-container w3-third">
-                <select class="w3-select w3-border" id="city">
-                    <option value=""></option>
-                    <option value="">London</option>
-                    <option value="">Manchester</option>
-                    <option value="">Edinburgh</option>
-                    <option value="">Glasgow</option>
-                    <option value="">Leeds</option>
-                </select>
-            </div>
+            <button type="submit" class="w3-button  w3-black w3-round-large">Search</button>
 
         </form>
-        <button class="w3-button w3-center w3-black w3-round-large" id="go">Go</button>
-
-
     </div>
 </section>
 
 <%include footer.html%>
 
 <script>
-    function change() {
-        var x = document.getElementById("first");
-        var y = document.getElementById("second");
-        y.options.length = 0;
-        if(x.selectedIndex == 0)
-        {
-            y.options.add(new Option("Java Development", "0"));
-            y.options.add(new Option("PHP Development", "1", false, true));
-            y.options.add(new Option("Web Development", "2"));
-            y.options.add(new Option("Python Development", "3"));
-            y.options.add(new Option("Database Development", "4"));
-            y.options.add(new Option("AI Development", "5"));
-            y.options.add(new Option("None", "6"));
-        }
-
-        if(x.selectedIndex == 1)
-        {
-            y.options.add(new Option("Bank", "0"));
-            y.options.add(new Option("Marketing", "1", false, true));
-            y.options.add(new Option("Securities", "2"));
-            y.options.add(new Option("Stock", "3"));
-            y.options.add(new Option("Insurance", "4"));
-            y.options.add(new Option("The credit", "5"));
-            y.options.add(new Option("None", "6"));
-        }
-
-        if(x.selectedIndex == 2)
-        {
-            y.options.add(new Option("Biology engineer", "0"));
-            y.options.add(new Option("Biology assistant", "1", false, true));
-            y.options.add(new Option("Biology education", "2"));
-            y.options.add(new Option("None", "3"));
-        }
-
-        if(x.selectedIndex == 3)
-        {
-            y.options.add(new Option("The fine arts", "0"));
-            y.options.add(new Option("Music arts", "1", false, true));
-            y.options.add(new Option("Arts education", "2"));
-            y.options.add(new Option("None", "3"));
-        }
-
-        if(x.selectedIndex == 4)
-        {
-            y.options.add(new Option("English literature", "0"));
-            y.options.add(new Option("Foreign literature", "1", false, true));
-            y.options.add(new Option("Literature education", "2"));
-            y.options.add(new Option("None", "3"));
-        }
-
-    }
-
+$(function () {
+    $('#findCv').submit(function () {
+        var keyword = $('#keyword').val();
+        var address = $('#address').val();
+        location.href='/results?keywordJob='+keyword+'&address='+address+'';
+    })
+})
 
 </script>
 </body>

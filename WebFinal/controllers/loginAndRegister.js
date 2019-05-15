@@ -138,30 +138,6 @@ exports.home = function (req,res) {
     res.render('home',{title : 'welcome'+req.session.user});
 }
 
-exports.getResults=function(req,res){
-    var value = req.body.value;
-    var publication = global.dbHandel.getModel('publication');
-    publication.find({city:{$regex:value,$options:"$i"}},function(err,result){
-        if(result.length>0){
-            if(err){
-                console.log("something wrong..");
-            }else{
-                res.send(result);
-            }
-        }else{
-            publication.find({careerType:{$regex:value,$options:"$i"}},function(err,result){
-                if(err){
-                    console.log("something wrong..");
-                }else{
-                    res.send(result);
-                }
-            })
-        }
-
-
-    })
-}
-
 exports.logout = function (req,res) {
     req.session.user = null;
     req.session.isCompany=null;
@@ -169,7 +145,7 @@ exports.logout = function (req,res) {
     res.redirect('/');
 }
 
-    exports.companyHome = function (req, res) {
+exports.companyHome = function (req, res) {
     //should compare the user is belonged company member or individual
     if (!req.session.user || (req.session.isCompany!= 1)){
         req.session.error = 'please log in to your company account';
@@ -180,7 +156,38 @@ exports.logout = function (req,res) {
 
 
 exports.results = function (req, res) {
-    res.render('results', { title: 'results'});
+
+    var value = req.query.keyword;
+    var keyword = req.query.keywordJob;
+    var address = req.query.address;
+    var publication = global.dbHandel.getModel('publication');
+    var jobrequest = global.dbHandel.getModel('jobRequest');
+    //find jobs
+    if(value){
+        publication.find({$or:[{city:{$regex:value,$options:"$i"}},{careerType:{$regex:value,$options:"$i"}}]},function(err,result) {
+            if (err) {
+                console.log("something wrong..");
+            } else {
+                res.render('results', {resultOfSearch: result})
+            }
+        }).sort({'date':-1})
+    }else{
+        //find cv
+        if(address){
+            jobrequest.find({$and:[{city:{$regex:address,$options:"$i"}},{type:{$regex:keyword,$options:"$i"}}]},function (err,result2) {
+                if(err) throw err;
+                res.render('results',{resultOfSearch:result2})
+            }).sort({'date':-1})
+
+        }else{
+            jobrequest.find({$or:[{type:{$regex:keyword,$options:"$i"}},{job:{$regex:keyword,$options:"$i"}}]},function (err,result1) {
+                if(err) throw err;
+                res.render('results',{resultOfSearch:result1})
+            }).sort({'date':-1})
+        }
+
+    }
+
 }
 
 exports.careerDetail=function(req,res){
@@ -200,8 +207,8 @@ exports.careerDetail=function(req,res){
             if(result.length>0){
                 for(var i=0;i<result.length;i++){
                     aveScore+=result[i].score;
-                    aveScore = (aveScore/result.length).toFixed(2);
                 }
+                aveScore = (aveScore/result.length).toFixed(2);
             }
 
             //find the detail of this company
@@ -292,6 +299,80 @@ exports.comment=function (req,res) {
         } else {
             req.session.error = 'create successfully';
             res.sendStatus(200);
+        }
+    })
+}
+
+//get candidate detail from employee table and job request table
+exports.candidateDetail=function (req,res) {
+    //candidate name
+    var name = req.query.name;
+    var career = req.query.career;
+
+    var comment = global.dbHandel.getModel('comment');
+    var employee = global.dbHandel.getModel('employee');
+    var jobrequest = global.dbHandel.getModel('jobRequest');
+
+    jobrequest.findOne({name:{$regex:name,$options:"$i"},job:{$regex:career,$options:"$i"}},function (err,result) {
+        if(err) throw err;
+        var data = result;
+        //find the comment about this candidate
+        comment.find({username:{$regex:data.account,$options:"$i"}},function (err,result2) {
+            if(err) throw err;
+            //calculate the average score, and update average score
+            var aveScore = 0;
+            //if this company has comment
+            if(result2.length>0){
+                for(var i=0;i<result2.length;i++){
+                    aveScore+=result2[i].score;
+                }
+                aveScore = (aveScore/result2.length).toFixed(2);
+            }
+            employee.updateOne({username:data.account},{$set: { aveScore: aveScore}},function (err, res) {
+                if(err) throw err;
+            })
+
+            //find candidate personal detail
+            employee.findOne({username:data.account},function (err,result1) {
+                if(err) throw err;
+                res.render('candidatedetail',{detail:result1,job:data.job,city:data.city,intro:data.introduction,comment:result2});
+            })
+        })
+
+    })
+}
+
+exports.candidateInvite=function (req,res) {
+    var username = req.body.employee;
+    var career = req.body.job;
+    var date = req.body.date;
+    var companyUsername = req.body.employer;
+    //create application into received application form
+    var receivedInvite = global.dbHandel.getModel('receivedInvite');
+    receivedInvite.findOne({employee:username,job:career,employer:companyUsername}, function (err,result) {
+        if (err){
+            req.session.error= 'something wrong!';
+            res.sendStatus(500);
+            //console.log(err);
+        }else if(result){
+            req.session.error = 'you already applied this job before.';
+            res.sendStatus(500);
+        }else {
+            receivedInvite.create({
+                employee:username,
+                employer:companyUsername,
+                date:date,
+                job:career
+            },function (err, doc) {
+                if (err){
+                    req.session.error= 'server is wrong!';
+                    res.sendStatus(500);
+                    //console.log(err);
+                } else {
+                    req.session.error = 'create successfully';
+                    res.sendStatus(200);
+                }
+            });
         }
     })
 }

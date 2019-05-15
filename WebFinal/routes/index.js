@@ -18,7 +18,6 @@ router.get('/login',loginAndRegisterController.login);
 router.post('/login',loginAndRegisterController.loginPost);
 
 router.get('/home',loginAndRegisterController.home);
-router.post('/home',loginAndRegisterController.getResults);
 
 router.get('/logout', loginAndRegisterController.logout);
 
@@ -28,6 +27,9 @@ router.get('/results',loginAndRegisterController.results);
 
 router.get('/careerdetail',loginAndRegisterController.careerDetail);
 router.post('/careerdetail',loginAndRegisterController.careerapply);
+
+router.get('/candidatedetail',loginAndRegisterController.candidateDetail);
+router.post('/candidatedetail',loginAndRegisterController.candidateInvite);
 
 router.post('/comment',loginAndRegisterController.comment);
 
