@@ -17,7 +17,7 @@ module.exports={
         phoneNumber:{type:String,required:true},
         degreeLevel:{type:String,required:true},
         major:{type:String,required:true},
-        aveScore:{type:Number}
+        aveScore:{type:Number,default:0}
     },
     employer:{
         username:{type:String,required:true},
@@ -26,9 +26,11 @@ module.exports={
         city:{type:String,required:true},
         postcode:{type:String,required:true},
         address:{type:String,required:true},
+        state:{type:String},
+        country:{type:String},
         email:{type:String,required:true},
-        aveScore:{type:Number},
-        isCompany:{type:Number}
+        aveScore:{type:Number,default:0},
+        isCompany:{type:Number,default:1,}
     },
     publication:{
         username:{type:String,required:true},
@@ -36,6 +38,10 @@ module.exports={
         career:{type:String,required:true},
         careerType:{type:Array,required:true},
         city:{type:String,required:true},
+        state:{type:String},
+        country:{type:String},
+        address:{type:String},
+        postcode:{type:String,required:true},
         description:{type:String,required:true},
         requirement:{type:String,required:true},
         path:{type:String},

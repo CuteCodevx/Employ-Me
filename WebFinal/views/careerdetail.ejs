@@ -53,13 +53,13 @@
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
-        <label><strong>City:</strong></label>
-        <p><%=detail.city%></p>
+        <label><strong>Postcode:</strong></label>
+        <p><%=detail.postcode%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Address:</strong></label>
-        <p><%=detail.address%></p>
+        <p><%=detail.address%>, <%=detail.city%>, <%=detail.state%>, <%=detail.country%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
@@ -67,8 +67,10 @@
         <p><%=detail.email%></p>
     </div>
     <%if(detail.path){%>
-    <div class="w3-container w3-panel w3-border w3-round">
-        <img class="w3-round w3-image" src="/images/<%=detail.path%>" style="width:100%;max-width:400px" alt="">
+
+    <div class="w3-container w3-panel w3-border w3-round w3-padding-16">
+        <h5>Working Environment</h5>
+        <img class="w3-round w3-image w3-section" src="/images/<%=detail.path%>" style="width:100%;max-width:400px" alt="">
     </div>
     <%}%>
 

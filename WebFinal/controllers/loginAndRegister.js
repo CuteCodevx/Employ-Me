@@ -23,7 +23,6 @@ exports.registerPost = function(req, res) {
                 phoneNumber:req.body.tel,
                 degreeLevel:req.body.degreeLevel,
                 major:req.body.major,
-                aveScore:0.0
             },function (err, doc) {
                 if (err){
                     req.session.error= 'server is wrong!';
@@ -42,9 +41,10 @@ exports.registerCompany = function(req, res){
 }
 exports.registerCompanyPost=function(req, res){
     var username = req.body.username;
+    var name=req.body.companyName;
     var employer = global.dbHandle.getModel('employer');
 
-    employer.findOne({username:username}, function (err,result) {
+    employer.findOne({$or:[{username:username},{name:name}]}, function (err,result) {
         if (err){
             req.session.error= 'something wrong!';
             res.sendStatus(500);
@@ -56,19 +56,19 @@ exports.registerCompanyPost=function(req, res){
             employer.create({
                 username:username,
                 password:req.body.password,
-                name:req.body.companyName,
+                name:name,
                 city:req.body.city,
-                address:req.body.address,
+                address:req.body.street_number+", "+req.body.route,
                 postcode:req.body.postcode,
-                email:req.body.email,
-                aveScore:0.0,
-                isCompany:1
+                state:req.body.state,
+                country:req.body.country,
+                email:req.body.email
             },function (err, doc) {
                 if (err){
                     req.session.error= 'server is wrong!';
                     res.sendStatus(500);
                 } else {
-                    console.log(doc)
+                    //console.log(doc)
                     req.session.error = 'create successfully';
                     res.sendStatus(200);
                 }
@@ -239,7 +239,7 @@ exports.careerDetail=function(req,res){
                 if(err){
                     console.log('wrong.')
                 }else{
-                    var data = result1._doc;
+                    var data = result1;
                     //update the new score
                     company.updateOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}]}, { $set: { aveScore: aveScore}},function (err,res) {
                         if (err) throw err;
@@ -249,10 +249,10 @@ exports.careerDetail=function(req,res){
                         if(err){
                             console.log("wrong");
                         }else{
-                            var address = result2.address +" "+ result2.postcode;
+                            //var address = result2.address +" "+ result2.postcode;
                             var email = result2.email;
                             var score = result2.aveScore;
-                            data.address = address;
+                            //data.address = address;
                             data.email = email;
                             data.score = score;
                             res.render('careerDetail',{comment:result,detail:data});

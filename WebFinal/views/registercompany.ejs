@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="/stylesheets/registercompany.css">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/javascripts/registerCompany.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCRdAXwaZD4Gc302lr8jSVOSQ8z28bOlo&libraries=places&callback=initAutocomplete"
+            async defer></script>
     <title>Register Company</title>
 </head>
 <body class="w3-content">
@@ -18,7 +21,7 @@
 </div>
 
 <div class="w3-container">
-    <div id="msg"><%-msg%></div>
+    <div class="w3-margin w3-padding-32 w3-center w3-xlarge" id="msg"><%-msg%></div>
     <div class="w3-card" id="registerCard">
         <div class="w3-container w3-black">
             <h2>Register as an Employer</h2>
@@ -27,16 +30,16 @@
             <form class="w3-container" onsubmit="return false" id="registerCompany">
                 <p>
                     <label>Username</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" id="username" name="username">
+                    <input class="w3-input w3-hover-gray w3-animate-input w3-section" type="text" id="username" name="username" required>
                 </p>
                 <p>
                     <label>Password</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="password" id="psw1" name="password">
+                    <input class="w3-input w3-hover-gray w3-animate-input w3-section" type="password" id="psw1" name="password" required>
                     <span class="w3-small">Passwords must be at least 6 characters.</span>
                 </p>
                 <p>
                     <label>Confirm Password</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="password" id="psw2">
+                    <input class="w3-input w3-hover-gray w3-animate-input w3-section" type="password" id="psw2" required>
                 </p>
                 <div class="w3-small">
                     <span class="w3-tag">*</span>
@@ -44,27 +47,42 @@
                 </div>
                 <p>
                     <label>Company Name</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" name="companyName">
-                </p>
-                <p>
-                    <label>City</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" name="city">
-                </p>
-                <p>
-                    <label>Address</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" name="address">
-                </p>
-                <p>
-                    <label>Post Code</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" name="postcode">
+                    <input class="w3-input w3-hover-gray w3-animate-input w3-section" type="text" name="companyName" required>
                 </p>
                 <p>
                     <label>Email Address</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="email" name="email">
+                    <input class="w3-input w3-hover-gray w3-animate-input w3-section" type="email" name="email" required>
                 </p>
-                <p><button class="w3-button w3-black" type="submit">Create your Company account</button></p>
-                <br>
-
+                <label>Address</label>
+                <p id="locationField" class="w3-section">
+                    <input class="w3-input"
+                           id="autocomplete"
+                           placeholder="Enter your address"
+                           onFocus="geolocate()"
+                           type="text"/>
+                </p>
+                <table id="address" class="w3-table w3-padding-32 w3-margin">
+                    <tr>
+                        <td class="label">Street address</td>
+                        <td class="slimField"><input class="field" id="street_number" name="street_number" disabled="true" required/></td>
+                        <td class="wideField" colspan="2"><input class="field" id="route" name="route" disabled="true" required/></td>
+                    </tr>
+                    <tr>
+                        <td class="label">City</td>
+                        <td class="wideField" colspan="3"><input class="field" id="locality" name="city" disabled="true" required/></td>
+                    </tr>
+                    <tr>
+                        <td class="label">State</td>
+                        <td class="slimField"><input class="field" id="administrative_area_level_1" name="state" disabled="true" required/></td>
+                        <td class="label">Zip code</td>
+                        <td class="wideField"><input class="field" id="postal_code" name="postcode" disabled="true" required/></td>
+                    </tr>
+                    <tr>
+                        <td class="label">Country</td>
+                        <td class="wideField" colspan="3"><input class="field" id="country" name="country" disabled="true" required/></td>
+                    </tr>
+                </table>
+               <button class="w3-button w3-section w3-black" type="submit">Create your Company account</button>
             </form>
             <hr>
             <p class="w3-container">Already have an account? <button class="w3-button w3-black" type="button" id="login">Sign in</button></p>

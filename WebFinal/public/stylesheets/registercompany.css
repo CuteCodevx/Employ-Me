@@ -18,3 +18,20 @@
     margin-top: 5%;
     margin-bottom: 2%;
 }
+.label {
+    text-align: right;
+    font-weight: bold;
+    width: 100px;
+    color: #303030;
+    font-family: "Roboto";
+}
+
+.field {
+    width: 98%;
+}
+.slimField {
+    width: 80px;
+}
+.wideField {
+    width: 200px;
+}
