@@ -5,6 +5,7 @@ module.exports={
        evaluators:{type:String,required:true},
        score:{type:Number,required:true},
        comments:{type:String},
+       path:{type:String},
        date:{type:String}
     },
     employee:{

@@ -44,35 +44,45 @@ exports.companydetail=function (req,res) {
         }
         company.updateOne({$or:[{username:name},{name:name}]}, { $set: { aveScore: aveScore}},function (err,status) {
             if (err) throw err;
-            company.findOne({$or:[{username:name},{name:name}]},function (err,result) {
-                if(err) throw err;
-                res.render('companydetail',{detail:result, comment:result1});
-            })
         })
+
+        company.findOne({$or:[{username:name},{name:name}]},function (err,result) {
+            if(err) throw err;
+            res.render('companydetail',{detail:result, comment:result1});
+        })
+
     }).sort({'date':-1})
 };
 
 exports.publicJob=function (req,res) {
-    var publication = global.dbHandle.getModel('publication');
-    publication.create({
-        username:req.body.account,
-        name:req.body.name,
-        career:req.body.career,
-        careerType:req.body.type,
-        pay:req.body.pay,
-        city:req.body.city,
-        description:req.body.detail,
-        requirement:req.body.requ,
-        date:req.body.date
-    },function (err,result) {
+    imageUploader(req,res,function (err) {
         if(err){
-            req.session.error= 'server is wrong!';
-            res.sendStatus(500);
-        }else{
-            req.session.error= 'create successfully!';
-            res.sendStatus(200);
+            console.log(err);
+            return ;
         }
+        var publication = global.dbHandle.getModel('publication');
+        publication.create({
+            username:req.body.account,
+            name:req.body.name,
+            career:req.body.career,
+            careerType:req.body.type,
+            pay:req.body.pay,
+            city:req.body.city,
+            description:req.body.description,
+            requirement:req.body.requ,
+            date:req.body.date,
+            path:req.file.filename
+        },function (err,result) {
+            if(err){
+                req.session.error= 'server is wrong!';
+                res.sendStatus(500);
+            }else{
+                req.session.error= 'create successfully!';
+                res.sendStatus(200);
+            }
+        })
     })
+
 };
 exports.deleteJob=function (req,res) {
     var username=req.body.username;

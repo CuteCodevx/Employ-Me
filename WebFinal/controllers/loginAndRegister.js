@@ -154,17 +154,38 @@ exports.companyHome = function (req, res) {
     res.render('companyHome',{title : 'welcome'+req.session.user});
 }
 
-
+//get result of searching keyword(city,job title, job skill)
 exports.results = function (req, res) {
 
     var value = req.query.keyword;
     var keyword = req.query.keywordJob;
     var address = req.query.address;
+    var findJobByTitle = req.query.findJobByTitle;
+    var findJobByCity = req.query.findJobByCity;
+
     var publication = global.dbHandle.getModel('publication');
     var jobrequest = global.dbHandle.getModel('jobRequest');
     //find jobs
     if(value){
         publication.find({$and:[{$or:[{city:{$regex:value,$options:"$i"}},{careerType:{$regex:value,$options:"$i"}}]},{isDeleted:{$ne:1}}]},function(err,result) {
+            if (err) {
+                console.log("something wrong..");
+            } else {
+                res.render('results', {resultOfSearch: result})
+            }
+        }).sort({'date':-1})
+    }else if(findJobByCity){
+        //the input is city name
+        publication.find({$and:[{$or:[{city:{$regex:findJobByCity,$options:"$i"}}]},{isDeleted:{$ne:1}}]},function(err,result) {
+            if (err) {
+                console.log("something wrong..");
+            } else {
+                res.render('results', {resultOfSearch: result})
+            }
+        }).sort({'date':-1})
+
+    }else if(findJobByTitle){
+        publication.find({$and:[{$or:[{name:{$regex:findJobByTitle,$options:"$i"}},{careerType:{$regex:findJobByTitle,$options:"$i"}},{career:{$regex:findJobByTitle,$options:"$i"}},{description:{$regex:findJobByTitle,$options:"$i"}},{requirement:{$regex:findJobByTitle,$options:"$i"}}]},{isDeleted:{$ne:1}}]},function(err,result) {
             if (err) {
                 console.log("something wrong..");
             } else {
@@ -283,24 +304,32 @@ exports.careerapply = function (req,res) {
 }
 //write comment for company. evaluator is job hunter
 exports.comment=function (req,res) {
-    var comment = global.dbHandle.getModel('comment');
-    comment.create({
-        username:req.body.username,
-        name:req.body.name,
-        evaluators:req.body.realName,
-        score:req.body.score,
-        comments:req.body.content,
-        date:req.body.date
-    },function (err,doc) {
-        if (err){
-            req.session.error= 'server is wrong!';
-            res.sendStatus(500);
-            //console.log(err);
-        } else {
-            req.session.error = 'create successfully';
-            res.sendStatus(200);
+    imageUploader(req,res,function (err) {
+        if(err){
+            console.log(err);
+            return ;
         }
+        var comment = global.dbHandle.getModel('comment');
+        comment.create({
+            username:req.body.username,
+            name:req.body.name,
+            evaluators:req.body.realName,
+            score:req.body.score,
+            comments:req.body.content,
+            date:req.body.date,
+            path:req.file.filename
+        },function (err,doc) {
+            if (err){
+                req.session.error= 'server is wrong!';
+                res.sendStatus(500);
+                //console.log(err);
+            } else {
+                req.session.error = 'create successfully';
+                res.sendStatus(200);
+            }
+        })
     })
+
 }
 
 //get candidate detail from employee table and job request table
@@ -339,10 +368,7 @@ exports.candidateDetail=function (req,res) {
                     res.render('candidatedetail',{detail:result1,job:data.job,city:data.city,intro:data.introduction,comment:result2});
                 })
             }).sort({'date':-1})
-        }else{
-            res.render('error');
         }
-
 
     }).sort({'date':-1});
 }

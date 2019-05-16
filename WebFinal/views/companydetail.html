@@ -63,6 +63,11 @@
                     <p class="w3-text-red"><%=comment[i].score%></p>
                     <p><%=comment[i].comments%></p>
                 </div>
+                <%if(comment[i].path){%>
+                <div class="w3-container w3-panel w3-round">
+                    <img class="w3-round w3-image" src="/images/<%=comment[i].path%>" style="width:100%;max-width:400px" alt="">
+                </div>
+                <%}%>
             </div>
             <%}}else{%>
             <p class="w3-center">There are currently no reviews for this Company.</p>

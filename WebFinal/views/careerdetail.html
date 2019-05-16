@@ -67,7 +67,7 @@
         <p><%=detail.email%></p>
     </div>
     <%if(detail.path){%>
-    <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
+    <div class="w3-container w3-panel w3-border w3-round">
         <img class="w3-round w3-image" src="/images/<%=detail.path%>" style="width:100%;max-width:400px" alt="">
     </div>
     <%}%>
@@ -86,13 +86,17 @@
               class="w3-button w3-black w3-xlarge w3-display-topright">X</span>
             <h2 class="w3-wide">Review</h2>
         </header>
-        <form class="w3-container" id="comment" onsubmit="return false">
-            <p><label>Share your feeling</label></p>
+        <form enctype="multipart/form-data" class="w3-container" id="comment" onsubmit="return false">
+            <p><label for="content">Share your feeling</label></p>
             <input class="w3-input w3-border" type="text" required name="content" id="content">
-            <p><label>How much point will you give us</label> <b class="w3-small">(The point is no more than 5)</b></p>
+            <p><label for="score">How much point will you give us</label> <b class="w3-small">(The point is no more than 5)</b></p>
             <input class="w3-input w3-border" type="number" required name="score" id="score">
-            <p><label>Please input your real name</label></p>
+            <p><label for="realName">Please input your real name</label></p>
             <input class="w3-input w3-border" type="text" required name="realName" id="realName">
+            <p>
+                <label for="file">File input:</label>
+                <input type="file" name="file" id="file">
+            </p>
             <button type="submit" class="w3-button w3-block w3-black w3-padding-16 w3-section w3-right">SUBMIT <i class="fa fa-check"></i></button>
         </form>
     </div>
@@ -119,11 +123,16 @@
                 <p class="w3-text-red"><%=comment[i].score%></p>
                 <p><%=comment[i].comments%></p>
             </div>
+            <%if(comment[i].path){%>
+            <div class="w3-container w3-panel w3-round">
+                <img class="w3-round w3-image" src="/images/<%=comment[i].path%>" style="width:100%;max-width:400px" alt="">
+            </div>
+            <%}%>
         </div>
         <%}}else{%>
         <p class="w3-center">There are currently no reviews.</p>
         <%}%>
-        <button class="w3-btn w3-round-large w3-margin w3-black w3-right" id="evaluate">Evaluate</button>
+        <button class="w3-btn w3-round-large w3-margin w3-black w3-right" id="evaluate">Comment</button>
     </div>
 </section>
 <%}%>
@@ -172,11 +181,24 @@
                     var realName=$('#realName').val();
                     var score = $('#score').val();
                     var content=$('#content').val();
-                    var data={username:username,name:name,realName:realName,score:score,content:content,date:date.toLocaleString()};
+                    //upload file
+                    var file=$('#file')[0];
+
+                    var formData = new FormData();
+                    formData.append('file',file.files[0]);
+                    formData.append('username',username.trim());
+                    formData.append('name',name.trim());
+                    formData.append('realName',realName.trim());
+                    formData.append('score',score);
+                    formData.append('content',content);
+                    formData.append('date',date.toLocaleString());
+                    //var data={username:username,name:name,realName:realName,score:score,content:content,date:date.toLocaleString()};
                     $.ajax({
                         url:'comment',
                         type:'post',
-                        data:data,
+                        contentType: false,
+                        processData: false,
+                        data:formData,
                         success:function (result) {
                             alert('review successfully!');
                             location.href='careerdetail?name='+name+'&career='+career+'';
