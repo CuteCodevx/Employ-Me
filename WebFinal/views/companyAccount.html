@@ -288,7 +288,6 @@
         //delete application
         $('.delete').each(function (index,ele) {
             $(this).click(function () {
-                console.log('click');
                 var username = $('#companyAccount').text();
                 var name = $('#companyName').text();
                 var career= $('.career')[index].innerHTML;
@@ -301,7 +300,6 @@
                     type:'post',
                     data:data,
                     success:function (data) {
-
                         alert('delete success');
                         //back the current page
                         location.href="/company/companyAccount?username="+username+"";

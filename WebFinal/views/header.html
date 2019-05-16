@@ -2,7 +2,7 @@
 
     <% if(user && isCompany != 1){%>
     <a class="w3-bar-item w3-button" href="/home">Find Jobs</a>
-    <a href="/users/userdetail?username=<%=user%>" class="w3-bar-item w3-button">My Account <span  id="account"><%=user%></span></a>
+    <a href="/users/userdetail?username=<%=user%>" class="w3-bar-item w3-button">My Account <span id="account"><%=user%></span></a>
     <a href="/users?username=<%=user%>" class="w3-bar-item w3-button">My Job Hunting</a>
     <a href="/logout" class="w3-bar-item w3-button" id="logout">Log out</a>
     <%}else if(user && isCompany == 1){%>
@@ -17,8 +17,8 @@
     <a href="/register" class="w3-bar-item w3-button">Register</a>
     <%}%>
     <div class="w3-right">
-        <input type="text" class="w3-bar-item w3-input w3-white w3-mobile" placeholder="Search..">
-        <button class="w3-bar-item w3-button w3-mobile w3-black">Go</button>
+        <input type="text" class="w3-bar-item w3-input w3-white w3-mobile" placeholder="Search.." id="keyword">
+        <button class="w3-bar-item w3-button w3-mobile w3-black" type="submit">Go</button>
     </div>
 
 </header>

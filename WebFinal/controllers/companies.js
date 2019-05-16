@@ -8,11 +8,11 @@ exports.companyAccount = function (req, res) {
 
     company.findOne({username:username},function (err,result3) {
         if(err) throw err;
-        publication.find({username:username},function (err,result) {
+        publication.find({$and:[{username:username},{isDeleted:{$ne:1}}]},function (err,result) {
             if(err) throw err;
             //get company Name
             var companyName = result3.name;
-            receivedApply.find({employerAccount:companyName},function (err,result1) {
+            receivedApply.find({$and:[{employerAccount:companyName},{isDeleted:{$ne:1}}]},function (err,result1) {
                 if(err) throw err;
                 invitation.find({$or:[{employer:companyName},{employer:username}]},function (err,result2) {
                     if(err) throw err;
@@ -74,3 +74,23 @@ exports.publicJob=function (req,res) {
         }
     })
 };
+exports.deleteJob=function (req,res) {
+    var username=req.body.username;
+    var name=req.body.name;
+    var career=req.body.career;
+    var publication = global.dbHandle.getModel('publication');
+    var receivedApply = global.dbHandle.getModel('receivedApplication');
+    publication.updateOne({$and:[{username:username},{career:career}]},{$set:{isDeleted:1}},function (err,raw) {
+        if (err){
+            res.sendStatus(500);
+        }else{
+            receivedApply.updateOne({$and:[{employerAccount:name},{career:career}]},{$set:{isDeleted:1}},function (err,raw) {
+                if (err){
+                    res.sendStatus(500);
+                }else{
+                    res.sendStatus(200);
+                }
+            })
+        }
+    })
+}
