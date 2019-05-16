@@ -12,7 +12,7 @@
 </head>
 <body class="w3-content">
 
-<%include header.html%>
+<%include header.ejs%>
 <!--received Invitation-->
 <div class="w3-container" id="invitations">
     <h3 id="title1"><strong>Received Invitation</strong></h3>
@@ -68,7 +68,7 @@
                     <option value="">Literature</option>
                 </select>
 
-<!--                <select class="w3-select w3-border" id="second" style="margin-top: 10px">-->
+                <select class="w3-select w3-border" id="second" style="margin-top: 10px">
 
                 </select></p>
             <button type="submit" class="w3-button w3-block w3-black w3-padding-16 w3-section w3-right">SUBMIT <i class="fa fa-check"></i></button>
@@ -163,7 +163,7 @@
     <%}%>
 </div>
 
-<%include footer.html%>
+<%include footer.ejs%>
 <script>
     function change() {
         var x = document.getElementById("first");

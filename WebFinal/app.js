@@ -19,9 +19,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 //ejs not 'pug'
-//app.set('view engine', 'ejs');
-app.engine('html', require('ejs').__express);
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
+//app.engine('html', require('ejs').__express);
+//app.set('view engine', 'html');
 
 //Adds middleware libraries using app.use()
 app.use(logger('dev'));
