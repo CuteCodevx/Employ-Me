@@ -1,3 +1,8 @@
+/**
+ * This file handles the overall control for companies (Employers). It also provides search functions such as Find and FindOne one results
+ * as well as getting the latitude and longitude.
+ * @type {geocode}
+ */
 const geocode = require('../util/geocode');
 exports.companyAccount = function (req, res) {
     var username = req.query.username;

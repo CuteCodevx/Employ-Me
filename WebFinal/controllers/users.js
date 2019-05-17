@@ -1,3 +1,8 @@
+/**
+ * This file provides functions to handle users accordingly such as displaying public request and user details
+ * @param req
+ * @param res
+ */
 exports.users = function (req, res) {
     if (!req.session.user||req.session.isCompany===1){
         req.session.error = 'please log in to your personal account first!';

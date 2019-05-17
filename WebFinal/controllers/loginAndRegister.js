@@ -1,6 +1,13 @@
+/**
+ * This login and register controller handles most of the overall function for login, logout and registration.
+ * Users can also create Employer or Employees accounts using this function
+ * @param req
+ * @param res
+ */
 exports.register = function (req, res) {
     res.render('register',{title:'register'});
-}
+};
+
 exports.registerPost = function(req, res) {
     var username = req.body.username;
     var employee = global.dbHandle.getModel('employee');
@@ -35,10 +42,12 @@ exports.registerPost = function(req, res) {
             });
         }
     })
-}
+};
+
 exports.registerCompany = function(req, res){
     res.render('registercompany');
-}
+};
+
 exports.registerCompanyPost=function(req, res){
     var username = req.body.username;
     var name=req.body.companyName;
@@ -75,10 +84,12 @@ exports.registerCompanyPost=function(req, res){
             });
         }
     })
-}
+};
+
 exports.login = function (req, res) {
     res.render('login', { title: 'Login'});
-}
+};
+
 exports.loginPost = function (req, res){
     var username = req.body.username;
     var psw = req.body.password;
@@ -94,7 +105,7 @@ exports.loginPost = function (req, res){
                 req.session.error = 'We cannot find an account with that username';
                 res.sendStatus(404);
 
-            } else if(psw!=result.password){
+            } else if(psw!==result.password){
                 req.session.error = 'password is incorrect';
                 res.sendStatus(404);
             }else{
@@ -114,7 +125,7 @@ exports.loginPost = function (req, res){
                     req.session.error = 'We cannot find an account with that username';
                     res.sendStatus(404);
 
-                } else if(psw!=result.password){
+                } else if(psw!==result.password){
                     req.session.error = 'password is incorrect';
                     res.sendStatus(404);
                 }else{
@@ -130,29 +141,28 @@ exports.loginPost = function (req, res){
 
 
     });
-
-}
+};
 
 exports.home = function (req,res) {
     //console.log(req);
     res.render('home',{title : 'welcome'+req.session.user});
-}
+};
 
 exports.logout = function (req,res) {
     req.session.user = null;
     req.session.isCompany=null;
     req.session.error = null;
     res.redirect('/');
-}
+};
 
 exports.companyHome = function (req, res) {
     //should compare the user is belonged company member or individual
-    if (!req.session.user || (req.session.isCompany!= 1)){
+    if (!req.session.user || (req.session.isCompany!== 1)){
         req.session.error = 'please log in to your company account';
         res.redirect('/login');
     }
     res.render('companyHome',{title : 'welcome'+req.session.user});
-}
+};
 
 //get result of searching keyword(city,job title, job skill)
 exports.results = function (req, res) {
@@ -206,10 +216,8 @@ exports.results = function (req, res) {
                 res.render('results',{resultOfSearch:result1})
             }).sort({'date':-1})
         }
-
     }
-
-}
+};
 
 exports.careerDetail=function(req,res){
     //company name
@@ -243,7 +251,7 @@ exports.careerDetail=function(req,res){
                     //update the new score
                     company.updateOne({$or:[{name:name},{username:name}]}, { $set: { aveScore: aveScore}},function (err,res) {
                         if (err) throw err;
-                    })
+                    });
                     //plus the data from other database
                     company.findOne({$or:[{name:name},{username:name}]},function (err,result2) {
                         if(err){
@@ -264,7 +272,7 @@ exports.careerDetail=function(req,res){
         }
     }).sort({'date':-1});
 
-}
+};
 
 
 exports.careerapply = function (req,res) {
@@ -301,7 +309,8 @@ exports.careerapply = function (req,res) {
         }
     }).sort({'date':-1});
 
-}
+};
+
 //write comment for company. evaluator is job hunter
 exports.comment=function (req,res) {
     imageUploader(req,res,function (err) {
@@ -330,7 +339,7 @@ exports.comment=function (req,res) {
         })
     })
 
-}
+};
 
 //get candidate detail from employee table and job request table
 exports.candidateDetail=function (req,res) {
@@ -360,7 +369,7 @@ exports.candidateDetail=function (req,res) {
                 }
                 employee.updateOne({username:data.account},{$set: { aveScore: aveScore}},function (err, res) {
                     if(err) throw err;
-                })
+                });
 
                 //find candidate personal detail
                 employee.findOne({username:data.account},function (err,result1) {
@@ -371,7 +380,8 @@ exports.candidateDetail=function (req,res) {
         }
 
     }).sort({'date':-1});
-}
+};
+
 //invite people
 exports.candidateInvite=function (req,res) {
     var username = req.body.employee;
@@ -406,4 +416,4 @@ exports.candidateInvite=function (req,res) {
             });
         }
     }).sort({'date':-1})
-}
+};
