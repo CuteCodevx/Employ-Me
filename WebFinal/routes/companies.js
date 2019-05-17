@@ -7,4 +7,6 @@ router.post('/companyAccount',companyController.publicJob);
 router.get('/companydetail',companyController.companydetail);
 router.post('/deletePublication',companyController.deleteJob);
 
+router.post('/getGeocode',companyController.getGeocode);
+
 module.exports = router;

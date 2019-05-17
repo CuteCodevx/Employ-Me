@@ -27,13 +27,13 @@
 
 <div class="w3-container">
     <%if(isCompany !=1){%>
-    <table class="w3-table w3-border w3-hoverable" id="table">
+    <table class="w3-table w3-hoverable" id="table">
         <thead>
             <tr class="w3-border-bottom">
                 <th id="judge">Company</th>
                 <th>Occupation</th>
                 <th>City</th>
-                <th>Time</th>
+                <th class="w3-hide-small">Time</th>
             </tr>
         </thead>
         <tbody>
@@ -43,14 +43,14 @@
             <td><%=resultOfSearch[i].name%></td>
             <td><a><%=resultOfSearch[i].career%></a></td>
             <td><%=resultOfSearch[i].city%></td>
-            <td><%=resultOfSearch[i].date%></td>
+            <td class="w3-hide-small"><%=resultOfSearch[i].date%></td>
         </tr>
         <%}}else{%>
         <tr>
             <td>no results!</td>
             <td>no results!</td>
             <td>no results!</td>
-            <td>no results!</td>
+            <td class="w3-hide-small">no results!</td>
         </tr>
         <%}%>
         </tbody>
@@ -62,7 +62,7 @@
             <th>Candidate</th>
             <th>Job Request</th>
             <th>City</th>
-            <th>Time</th>
+            <th class="w3-hide-small">Time</th>
         </tr>
         </thead>
         <tbody>
@@ -72,14 +72,14 @@
             <td><%=resultOfSearch[i].name%></td>
             <td><a><%=resultOfSearch[i].job%></a></td>
             <td><%=resultOfSearch[i].city%></td>
-            <td><%=resultOfSearch[i].date%></td>
+            <td class="w3-hide-small"><%=resultOfSearch[i].date%></td>
         </tr>
         <%}}else{%>
         <tr>
             <td>no results!</td>
             <td>no results!</td>
             <td>no results!</td>
-            <td>no results!</td>
+            <td class="w3-hide-small">no results!</td>
         </tr>
         <%}%>
         </tbody>

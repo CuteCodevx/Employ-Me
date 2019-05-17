@@ -54,7 +54,7 @@
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
         <label><strong>Postcode:</strong></label>
-        <p><%=detail.postcode%></p>
+        <p id="postcode"><%=detail.postcode%></p>
     </div>
 
     <div class="w3-container w3-panel w3-light-grey w3-border w3-round">
@@ -75,6 +75,10 @@
     <%}%>
 
 </div>
+<!--location information-->
+
+<div class="w3-center w3-margin w3-padding-48" id="map" style="width:80%; height: 80%" ></div>
+
 <%if(isCompany != 1){%>
 <div class="w3-container" id="button">
     <button class="w3-btn w3-round-large w3-black " id="apply">Apply</button>
@@ -127,7 +131,7 @@
             </div>
             <%if(comment[i].path){%>
             <div class="w3-container w3-panel w3-round">
-                <img class="w3-round w3-image" src="/images/<%=comment[i].path%>" style="width:100%;max-width:400px" alt="">
+                <img class="w3-round w3-image w3-section" src="/images/<%=comment[i].path%>" style="width:100%;max-width:200px" alt="">
             </div>
             <%}%>
         </div>
@@ -140,6 +144,39 @@
 <%}%>
 <%include footer.ejs%>
 <script>
+    function initMap() {
+        let postcode = $('#postcode').text();
+        //console.log(postcode);
+        let latitude=0;
+        let longitude=0;
+        $.ajax({
+            url:'/company/getGeocode',
+            type:'post',
+            data:{postcode:postcode},
+            success:function (result) {
+                //the result should be lat and lng;
+                latitude = result.latitude;
+                longitude = result.longitude;
+                let myLatLng = {lat: latitude, lng: longitude};
+
+                let map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: myLatLng
+                });
+
+                let marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: 'Hello World!'
+                });
+            },
+            error:function (err) {
+                $('#map').text('No Map here, Please check whether your postcode or address is correct or not');
+            }
+        })
+
+
+    }
     $(function(){
         //apply a job
         $('#apply').click(function(){
@@ -214,6 +251,9 @@
 
         })
     })
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCRdAXwaZD4Gc302lr8jSVOSQ8z28bOlo&callback=initMap">
 </script>
 </body>
 </html>

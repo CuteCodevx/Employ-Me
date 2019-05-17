@@ -1,3 +1,4 @@
+const geocode = require('../util/geocode');
 exports.companyAccount = function (req, res) {
     var username = req.query.username;
     var publication = global.dbHandle.getModel('publication');
@@ -118,5 +119,20 @@ exports.deleteJob=function (req,res) {
                 }
             })
         }
+    })
+}
+
+exports.getGeocode=function (req,res) {
+    geocode(req.body.postcode, (error, { latitude, longitude }) => {
+        if (error) {
+            console.log(error)
+        }
+        if(latitude==null && longitude==null){
+            res.sendStatus(500);
+        }else{
+            let result={latitude:latitude, longitude:longitude};
+            res.send(result);
+        }
+
     })
 }

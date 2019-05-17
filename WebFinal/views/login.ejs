@@ -6,7 +6,7 @@
     <meta http-equiv="refresh" content="180">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/stylesheets/login.css">
+    <!--<link rel="stylesheet" href="/stylesheets/login.css">-->
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/javascripts/login.js"></script>
 
@@ -15,27 +15,27 @@
 <div class="w3-container">
     <p class="w3-padding-32 w3-center w3-xlarge"><strong>Login to Our Website</strong></p>
 </div>
-<div class="w3-container">
+<div class="w3-container w3-padding-64 w3-section">
     <div class="w3-margin w3-padding-32 w3-center w3-xlarge" id="msg"><%-msg%></div>
     <div class="w3-card" id="loginCard">
         <div class="w3-container w3-black">
             <h2>Login</h2>
         </div>
-        <div>
+        <div class="w3-container">
             <form class="w3-container" onsubmit="return false">
                 <p>
                     <label>Username</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="text" id="username" name="username" required>
+                    <input class="w3-input w3-hover-gray w3-animate-input" type="text" id="username" name="username" required>
                 </p>
                 <p>
                     <label>Password</label>
-                    <input class="w3-input w3-hover-gray w3-border w3-animate-input" type="password" id="psw1" name="password" required>
+                    <input class="w3-input w3-hover-gray w3-animate-input" type="password" id="psw1" name="password" required>
                 </p>
-                <p><button class="w3-button w3-black" type="submit" id="login">Sign in</button></p>
-                <hr>
-                <p class="w3-center">New to our website?</p>
-                <p><button class="w3-button w3-black" type="button" id="register">Create your Website account here</button></p>
+                <button class="w3-button w3-black" type="submit" id="login">Sign in</button>
             </form>
+            <hr>
+            <p class="w3-center">New to our website?</p>
+            <button class="w3-button w3-black w3-center w3-section" type="button" id="register">Create your Website account here</button>
         </div>
     </div>
 </div>

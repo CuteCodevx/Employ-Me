@@ -176,7 +176,7 @@ exports.results = function (req, res) {
         }).sort({'date':-1})
     }else if(findJobByCity){
         //the input is city name
-        publication.find({$and:[{$or:[{city:{$regex:findJobByCity,$options:"$i"}}]},{isDeleted:{$ne:1}}]},function(err,result) {
+        publication.find({$and:[{$or:[{city:{$regex:findJobByCity,$options:"$i"}},{postcode:{$regex:findJobByCity,$options:"$i"}}]},{isDeleted:{$ne:1}}]},function(err,result) {
             if (err) {
                 console.log("something wrong..");
             } else {
@@ -235,17 +235,17 @@ exports.careerDetail=function(req,res){
             //find the detail of this company
             var publication = global.dbHandle.getModel('publication');
             var company = global.dbHandle.getModel('employer');
-            publication.findOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}],career:{$regex:career,$options:"$i"}},function (err,result1) {
+            publication.findOne({$or:[{name:name},{username:name}],career:career},function (err,result1) {
                 if(err){
                     console.log('wrong.')
                 }else{
                     var data = result1;
                     //update the new score
-                    company.updateOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}]}, { $set: { aveScore: aveScore}},function (err,res) {
+                    company.updateOne({$or:[{name:name},{username:name}]}, { $set: { aveScore: aveScore}},function (err,res) {
                         if (err) throw err;
                     })
                     //plus the data from other database
-                    company.findOne({$or:[{name:{$regex:name,$options:"$i"}},{username:name}]},function (err,result2) {
+                    company.findOne({$or:[{name:name},{username:name}]},function (err,result2) {
                         if(err){
                             console.log("wrong");
                         }else{
@@ -342,12 +342,12 @@ exports.candidateDetail=function (req,res) {
     var employee = global.dbHandle.getModel('employee');
     var jobrequest = global.dbHandle.getModel('jobRequest');
 
-    jobrequest.findOne({$and:[{$or:[{name:name},{account:name}]},{job:{$regex:career,$options:"$i"}}]},function (err,result) {
+    jobrequest.findOne({$and:[{$or:[{name:name},{account:name}]},{job:career}]},function (err,result) {
         if(err) throw err;
         if(result){
             var data = result;
             //find the comment about this candidate
-            comment.find({username:{$regex:data.account,$options:"$i"}},function (err,result2) {
+            comment.find({username:data.account},function (err,result2) {
                 if(err) throw err;
                 //calculate the average score, and update average score
                 var aveScore = 0;

@@ -11,7 +11,7 @@ exports.users = function (req, res) {
         request.find({account:username},function (err,result) {
             if (err) throw err;
 
-            received.find({employee:{$regex:username,$options:"$i"}},function (err,result1) {
+            received.find({employee:username},function (err,result1) {
                 if (err) throw err;
 
                 receivedApplication.find({$and:[{employeeAccount:username},{isDeleted:{$ne:1}}]},function (err,result2) {
@@ -56,7 +56,7 @@ exports.userdetails=function (req,res) {
     var comment = global.dbHandle.getModel('comment');
     //calculate the average score
 
-    comment.find({$or:[{username:{$regex:name,$options:"$i"}},{'name':{$regex:name,$options:"$i"}}]},function (err, result) {
+    comment.find({$or:[{username:firstname},{name:name}]},function (err, result) {
         if(err) throw err;
         //calculate
         var aveScore=0;
@@ -67,11 +67,11 @@ exports.userdetails=function (req,res) {
             }
             aveScore = (aveScore/result.length).toFixed(2);
         }
-        usersTable.updateOne({$or:[{username:{$regex:name,$options:"$i"}},{$and:[{'firstName':firstname},{'lastName':lastname}]}]}, { $set: { aveScore: aveScore}},function (err,res) {
+        usersTable.updateOne({$or:[{username:firstname},{$and:[{'firstName':firstname},{'lastName':lastname}]},{'firstName':firstname}]}, { $set: { aveScore: aveScore}},function (err,res) {
         if(err) throw err;
         });
 
-        usersTable.findOne({$or:[{username:{$regex:name,$options:"$i"}},{$and:[{'firstName':firstname},{'lastName':lastname}]}]},function (err,result1) {
+        usersTable.findOne({$or:[{username:firstname},{$and:[{'firstName':firstname},{'lastName':lastname}]},{'firstName':firstname}]},function (err,result1) {
             if(err) throw err;
             res.render('userdetail',{detail:result1,comment:result});
         })

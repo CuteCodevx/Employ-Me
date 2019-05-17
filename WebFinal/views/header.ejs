@@ -1,4 +1,4 @@
-<header class="w3-bar w3-container w3-black" id="nav">
+<header class="w3-bar w3-container w3-black">
 
     <% if(user && isCompany != 1){%>
     <a class="w3-bar-item w3-button" href="/home">Find Jobs</a>
@@ -6,14 +6,23 @@
     <a href="/users?username=<%=user%>" class="w3-bar-item w3-button">My Job Hunting</a>
     <a href="/logout" class="w3-bar-item w3-button" id="logout">Log out</a>
     <%}else if(user && isCompany == 1){%>
-    <a class="w3-bar-item w3-button" href="/company">Find CVs</a>
-    <a class="w3-bar-item w3-button" href="/company/companydetail?username=<%=user%>">My Account <span id="companyAccount"><%=user%></span></a>
-    <a class="w3-bar-item w3-button" href="/company/companyAccount?username=<%=user%>" >My Publication</a>
-    <a href="/logout" class="w3-bar-item w3-button">Log Out</a>
+    <a class="w3-bar-item w3-button w3-hide-small" href="/company">Find CVs</a>
+    <a class="w3-bar-item w3-button w3-hide-small" href="/company/companydetail?username=<%=user%>">My Account <span id="companyAccount"><%=user%></span></a>
+    <a class="w3-bar-item w3-button w3-hide-small" href="/company/companyAccount?username=<%=user%>" >My Publication</a>
+    <a href="/logout" class="w3-bar-item w3-button w3-hide-small">Log Out</a>
+    <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+    <div class="w3-padding-16 w3-hide-large w3-hide-medium">
+        <div class="w3-bar">
+            <a class="w3-bar-item w3-button" href="/company">Find CVs</a>
+            <a href="/company/companydetail?username=<%=user%>" class="w3-bar-item w3-button">My Account <span id="companyAccount"><%=user%></span></a>
+            <a href="/company/companyAccount?username=<%=user%>" class="w3-bar-item w3-button">My Publication</a>
+            <a href="/logout" class="w3-bar-item w3-button">Log Out</a>
+        </div>
+    </div>
     <%}else{%>
     <a href="/home" class="w3-bar-item w3-button" >Find Jobs</a>
     <a class="w3-bar-item w3-button" href="/company">Find CVs</a>
-    <a href="/login" class="w3-bar-item w3-button" >Log in</a>
+    <a href="/login" class="w3-bar-item w3-button w3-hide-small" >Log in</a>
     <a href="/register" class="w3-bar-item w3-button">Register</a>
     <%}%>
 </header>

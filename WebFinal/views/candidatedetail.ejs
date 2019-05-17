@@ -81,7 +81,7 @@
         <form enctype="multipart/form-data" class="w3-container" id="comment" onsubmit="return false">
             <p><label for="content">Share your feeling</label></p>
             <input class="w3-input w3-border" type="text" required name="content" id="content">
-            <p><label for="score">How much point will you give this candidate</label> <b class="w3-small">(The point is no more than 5)</b></p>
+            <p><label for="score">How much point will you give to this candidate</label> <b class="w3-small">(The point is no more than 5)</b></p>
             <input class="w3-input w3-border" type="number" required name="score" id="score">
             <p><label for="realName">Please input the company name</label></p>
             <input class="w3-input w3-border" type="text" required name="realName" id="realName">
@@ -117,7 +117,7 @@
             </div>
             <%if(comment[i].path){%>
             <div class="w3-container w3-panel w3-round">
-                <img class="w3-round w3-image" src="/images/<%=comment[i].path%>" style="width:100%;max-width:400px" alt="">
+                <img class="w3-round w3-image w3-section" src="/images/<%=comment[i].path%>" style="width:100%;max-width:200px" alt="">
             </div>
             <%}%>
         </div>
@@ -130,10 +130,10 @@
 <%include footer.ejs%>
 <script>
     $(function () {
-        var companyaccount= $('#companyAccount').text();
-        var career = $('#career').text();
-        var username=$('#employeeUsername').text();
-        var name=$('#employeeName').text();
+        var companyaccount= $('#companyAccount').text().trim();
+        var career = $('#career').text().trim();
+        var username=$('#employeeUsername').text().trim();
+        var name=$('#employeeName').text().trim();
 
         $('#invite').click(function () {
 
@@ -173,35 +173,36 @@
 
                 $('#comment').submit(function () {
                     //get review
-                    var evaluator=$('#realName').val();
-                    var score = $('#score').val();
-                    var content=$('#content').val();
+                    var evaluator=$('#realName').val().trim();
+                    var score = $('#score').val().trim();
+                    var content=$('#content');
 
                     //upload file
                     var file=$('#file')[0];
 
                     var formData = new FormData();
                     formData.append('file',file.files[0]);
-                    formData.append('username',username.trim());
-                    formData.append('name',name.trim());
+                    formData.append('username',username);
+                    formData.append('name',name);
                     formData.append('score',score);
-                    formData.append('realName',evaluator.trim());
+                    formData.append('realName',evaluator);
                     formData.append('content',content);
                     formData.append('date',date.toLocaleString());
-                    console.log(formData);
+                    //console.log(typeof formData);
+
                     //var data={username:username,name:name,realName:evaluator,score:score,content:content,date:date.toLocaleString()};
                     $.ajax({
                         url:'comment',
-                        type:'post',
+                        type:'formData',
                         contentType: false,
                         processData: false,
-                        data:formData,
+                        data:data,
                         success:function (result) {
                             alert('review successfully!');
                             location.href='candidatedetail?name='+name+'&career='+career+'';
                         },
                         error:function (err) {
-                            alert(err);
+                            console.log(err);
                         }
                     })
                 })
