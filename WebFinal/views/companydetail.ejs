@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="/stylesheets/careerdetail.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/companyDetail.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCRdAXwaZD4Gc302lr8jSVOSQ8z28bOlo&callback=initMap">
+    </script>
     <title>Company Account</title>
 </head>
 <body class="w3-content">
@@ -81,42 +85,5 @@
     </div>
 <%include footer.ejs%>
 
-<script>
-    function initMap() {
-        let postcode = $('#postcode').text();
-        let latitude=0;
-        let longitude=0;
-        $.ajax({
-            url:'getGeocode',
-            type:'post',
-            data:{postcode:postcode},
-            success:function (result) {
-                //the result should be lat and lng;
-                latitude = result.latitude;
-                longitude = result.longitude;
-                let myLatLng = {lat: latitude, lng: longitude};
-
-                let map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 8,
-                    center: myLatLng
-                });
-
-                let marker = new google.maps.Marker({
-                    position: myLatLng,
-                    map: map,
-                    title: 'Hello World!'
-                });
-            },
-            error:function (err) {
-                $('#map').text('No Map here, Please check whether your postcode or address is correct or not');
-            }
-        })
-
-
-    }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCRdAXwaZD4Gc302lr8jSVOSQ8z28bOlo&callback=initMap">
-</script>
 </body>
 </html>

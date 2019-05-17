@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="stylesheets/companyAccount.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
-
+    <script type="text/javascript" src="/javascripts/companyHome.js"></script>
     <title>Company Account</title>
 </head>
 <body class="w3-content">
@@ -38,16 +38,5 @@
 </section>
 
 <%include footer.ejs%>
-
-<script>
-$(function () {
-    $('#findCv').submit(function () {
-        var keyword = $('#keyword').val();
-        var address = $('#address').val();
-        location.href='/results?keywordJob='+keyword+'&address='+address+'';
-    })
-})
-
-</script>
 </body>
 </html>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/stylesheets/careerdetail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/candidatedetail.js"></script>
     <title>Candidate</title>
 </head>
 <body class="w3-content">
@@ -128,89 +129,5 @@
     </div>
 </section>
 <%include footer.ejs%>
-<script>
-    $(function () {
-        var companyaccount= $('#companyAccount').text().trim();
-        var career = $('#career').text().trim();
-        var username=$('#employeeUsername').text().trim();
-        var name=$('#employeeName').text().trim();
-
-        $('#invite').click(function () {
-
-            if(!companyaccount){
-                alert('Please login to your account first!');
-            }else{
-
-                var date = new Date();
-                var data = {'employee':username,'employer':companyaccount,'date':date.toLocaleString(),'job':career};
-
-                $.ajax({
-                    url:'/candidatedetail',
-                    type:'post',
-                    data:data,
-                    success:function (result) {
-                        //console.log(result);
-                        alert('invite successfully!');
-                        location.href='candidatedetail?name='+name+'&career='+career+'';
-                    },
-                    error:function (err,result) {
-                        // console.log(err.statusText);
-                        alert("You have already invited this person!");
-                    }
-                })
-
-
-            }
-        })
-        $('#evaluate').click(function () {
-
-            var date = new Date();
-
-            if(!companyaccount){
-                alert('Please Login to your account first!');
-            }else{
-                $('#reviewModal').css('display','block');
-
-                $('#comment').submit(function () {
-                    //get review
-                    var evaluator=$('#realName').val().trim();
-                    var score = $('#score').val().trim();
-                    var content=$('#content');
-
-                    //upload file
-                    var file=$('#file')[0];
-
-                    var formData = new FormData();
-                    formData.append('file',file.files[0]);
-                    formData.append('username',username);
-                    formData.append('name',name);
-                    formData.append('score',score);
-                    formData.append('realName',evaluator);
-                    formData.append('content',content);
-                    formData.append('date',date.toLocaleString());
-                    //console.log(typeof formData);
-
-                    //var data={username:username,name:name,realName:evaluator,score:score,content:content,date:date.toLocaleString()};
-                    $.ajax({
-                        url:'comment',
-                        type:'formData',
-                        contentType: false,
-                        processData: false,
-                        data:data,
-                        success:function (result) {
-                            alert('review successfully!');
-                            location.href='candidatedetail?name='+name+'&career='+career+'';
-                        },
-                        error:function (err) {
-                            console.log(err);
-                        }
-                    })
-                })
-            }
-
-        })
-
-    })
-</script>
 </body>
 </html>

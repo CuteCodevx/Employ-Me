@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="/stylesheets/Mainpage.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/home.js"></script>
     <style type="text/css">
         a:link { text-decoration: none;}
 
@@ -266,25 +267,6 @@
 
 
 <%include footer.ejs%>
-<script>
-    $(function () {
-        $('section a').click(function () {
-            var text = $(this).text();
-            location.href='/results?keyword='+text+'';
-        })
-
-        $('#findJob').click(function () {
-            var text=$('#findJobByTitle').val();
-            location.href='/results?findJobByTitle='+text+'';
-        })
-
-        $('#findCity').click(function () {
-            var text=$('#findJobByCity').val();
-            location.href='/results?findJobByCity='+text+'';
-        })
-    })
-
-</script>
 
 </body>
 </html>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="/stylesheets/results.css">
     <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/result.js"></script>
     <title>Result</title>
 </head>
 <body class="w3-content">
@@ -95,37 +96,6 @@
 </div>
 
 <% include footer.ejs%>
-<script>
-    $(function(){
 
-        $('.tr').each(function () {
-            $(this).click(function () {
-                //console.log($(this).text());
-                var text = $(this).text();
-
-                var dataArr = text.split("\r\n");
-                dataArr = dataArr[0].split("\n");
-                var dataFinal=[];
-                for(var i=0;i<dataArr.length;i++){
-                    if(dataArr[i]){
-                        dataFinal.push(dataArr[i].trim());
-                    }
-                }
-                //console.log(dataFinal);
-                var name = dataFinal[0];
-                var career= dataFinal[1];
-
-                if($('#judge').text()){
-                    location.href='careerdetail?name='+name+'&career='+career+'';
-                }else{
-                    location.href='candidatedetail?name='+name+'&career='+career+'';
-                }
-
-            })
-        })
-
-    })
-
-</script>
 </body>
 </html>
