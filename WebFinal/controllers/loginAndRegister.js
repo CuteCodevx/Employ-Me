@@ -143,6 +143,7 @@ exports.loginPost = function (req, res){
     });
 };
 
+//employee home, find job
 exports.home = function (req,res) {
     //console.log(req);
     res.render('home',{title : 'welcome'+req.session.user});
@@ -155,6 +156,7 @@ exports.logout = function (req,res) {
     res.redirect('/');
 };
 
+//company home, find cv page
 exports.companyHome = function (req, res) {
     //should compare the user is belonged company member or individual
     if (!req.session.user || (req.session.isCompany!== 1)){
@@ -164,9 +166,8 @@ exports.companyHome = function (req, res) {
     res.render('companyHome',{title : 'welcome'+req.session.user});
 };
 
-//get result of searching keyword(city,job title, job skill)
+//get result of searching keyword(city,postcode ,job title, job skill)
 exports.results = function (req, res) {
-
     var value = req.query.keyword;
     var keyword = req.query.keywordJob;
     var address = req.query.address;
@@ -218,7 +219,7 @@ exports.results = function (req, res) {
         }
     }
 };
-
+//career detail
 exports.careerDetail=function(req,res){
     //company name
     var name = req.query.name;
@@ -274,7 +275,7 @@ exports.careerDetail=function(req,res){
 
 };
 
-
+//apply new job
 exports.careerapply = function (req,res) {
     var username = req.body.employeeAccount;
     var career = req.body.career;

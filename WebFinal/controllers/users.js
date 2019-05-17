@@ -28,7 +28,7 @@ exports.users = function (req, res) {
         }).sort({'date':-1})
     }
 };
-
+//post cv(job request)
 exports.publicRequest=function (req,res) {
     var request = global.dbHandle.getModel('jobRequest');
     request.create({
@@ -50,7 +50,7 @@ exports.publicRequest=function (req,res) {
         }
     })
 };
-
+//get user detail
 exports.userdetails=function (req,res) {
     //username
     var name = req.query.username;

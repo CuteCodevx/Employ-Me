@@ -4,6 +4,7 @@
  * @type {geocode}
  */
 const geocode = require('../util/geocode');
+//get the employees' application information, invitation record and history publication
 exports.companyAccount = function (req, res) {
     var username = req.query.username;
     var publication = global.dbHandle.getModel('publication');
@@ -24,7 +25,6 @@ exports.companyAccount = function (req, res) {
                     if(err) throw err;
 
                     res.render('companyAccount',{public:result,received:result1,invite:result2,nameCompany:result3.name});
-
 
                 }).sort({'date':-1})
             }).sort({'date':-1})
@@ -59,7 +59,7 @@ exports.companydetail=function (req,res) {
 
     }).sort({'date':-1})
 };
-
+//public job
 exports.publicJob=function (req,res) {
     imageUploader(req,res,function (err) {
         if(err){
@@ -126,7 +126,7 @@ exports.deleteJob=function (req,res) {
         }
     })
 }
-
+//get coordinate
 exports.getGeocode=function (req,res) {
     geocode(req.body.postcode, (error, { latitude, longitude }) => {
         if (error) {
