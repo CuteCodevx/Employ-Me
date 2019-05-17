@@ -1,3 +1,6 @@
+/**
+ * This function handles the login of the application
+ */
 $(function () {
     $('#register').click(function () {
         //jump web page
@@ -34,4 +37,4 @@ $(function () {
             })
         // }
     });
-})
+});

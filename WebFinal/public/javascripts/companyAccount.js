@@ -1,8 +1,11 @@
+/**
+ * This file handles the different options selected such as specific Job Titles
+ */
 function change() {
     var x = document.getElementById("first");
     var y = document.getElementById("second");
     y.options.length = 0;
-    if(x.selectedIndex == 0)
+    if(x.selectedIndex === 0)
     {
         y.options.add(new Option("Java Development", "0"));
         y.options.add(new Option("PHP Development", "1", false, true));
@@ -13,7 +16,7 @@ function change() {
         y.options.add(new Option("None", "6"));
     }
 
-    if(x.selectedIndex == 1)
+    if(x.selectedIndex === 1)
     {
         y.options.add(new Option("Bank", "0"));
         y.options.add(new Option("Marketing", "1", false, true));
@@ -24,7 +27,7 @@ function change() {
         y.options.add(new Option("None", "6"));
     }
 
-    if(x.selectedIndex == 2)
+    if(x.selectedIndex === 2)
     {
         y.options.add(new Option("Biology engineer", "0"));
         y.options.add(new Option("Biology assistant", "1", false, true));
@@ -32,7 +35,7 @@ function change() {
         y.options.add(new Option("None", "3"));
     }
 
-    if(x.selectedIndex == 3)
+    if(x.selectedIndex === 3)
     {
         y.options.add(new Option("The fine arts", "0"));
         y.options.add(new Option("Music arts", "1", false, true));
@@ -40,7 +43,7 @@ function change() {
         y.options.add(new Option("None", "3"));
     }
 
-    if(x.selectedIndex == 4)
+    if(x.selectedIndex === 4)
     {
         y.options.add(new Option("English literature", "0"));
         y.options.add(new Option("Foreign literature", "1", false, true));  // 默认选中省会城市
@@ -114,7 +117,7 @@ $(function () {
 
     $('#public').click(function () {
         $('#publicJob').css("display","block");
-    })
+    });
 
     //check publication
     $('.checkPublic').each(function (index,ele) {
@@ -125,7 +128,7 @@ $(function () {
             name=name.trim();
             location.href='/careerdetail?name='+name+'&career='+career+'';
         })
-    })
+    });
 
     //check employee information
     $('.checkEmployee').each(function (i,ele) {
@@ -134,7 +137,7 @@ $(function () {
             name=name.trim();
             $(this).attr('href','/users/userdetail?username='+name+'');
         })
-    })
+    });
     $('.checkInvite').each(function (i,ele) {
         $(this).click(function () {
             var career = $('.recordJob')[i].innerHTML;
@@ -143,7 +146,7 @@ $(function () {
             name=name.trim();
             $(this).attr('href',"/candidatedetail?name="+name+"&career="+career+"");
         })
-    })
+    });
 
     //post new job
     $('#postForm').submit(function () {
@@ -196,7 +199,7 @@ $(function () {
             }
 
         })
-    })
+    });
 
     //delete application
     $('.delete').each(function (index,ele) {
@@ -224,4 +227,4 @@ $(function () {
 
         })
     })
-})
+});

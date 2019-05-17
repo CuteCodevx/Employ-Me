@@ -1,3 +1,6 @@
+/**
+ * This function checks the registration process of the application
+ */
 $(function () {
     $('#changeRegisterType').click(function () {
         location.href = 'registercompany';
@@ -32,4 +35,4 @@ $(function () {
             })
        }
     })
-})
+});

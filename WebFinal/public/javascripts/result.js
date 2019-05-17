@@ -1,3 +1,6 @@
+/**
+ * This function handles the search result
+ */
 $(function(){
 
     $('.tr').each(function () {
@@ -26,4 +29,4 @@ $(function(){
         })
     })
 
-})
+});

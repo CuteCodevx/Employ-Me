@@ -1,3 +1,7 @@
+/**
+ * This function handles the candidatedetail.ejs view. If the invite button is clicked, the employee will be notified
+ * that the Employer is interested in his JobRequest. If the evaluate button is clicked, create a review respectively
+ */
 $(function () {
     var companyaccount= $('#companyAccount').text().trim();
     var career = $('#career').text().trim();
@@ -27,10 +31,9 @@ $(function () {
                     alert("You have already invited this person!");
                 }
             })
-
-
         }
-    })
+    });
+
     $('#evaluate').click(function () {
 
         var date = new Date();
@@ -76,7 +79,5 @@ $(function () {
                 })
             })
         }
-
     })
-
-})
+});

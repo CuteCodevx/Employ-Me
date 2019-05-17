@@ -1,3 +1,6 @@
+/**
+ * This file handles the overall functions when registering a company/Employer
+ */
 //autocomplete address form
 var placeSearch, autocomplete;
 
@@ -83,7 +86,7 @@ $(function () {
                 type:'post',
                 data:$('#registerCompany').serialize(),
                 success:function (data,status) {
-                    if (status=='success'){
+                    if (status==='success'){
                         location.href = 'login';
                     }
                 },
@@ -93,4 +96,4 @@ $(function () {
             })
         }
     })
-})
+});

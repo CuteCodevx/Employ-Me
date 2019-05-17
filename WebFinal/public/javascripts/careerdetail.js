@@ -1,3 +1,6 @@
+/**
+ * This function helps to initialise the GoogleMaps in the Careerdetail.ejs view with respective latitude and longitude.
+ */
 function initMap() {
     let postcode = $('#postcode').text();
     //console.log(postcode);
@@ -28,9 +31,12 @@ function initMap() {
             $('#map').text('No Map here, Please check whether your postcode or address is correct or not');
         }
     })
-
-
 }
+
+/**
+ * This function handles the operation when the apply button is click. Employer will be notified that this employee is interested
+ * in this JobOffer
+ */
 $(function(){
     //apply a job
     $('#apply').click(function(){
@@ -57,8 +63,7 @@ $(function(){
                 }
             })
         }
-
-    })
+    });
 
     $('#evaluate').click(function () {
         var account= $('#account').text();
@@ -104,4 +109,4 @@ $(function(){
         }
 
     })
-})
+});

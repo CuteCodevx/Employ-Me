@@ -1,3 +1,6 @@
+/**
+ * This function helps to initialise the GoogleMaps in the Companydetail.ejs view with respective latitude and longitude.
+ */
 function initMap() {
     let postcode = $('#postcode').text();
     let latitude=0;

@@ -1,8 +1,11 @@
+/**
+ * This file handles the file options for user of type Employee
+ */
 function change() {
     var x = document.getElementById("first");
     var y = document.getElementById("second");
     y.options.length = 0; // clear all content
-    if(x.selectedIndex == 0)
+    if(x.selectedIndex === 0)
     {
         y.options.add(new Option("Java Development", "0"));
         y.options.add(new Option("PHP Development", "1", false, true));  //
@@ -13,7 +16,7 @@ function change() {
         y.options.add(new Option("None", "6"));
     }
 
-    if(x.selectedIndex == 1)
+    if(x.selectedIndex === 1)
     {
         y.options.add(new Option("Bank", "0"));
         y.options.add(new Option("Marketing", "1", false, true));  //
@@ -24,7 +27,7 @@ function change() {
         y.options.add(new Option("None", "6"));
     }
 
-    if(x.selectedIndex == 2)
+    if(x.selectedIndex === 2)
     {
         y.options.add(new Option("Biology engineer", "0"));
         y.options.add(new Option("Biology assistant", "1", false, true));  //
@@ -32,7 +35,7 @@ function change() {
         y.options.add(new Option("None", "3"));
     }
 
-    if(x.selectedIndex == 3)
+    if(x.selectedIndex === 3)
     {
         y.options.add(new Option("The fine arts", "0"));
         y.options.add(new Option("Music arts", "1", false, true));  //
@@ -77,7 +80,7 @@ $(function () {
                 }
             })
         })
-    })
+    });
 
     $('.checkInvitationDetail').each(function (index,ele) {
         $(this).click(function () {
@@ -85,7 +88,8 @@ $(function () {
             $(this).attr('href','/company/companydetail?username='+employer+'');
 
         })
-    })
+    });
+
     $('.checkRecord').each(function (index,ele) {
         $(this).click(function () {
             var job = $('.recordJob')[index].innerHTML;
@@ -93,7 +97,7 @@ $(function () {
             $(this).attr('href','careerdetail?name='+employer+'&career='+job+'');
             // location.href='careerdetail?name='+employer+'&career='+job+'';
         })
-    })
+    });
 
 
     //display public request detail
@@ -102,11 +106,11 @@ $(function () {
             $('.publicDetail')[index].style.display='block';
         })
 
-    })
+    });
 
     $('.close').each(function (index,ele) {
         $(this).click(function () {
             $('.publicDetail')[index].style.display='none';
         })
     })
-})
+});
